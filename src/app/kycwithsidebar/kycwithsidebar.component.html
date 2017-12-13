@@ -1,0 +1,155 @@
+<app-navbar></app-navbar>
+<ngx-loading [show]="ngxloading"></ngx-loading>
+<section id="main-sec">  
+  <div class="container-fluid" id="main-container">
+      <div class="hidden-xs">
+          <div id="sidebar-wrapper">
+              <nav id="sidenav" #sidenav>
+                  <app-sidemenu></app-sidemenu>
+              </nav>
+          </div>
+      </div> 
+      <div class="col-sm-9 col-md-10 pull-right nopad">
+        <div id="topbar">
+          
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+                
+                <div class="col-sm-12 form_head">
+                    <h5 style="margin-bottom: 0px;">
+                            Update your KYC information. You can also skip this step for now and continue buying MASS Coins. Please ensure this is completed before 31st December 2017.
+                    </h5>
+                    <hr>
+                </div>
+                <div class="col-sm-6 col-md-6 col-sm-push-6">
+                    <div class="col-sm-12 form_head">
+                        <h5 style="margin-bottom: 0px;">
+                              Upload here...  
+                        </h5>
+                        <hr>
+                    </div>
+                    <div class="col-sm-12 kycform">
+                        <div class="col-sm-12">&nbsp;</div>
+                        <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                        style="display: block">
+                            <span class="text-center text-danger">{{errmsg?errmsg:""}}</span>
+                        </div>
+                        <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                        style="display: block">
+                        <div class="col-sm-12">&nbsp;</div>
+                            <span class="text-center text-success">{{sucmsg?sucmsg:""}}</span>
+                        </div>
+                        <form [formGroup]="form" (ngSubmit)="signup_v2()">
+                          <div class="kycform">
+                            <div class="form-group">
+                                <label for="panUpload">Upload Proof Of Identity</label>
+                                <input type="file" name="pan_card" class="form-control-file" id="pan"
+                                       aria-describedby="fileHelp" accept=".png, .jpg, .jpeg, application/pdf" required=""  (change)="onFileChange1($event)" #fileInput1><br>
+                                <small id="fileHelp" class="form-text text-muted">
+                                    Supported File Format: JPG, PNG, PDF.
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <strong>Upload Proof Of Address</strong>
+                                <small class="text-muted">&nbsp;&nbsp; (Passport, Driving License, Aadhar Card)</small>
+                                <input type="file" name="id_proof" class="form-control-file" id="idproof"  (change)="onFileChange2($event)" #fileInput2
+                                       aria-describedby="fileHelp" accept=".png, .jpg, .jpeg, application/pdf" required="" multiple><br>
+                                <small id="fileHelp" class="form-text text-muted">
+                                    Supported File Format: JPG, PNG, PDF.
+                                </small>
+                            </div>
+    
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary col-sm-offset-4 custBtnAnchor2">
+                                    <strong style="letter-spacing: 1px;">Update</strong>
+                                    &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
+                                </button><br>
+                            </div>
+                            <!-- <div class="skipdiv text-center"><a (click)="skipfornow()"  class="skip">Skip for now</a> </div> -->
+                          </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-6 col-md-6 col-sm-pull-6" *ngIf="imgavailable == 1">
+                  <div class="nokycdiv">
+                    <img src="assets/img/kyc3.jpg" class="kycimage"><br>
+                    <p>
+                        {{nokycmessage}}
+                    </p><br>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-sm-pull-6" *ngIf="imgavailable == 0">
+                    <div class="kycdiv">
+                      <p>
+                         <b>KYC is been in {{kycstatus}} stage.</b>
+                      </p><br>
+                      <!-- <ngx-imageviewer class="imageviewer" [src]="dumimg"></ngx-imageviewer> -->
+                      
+                      <div class="col-md-12 text-center">Identity proof document</div>
+                      <br>
+
+                        <div *ngFor="let i of kycdatapoa">
+                            <div class="col-sm-12">&nbsp;</div>
+                            <div class="col-md-12 text-center">
+                                <img [src]="i.value" *ngIf="i.filetype == 'png' || i.filetype == 'jpeg'" class="kycimagemd" (click)="showme(i)" title="{{i.filename}}"><br>
+                                <img src="assets/img/pdf.png" *ngIf="i.filetype == 'pdf'" class="kycimagemdpdf" (click)="showme(i)" title="{{i.filename}}">
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="col-sm-12">&nbsp;</div>
+                        <div class="col-md-12 text-center">Address proof documents</div>
+                        <br>
+
+                        <div *ngFor="let a of kycdatapoi">
+                        <div class="col-sm-12">&nbsp;</div>
+                        <div class="col-md-12 text-center">
+                            <img [src]="a.value" *ngIf="a.filetype == 'png' || a.filetype == 'jpeg'"  class="kycimagemd" (click)="showme(a)" title="{{a.filename}}"><br>
+                            <img src="assets/img/pdf.png"  *ngIf="a.filetype == 'pdf'" class="kycimagemdpdf" (click)="showme(a)" title="{{a.filename}}">
+                        </div>
+                        <br>
+                        </div>
+
+                      <!-- <div class="col-md-12">
+                        <img src="assets/img/kyc3.jpg" class="kycimagemd" (click)="showme()">
+                      </div>
+                      <br> -->
+                      <div class="col-sm-12">&nbsp;</div>
+                      <p class="text-center">
+                        Update above with different KYC documents.
+                      </p><br>
+                    </div>
+                </div>
+
+
+                <ng-template #imagemodal>
+                    <div class="modal-header">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h6 id="myModalLabel" class="noMarg text-left">
+                                <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                            <span id="modal-header-content">KYC Viewer</span>
+                        </h6>
+                      </div>
+                      <div class="modal-body customModalHeight imagebody" id="normalModalBody">
+                        <ngx-imageviewer class="imageviewer" [src]="kycimg"></ngx-imageviewer>
+                      </div>
+                      <div class="modal-footer imagefooter">
+                        <button type="button" class="btn btn-primary btn-block btnimageviewer" (click)="hideme()">
+                            Close
+                        </button>
+                      </div>
+                </ng-template>
+
+              </div>
+          </div>
+        </div><!--topbar-->
+      </div>
+  </div>
+</section> 

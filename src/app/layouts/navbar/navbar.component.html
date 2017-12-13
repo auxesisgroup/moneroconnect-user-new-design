@@ -1,0 +1,80 @@
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <a class="navbar-brand" routerLink="">
+                    <img src="assets/img/masscryp.png" class="img-responsive tblogo" alt="tokenbazaar">
+                </a>
+                <button class="menubtn" (click)="openNav()"><i class="fa fa-cog  fa-3x fa-fw" aria-hidden="true"></i></button>
+                <div class="profileDescDiv">
+                        <img src="assets/img/man.png" class="img-responsive manhomelogo">
+                        <p class="manhomename">{{username?username:' there! '}}</p>
+                </div>
+                <!-- fa-spin -->
+            </div>
+  
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li class="active"><a href="#">Wallet <span class="sr-only">(current)</span></a></li>-->
+                    <!--<li><a href="#">Charts</a></li>-->
+                    <!--<li class="#"><a href="#">Stats</a></li>-->
+                    <!--<li><a href="#">Markets</a></li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- body view above  -->
+<!-- Overlay sidemenu for mobile view -->
+  <div id="mySidenav" class="sidenav"  #mySidenav>
+    <div class="divlogo text-center"  (click)="closeNav()">
+        <!-- <img src="assets/img/tokenBazar.jpg" class="img-responsive logo"> -->
+        <img src="assets/img/man.png" class="img-responsive manlogo">
+        <p class="manname">{{username}}</p>
+    </div>
+    <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">
+        &nbsp;&times;
+    </a> -->
+    <div class="menulistsidenav">
+        <a  (click)="homeReload()" class="nopad"><span class="sidebar-icon"><i class="fa fa-home" aria-hidden="true"></i></span>Dashboard</a>
+        
+        <!-- <a [routerLink]="['/transactions']"  data-scroll=""><span class="sidebar-icon"><i class="fa fa-file-o" aria-hidden="true"></i></span>Transactions</a> -->
+        <a (click)="clickonReferral()" class="nopad referral"><span class="sidebar-icon"><i class="fa fa-arrows" aria-hidden="true"></i></span>Referral</a>
+
+        
+        <a  class="settingclass nopad"  data-toggle="collapse" data-target="#demomenu">
+            <span class="sidebar-icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+            Setting
+        </a>
+        <div id="demomenu" class="collapse">
+            <ul class="collapsenavsetting">
+                <li>
+                    <a (click)="checkKYC()" class="nopad kyc"><i class="fa fa-arrows" aria-hidden="true"></i> KYC</a>
+                </li>
+                <li><a [routerLink]="['/addreferral']" ><i class="fa fa-address-card-o" aria-hidden="true"></i> Address</a></li>
+            </ul>
+        </div>
+
+        <a (click)="doLogout(template)" class="logoutlink" data-scroll=""><span class="sidebar-icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>Logout</a>
+    </div>
+    <div class="sidemenufooter"  (click)="closeNav()">
+        <p>&copy; {{year}}</p>
+    </div>
+  </div>
+  <ng-template #template>
+    <div class="modal-body text-center">
+        <p>Are you sure to logout?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+        <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+    </div>
+ </ng-template>

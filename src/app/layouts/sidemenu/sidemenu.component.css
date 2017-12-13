@@ -1,0 +1,22 @@
+a.logoutlink {
+    cursor: pointer;
+}
+li.active {
+    color: #5BC0DE !important;
+    text-decoration: none;
+    background-color: transparent !important;
+}
+li.active {
+    font-weight: 600;
+}
+
+ul.sidebar-nav.nav li {
+    width: 100%;
+}
+ul.sidebar-nav.nav {
+    padding-top: 15% !important;
+}
+
+a.nopad.referral {
+    cursor: pointer;
+}

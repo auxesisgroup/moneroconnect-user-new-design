@@ -1,0 +1,220 @@
+ <div class="col-sm-12 nopad">
+        <!-- <button class="btn btn-default btn-block" id="openmodal" data-toggle="modal" *ngIf="starterDisableButton" (click)="open_recieve_modal(btcmodal)">
+            <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+        </button> -->
+        <button class="btn btn-default btn-block" id="openmodal" data-toggle="modal" [disabled]="starterDisableButton" (click)="open_recieve_modal(btcmodal)">
+            <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+        </button>
+    </div>
+                                            <ng-template #btcmodal>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        <h3 id="myModalLabel" class="noMarg text-left">
+                <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            <span id="modal-header-content">{{btcmodaltitle}}</span>
+        </h3>
+    </div>
+    <hr>
+    <div class="modal-body customModalHeight" id="normalModalBody">
+        <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
+                <span aria-hidden="true">&times;</span>
+                </button>
+          <h3 id="myModalLabel" class="noMarg text-left">
+                  <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+              <span id="modal-header-content">{{btcmodaltitle}}</span>
+          </h3> -->
+          <div class="tab-content">
+            <!-- <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveBTH == 0">
+
+                <div class="container-fluid">
+                    <h4 class="pull-left">Provide detail:</h4>
+                </div>
+                <div class="container-fluid">
+                    <div class="col-sm-3 text-center">
+                        <h5>Select Wallet</h5>
+                        </div>
+                    <div class="col-sm-9 text-center">
+                        <select class="walletselect" id="btcwalletname" name="btcwalletname" [(ngModel)]="btcwalletname" (change)="btcwalletnamechange($event)">
+                            <option selected="selected" value="Mist">Mist
+                            </option>
+                            <option value="Parity">Parity</option>
+                            <option value="MyEtherWallet">MyEtherWallet</option>
+                            <option value="MetaMask">MetaMask</option>
+                            <option value="imToken">imToken</option>
+                            <option value="Coinbase">Coinbase</option>
+                            <option value="Globitex">Globitex</option>
+                            <option value="Kraken">Kraken</option>
+                            <option value="Poloniex">Poloniex</option>
+                            <option value="Bittrex">Bittrex</option>
+                            <option value="Jaxx">Jaxx</option>
+                            <option value="Coinomi">Coinomi</option>
+                            <option value="Parity">Parity</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="container-fluid">
+                    <div class="col-sm-12">
+                        <input type="text" width="100%" class="form-control sendCustInput" id="TmpAddress2" required="required" value="mwQNCTNHsQKPGHVVyWZy88uXv1i5Uc19sh" placeholder="your BTC address..." [(ngModel)]="btcwalletaddress" (keyup)="btcwalletaddresschange($event)">
+                    </div>
+                </div>
+                <hr>            
+                <div class="container-fluid">
+                    <div class="col-sm-12">
+                        <div *ngIf="toBTC == 0">
+                            <button type="button" class="btn btn-primary btn-block" (click)="nextbtc1_1()">
+                                Submit & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                            </button>
+                            <p class="text-center">Skip this for now</p>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block" *ngIf="toBTC == 1" (click)="nextbtc1_2()">
+                            Review & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+                        <button type="button" class="btn btn-primary btn-block" *ngIf="toBTC == 2" (click)="nextbtc1_3()">
+                            Update & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="step1RecieveBTH" #step1RecieveBTH *ngIf="stepRecieveBTH == 1">
+
+                <div class="container-fluid">
+                    <h5 class="pull-left">Please provide a refund Bitcoin address in case something is went wrong. Please ensure you give an address which you own and not an exchange address.</h5>
+                </div>
+                <hr>
+                <div class="container-fluid">
+                    <div class="col-sm-12">
+                        <input type="text" width="100%" class="form-control sendCustInput" id="TmpAddress2" required="required" value="mwQNCTNHsQKPGHVVyWZy88uXv1i5Uc19sh" placeholder="Your Bitcoin Refund Address" [(ngModel)]="btcrefundaddress" (keyup)="btcrefundaddresschange($event)" ><!---->
+                    </div>
+                </div>
+                <hr>
+
+                <div class="container-fluid">
+                    <div class="col-sm-12">
+                        <div *ngIf="toBTCRefund == 0">
+                            <button type="button" class="btn btn-primary btn-block" (click)="nextbtc2_1()">
+                                Submit & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                            </button>
+                            <!-- <p class="text-center">Skip this for now</p> -->
+                        </div>
+                        <br>
+                        <button type="button" class="btn btn-primary btn-block" *ngIf="toBTCRefund == 1" (click)="nextbtc2_2()">
+                            Review & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+                        <button type="button" class="btn btn-primary btn-block" *ngIf="toBTCRefund == 2" (click)="nextbtc2_3()">
+                            Update & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="step2RecieveBTH" #step2RecieveBTH *ngIf="stepRecieveBTH == 2">
+                    <div class="container-fluid text-center">
+                            <h4>{{token_amount}} MASS</h4>
+                            <h4><i class="fa fa-btc" aria-hidden="true"></i> {{amount_to_pay}} BTC</h4>
+                            <h5 class="pull-center text-center">
+                                    Please transfer BTC to the following address to successfully buy MASS Coins. Please provide sufficient mining fee to ensure required amount reach us.
+                            </h5>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="col-sm-9">
+                            <input type="text" width="100%" class="form-control sendCustInput" id="TmpAddress" readonly="readonly" value="{{generated_address}}" #btcaddress>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-block btn-primary" id="copyBtn" [ngxClipboard]="btcaddress" (click)="copytext(btcaddress)">Copy
+                            </button>
+                        </div>
+
+                    </div>
+                    <hr>
+
+                    <div class="container-fluid text-center">
+                        <h4 class="pull-center text-center">Scan QR Code</h4>
+                        <div class="qrcodediv">
+                            <ngx-qrcode 
+                            [qrc-value] = "qrvalue"
+                            qrc-class = "aclass"
+                            qrc-errorCorrectionLevel = "L">
+                            </ngx-qrcode>
+                        </div>
+                        <button class="btn btn-block btn-primary" id="submitdonebtcBtn">
+                                <img src="assets/img/loading.gif" class="loadingimgdone">
+                                Waiting For Payment
+                        </button>
+                        <h6 class="waitmsg">We will also send a confirmation mail as we receive the bitcoins.</h6>
+                        <!--firebae handler-->
+                        <li *ngFor="let i of items | async" style="display:none;" class="hidden">
+                        </li>
+                        <!-- <button class="btn btn-block btn-primary" id="submitbtcBtn" *ngIf="toBTCConfirm == 0" (click)="submitBTC()">
+                            Confirm&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+                        <button class="btn btn-block btn-primary" id="submitdonebtcBtn" *ngIf="toBTCConfirm == 1" (click)="submitDoneBTC()">
+                            <img src="assets/img/loading.gif" class="loadingimgdone">
+                            Waiting For Payment
+                        </button> -->
+                    </div>
+
+                    <!-- <div class="container-fluid">
+                            <br><br>
+                            <h4 class="pull-left">Waiting for transactions</h4><br><br>
+                            <img src="assets/static/gif/new.gif" class="img-responsive loadintransaction" width="120" alt="">
+                    </div> -->
+
+            </div>
+        </div>
+
+        <div class="tab-content">
+                <div class="tab-pane fade in active" id="step3RecieveBTH" #step3RecieveBTH *ngIf="stepRecieveBTH == 3">
+                        <div class="container-fluid">
+                                <!-- <h4 class="pull-left">Transfer BTC is processed</h4> -->
+                        </div>
+                        <div class="container-fluid">
+                            <div class="col-sm-12">&nbsp;</div>
+                            <div class="col-sm-12">
+                                Transaction ID: <a href="{{bitcoinurl}}/{{showtransidin3}}" target="_blank">{{showtransidin3}}</a>
+                            </div>
+                            <div class="col-sm-12">&nbsp;</div>
+                            <div class="col-sm-12" *ngIf="progressshow == false">
+                                    <progressbar class="progress progress-striped active" animate="true" [max]="150" [value]="progressvalue" type="{{progresstype}}"><i>{{initialCount}} confirm(s)</i></progressbar>
+                            </div>
+                            <div class="col-sm-12" *ngFor="let i of items | async">
+                                    <p *ngIf="i.confirmations == 0" style="color:#92d6a7">0 confirmation</p>
+                                    <p *ngIf="i.confirmations == 1" style="color:#86d29e">1 confirmation</p>
+                                    <p *ngIf="i.confirmations == 2" style="color:#6ba87e">2 confirmation</p>
+                                    <p *ngIf="i.confirmations == 3" style="color:#43694f">3 confirmation</p>
+                            </div>
+                            <div class="col-sm-12" *ngIf="initialCount != 3">
+                                    Please wait while we receive 3 confirmations of payment to allot the MASS coins. We will also send a confirmation mail as receipt.
+                            </div>
+                            <div class="col-sm-12" *ngIf="initialCount == 3">
+                                Confirmations have been completed, please wait <img src="assets/img/loading.gif" class="loadingimgdone">
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <h4 style="color:red" *ngIf="initialCount != 3">{{initialCount}} / 3</h4>
+                                <h4 style="color:green" *ngIf="initialCount == 3">{{initialCount}} / 3</h4>
+                            </div>
+                        </div>
+                        <hr>                
+                </div>
+        </div>
+
+        <div class="tab-content">
+                <div class="tab-pane fade in active" id="step4RecieveBTH" #step4RecieveBTH *ngIf="stepRecieveBTH == 4">
+                        <div class="container-fluid">
+                            <div class="col-sm-12">
+                                    {{message1}} MASS Token from transaction id <a href="{{bitcoinurl}}/{{showtransidin3}}" target="_blank">{{message?message:'No transaction ID'}}</a>  is deposited in your account.
+                                
+                            </div>
+                        </div>
+                        <hr>                
+                </div>
+        </div>
+    </div>
+    </ng-template>
+                                            

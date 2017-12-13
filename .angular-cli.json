@@ -19,9 +19,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/ngx-toastr/toastr.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/pdfjs-dist/build/pdf.min.js",
+        "../node_modules/ngx-sharebuttons/bundles/ngx-sharebuttons.umd.js",
+        "../node_modules/chart.js/src/chart.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

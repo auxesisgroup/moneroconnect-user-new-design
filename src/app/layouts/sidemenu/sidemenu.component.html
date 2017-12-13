@@ -1,0 +1,52 @@
+<ul class="sidebar-nav nav">
+  <li>
+      <a  (click)="homeReload()" class="nopad" style="cursor:pointer"><span class="sidebar-icon"><i class="fa fa-home" aria-hidden="true"></i></span>Dashboard</a>
+  </li>
+  <!-- <li>[routerLink]="['/home']" 
+      <a [routerLink]="['/transactions']"  data-scroll=""><span class="sidebar-icon"><i class="fa fa-file-o" aria-hidden="true"></i></span>Transactions</a>
+  </li> -->
+  <br>
+  <li>
+      <a (click)="clickonReferral()" class="nopad referral"><span class="sidebar-icon"><i class="fa fa-arrows" aria-hidden="true"></i></span>Referral</a>
+  </li>
+  <br>
+  <!-- <li class="dropdown">
+      <a href="javascript:void()" class=" dropdown-toggle nopad"  type="button" data-toggle="dropdown">
+        <span class="sidebar-icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+        Setting
+        <ul class="dropdown-menu">
+            <li>
+                <a [routerLink]="['/referral']" class="nopad"><span class="sidebar-icon"><i class="fa fa-arrows" aria-hidden="true"></i></span>Referral</a>
+            </li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+        </ul>
+     </a>
+  </li> 
+  <br> -->
+  <li>
+    <a  class="settingclass nopad"  type="button"  data-toggle="collapse" data-target="#demo">
+        <span class="sidebar-icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+        Setting
+    </a>
+    <div id="demo" class="collapse">
+        <ul class="collapsenavsetting">
+            <li>
+                <a (click)="checkKYC()" class="nopad kyc"><i class="fa fa-arrows" aria-hidden="true"></i> KYC</a>
+            </li>
+            <li><a [routerLink]="['/addreferral']" ><i class="fa fa-address-card-o" aria-hidden="true"></i> Address</a></li>
+        </ul>
+    </div>
+  </li>
+  <br>
+  <li>
+      <a (click)="doLogout(template)" class="logoutlink" data-scroll=""><span class="sidebar-icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>Logout</a>
+  </li>
+</ul>
+<ng-template #template>
+  <div class="modal-body text-center">
+        <p>Are you sure to logout?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>

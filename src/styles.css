@@ -1,1 +1,260 @@
 /* You can add global styles to this file, and also import other style files */
+.qrcodediv {
+    text-align: center;
+}
+/* .modal-dialog {
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+    -webkit-transform: translate(0,-25%);
+    transform: translate(0,-25%);
+} */
+.loadintransaction {
+    text-align: center;
+    padding: 5%;
+    margin-bottom: 5%;
+}
+img.loadingimgdone {
+    width: 5%;
+}
+
+/* css for layouts/sidemenu modal */
+/* modal-container {
+    padding-top: 10%;
+    margin-top: 5%; 
+} */
+
+body {
+    transition: background-color .5s;
+}
+
+img.img-responsive.tblogo {
+  width: 75%;
+    /* margin: 2px; */
+    /* position: fixed; */
+    left: 0;
+    /* margin-left: 3%; */
+    /* margin-top: 1.5%; */
+} 
+
+/* auth */
+.loadingimglogin {
+    width: 1.5em;
+}
+
+.ngloader,
+.ngloader:before,
+.ngloader:after {
+  background: #ffffff;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.ngloader {
+  color: #ffffff;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.ngloader:before,
+.ngloader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.ngloader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.ngloader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+
+/* sidemenu sidemenu.html */
+a.settingclass {
+  cursor: pointer;
+}
+ul.collapsenavsetting {
+  list-style-type: none;
+}
+
+/* ethereum */
+img.ethereum {
+  width: 22px;
+  padding-bottom: 2%;
+}
+img.ethereum.home {
+  width: 16px;
+  margin-top: 0.5%;
+} 
+img.ethereumico.home {
+  width: 16px;
+  margin: 4px;
+}
+
+/* addreferral */
+.btn.btn-primary.custBtnAnchor.referralbtnsubmit {
+  width: 50%;
+}
+
+/* sidemenu kyc */
+.nopad.kyc {
+  cursor: pointer;
+}
+@media (max-width: 767px) { 
+  button.menubtn{
+      display:block;
+  }
+}
+@media (min-width:768px){
+  button.menubtn{
+      display:none;
+  }
+}
+
+/* table */
+@media screen and (max-width: 767px){
+  .table-responsive>.table>tbody>tr>td, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>td, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>thead>tr>th{
+    white-space: normal;
+  }
+}
+
+/* add referrral */
+a.skip {
+  cursor: pointer;
+}
+
+a.nopad.referral {
+  cursor: pointer;
+}
+
+div.p.due {
+  margin-top: 40%;
+  color: brown;
+  text-align: center;
+}
+
+
+/* sidemenu mobile view */
+img.img-responsive.manlogo {
+  width: 50%;
+  /* margin: 5%; */
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10%;
+}
+p.manname {
+  color: white;
+  font-size: 18px;
+  margin-top: 5%;
+  font-weight: 600;
+}
+
+/* ProfileDescDiv */
+@media (max-width: 767px){
+  div.profileDescDiv {
+      display: none;
+  }
+}
+@media (min-width:768px){
+  div.profileDescDiv {
+      display:block;
+  }
+}
+
+
+/* navbar profile view header */
+.profileDescDiv {
+  position: absolute;
+  right: 0;
+}
+img.img-responsive.manhomelogo {
+  width: 40px;
+  height: 40px;
+  /* position: absolute; */
+  /* right: 0; */
+  /* padding: 5px; */
+  margin-right: 120px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+p.manhomename {
+  position: absolute;
+  top: 0;
+  margin: 6%;
+  padding: 5%;
+  margin-left: 30%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* signul statubar title */
+@media (max-width: 767px){
+  p.titlemasscryp {
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #004A7C;
+    text-align: center;
+  }
+}
+@media (min-width:768px){ 
+  p.titlemasscryp {
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    margin-right: 6%;
+    font-size: 20px;
+    font-weight: 600;
+    color: #004A7C;
+  }
+}
+
+/* @import '~/node_modules/ngx-sharebuttons/styles/share-buttons.scss';
+@import '~/node_modules/ngx-sharebuttons/styles/themes/default/default-theme.scss'; */
+
+/* modal imageviewer */
+ngx-imageviewer.imageviewer canvas {
+  width: 100%;
+}
+
+/* ngx-imageviewer canvas {
+  width: 100%;
+} */

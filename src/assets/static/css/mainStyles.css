@@ -1,0 +1,871 @@
+html {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: 'Montserrat', sans-serif;
+  height: 100%;
+}
+
+
+/*Custom Fonts RED RED RED RED */
+
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('../fonts/Montserrat-Bold.ttf') format('truetype');
+  /* Safari, Android, iOS */
+}
+
+.montBold {
+  font-family: 'MontserratBold';
+}
+
+@font-face {
+  font-family: 'MontserratRegular';
+  src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
+  /* Safari, Android, iOS */
+}
+
+.montRegular {
+  font-family: 'MontserratRegular';
+}
+
+
+/*Custom Fonts END RED RED RED RED */
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+
+/*################### PAdding and Margin Styles Start###################*/
+
+.nopad {
+  padding: 0px;
+}
+
+.noMarg {
+  margin: 0px;
+}
+
+.padTopBot5 {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.noMargBot {
+  margin-bottom: 0px;
+}
+
+.noPadTopBot {
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.noPadLeftRight {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.padLR5 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.padLR15 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.padLeft30{
+  padding-left: 30px;
+}
+
+.padLR20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.padRightOnly {
+  padding: 0px 10px 0px 0px;
+}
+
+.padTb3Lr15 {
+  padding: 3px 15px;
+}
+
+.padTopBot10 {
+  padding-top: 10px;
+  padding-top: 10px;
+}
+
+.margTop{
+  margin-top: 30px;
+}
+
+/*################### PAdding and Margin Styles End#####################*/
+
+
+/*################### Text Styles Start###################*/
+
+.colorWhite {
+  color: #fff;
+}
+
+.font25 {
+  font-size: 25px;
+}
+
+
+/*################### Text Styles End#####################*/
+
+.navShadow {
+  -webkit-box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+
+/*################### Navbar Styles Start#################*/
+
+.navbar {
+  border-radius: 0px;
+  height: 60px;
+  border: none;
+}
+
+.navbar-default {
+  background-color: #fff;
+}
+
+.navbar-collapse {
+  background-color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a {
+  background-color: transparent;
+  color: #5BC0DE;
+}
+
+.navbar-default .navbar-nav>.active>a:hover {
+  background-color: transparent;
+  color: #A3DAF7;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #337AB7;
+  background-color: none;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'MontserratRegular';
+}
+
+.navbar-nav>li>a {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 16px 16px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.navbar-header {
+  height: 60px;
+}
+
+.navbar-toggle {
+  position: relative;
+  float: right;
+  border-radius: 0px;
+  margin-top: 13px;
+  margin-right: 20px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+/*################### Navbar Styles End###################*/
+
+
+/*################### Custom Form Styles Start Green #################*/
+
+.custInput {
+  height: 40px;
+  border-radius: 0px;
+}
+
+.custBtnAnchor {
+  letter-spacing: 1px;
+  padding: 10px;
+}
+
+.sendCustInput {
+  height: 40px;
+  border-radius: 0px;
+}
+
+.input {
+  border: none;
+}
+
+
+/*################### Custom Form Styles End Red #################*/
+
+
+/*###################Intro Section Start#################*/
+
+#intro {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/images/bitcoin-2007769_1920.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  position: relative;
+  padding: 50px 10px;
+}
+
+.intro_txt_div {
+  padding: 80px 5px 0px 5px;
+}
+
+.intro_txt {
+  color: #fff;
+  font-size: 40pt;
+  font-family: 'MontserratBold';
+}
+
+.stats_div_wrap {
+  padding: 20px 10px;
+}
+
+.stats_div {
+  padding: 15px 5px;
+  font-family: 'MontserratBold';
+}
+
+.stats_div h3 {
+  font-size: 30px;
+}
+
+#buttons_wrap {
+  padding: 25px 0px 5px 0px;
+}
+
+
+/*###################Intro Section End###################*/
+
+.modalOTP {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+
+.modal-content {
+  /*border-radius: 0px;*/
+}
+
+.modal.in .modal-dialog {
+  top: 1%;
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-header {
+  padding: 40px 15px 20px 15px;
+  text-align: center;
+  border-bottom: none;
+}
+
+.modal-close-cust {
+  position: absolute;
+  z-index: 10;
+  top: -10px;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  opacity: 0.6 !important;
+  color: #fff !important;
+  border-radius: 50%;
+  background-color: #000 !important;
+  line-height: 15px;
+}
+
+.modal-close-cust:hover {
+  opacity: 1 !important;
+}
+
+.modal-footer {
+  margin-top: 10%;
+  border: none;
+}
+
+.alert {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+
+/*###################Dashboard Styles###################*/
+
+#topbar {
+  padding: 1% 0 0 4%;
+  /* padding: 10px 0px 0px 0px; */
+  /*border-bottom: 1px solid #CCCCCC;*/
+}
+
+.welcome {
+  background-color: pink;
+}
+
+.welcome_wrap {
+  color: #5F5F5F
+}
+
+#QRCode {
+  height: 150px;
+  padding: 5px;
+}
+
+.modFooot-cust {
+  padding: 10px;
+}
+
+/*!*.nest*!*/
+/*!*{*!*/
+  /*!*padding-left: 73px;*!*/
+  /*!*padding-right: 50px;*!*/
+  /*!*margin: 174px auto;*!*/
+  /*!*background-color: #eaedf1;*!*/
+/*!*}*!*/
+
+
+.new {
+  padding-top: 21px;
+  padding-bottom: 382px;
+  /*padding-left: 136px;*/
+  padding-left: 62px;
+  padding-right: 37px;
+  border-bottom: solid 1px #E1E1E1;
+}
+.new {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.center {
+  text-align: center;
+  /*These options are for the div to be visible in the example, the important is the first*/
+  /*border:1px solid black;*/
+  width: auto;
+  height: 50px;
+  /*display: block;*/
+  /*margin: 0 auto;*/
+}
+
+/*.cmb {*/
+  /*display: block;*/
+  /*margin: 0 auto;*/
+/*}*/
+
+.pass{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #878787;
+}
+
+.vr {
+  width:10px;
+  background-color:#000;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:150px;
+}
+
+
+/*######################### INDEX page media queries start ###################*/
+
+
+/*Iphone 4 adn 5*/
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 325px) {
+  .intro_txt {
+    font-size: 24px;
+  }
+  .stats_div h2 {
+    font-size: 20px !important;
+    margin: 0px;
+  }
+  .sendCustInput {
+    margin-bottom: 10px;
+  }
+  .otpResend {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .modFooot-cust {
+    margin-top: 15%;
+  }
+
+  .widget-heading{
+    font-size: 13px;
+  }
+
+  .widget-icon{
+    font-size: 14px !important;
+  }
+
+  .padLR20{
+    padding: 10px;
+  }
+}
+
+
+/*Rest Mobiles*/
+
+@media only screen and (min-device-width: 330px) and (max-device-width: 500px) {
+  #intro {
+    height: 100%;
+    padding: 10px;
+  }
+  .intro_txt {
+    font-size: 28px;
+  }
+  .stats_div h2 {
+    font-size: 24px !important;
+    margin: 0px;
+  }
+  .sendCustInput {
+    margin-bottom: 10px;
+  }
+  .otpResend {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .modFooot-cust {
+    margin-top: 35%;
+  }
+
+  .widget-heading{
+    font-size: 15px;
+  }
+
+  .widget-icon{
+    font-size: 15px !important;
+  }
+
+  #Sidebar {
+    padding-top: 0% !important;
+    height: 100%
+  }
+
+  .padLR20{
+    padding: 10px;
+  }
+}
+
+
+/*Ipad*/
+
+@media only screen and (min-device-width: 765px) and (max-device-width: 1030px) {
+  #intro {
+    height: 100%;
+    padding-top: 15%;
+  }
+  .intro_txt {
+    font-size: 40px;
+  }
+  #sidebar-wrapper {
+    width: 200px !important;
+  }
+
+  .btn-recieve{
+    padding-left: 0px !important;
+  }
+
+  .widget-heading{
+    font-size: 20px;
+  }
+
+  .padLR20{
+    padding: 10px;
+  }
+
+  .tofromDiv{
+    display: none;
+  }
+
+  .descDiv{
+    display: none;
+  }
+
+  .xs-up-filter{
+    display: none;
+  }
+}
+
+
+
+
+/*rest laptops*/
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1500px) {
+  #intro {
+    height: 100%;
+    padding-top: 5%;
+  }
+}
+
+@media screen and (min-device-width: 1275px) and (max-device-width: 1285px) {
+  #sidebar-wrapper {
+    width: 250px !important;
+  }
+}
+
+
+
+/*######################### INDEX page media queries end ###################*/
+
+
+/*#########################  Fixed Sidebar Start Green green ###############*/
+
+
+#main-sec{
+  padding-top: 55px;
+}
+
+#sidebar-wrapper {
+  /*margin-left: -250px;*/
+  left: 0;
+  width: 245px;
+  /* background: #F5F7F9; */
+  background: #fff;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 10;
+  transition: all 0.4s ease 0s;
+  border-right: solid 1px #E0E0E0;
+  box-shadow: 3px 5px 20px 2px lightgrey;
+}
+
+#wrapper.active {
+  padding-left: 0;
+}
+
+#wrapper.active #sidebar-wrapper {
+  left: 0;
+}
+
+.sidebar-nav {
+
+  padding-top: 5% !important;
+  /*position: absolute;*/
+  top: 0;
+  /*width: 250px;*/
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  line-height: 20px;
+  text-indent: 10px;
+}
+
+.sidebar-nav li a {
+  padding: 5px 0px !important;
+  color: #000;
+  display: block;
+  text-decoration: none;
+}
+
+
+
+.sidebar-nav li a:hover,
+.sidebar-nav li.active {
+  color: #5BC0DE !important;
+  text-decoration: none;
+  background-color: transparent !important;
+}
+
+.side-active{
+  color: #10ADE4 !important;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #5BC0DE;
+  background: none;
+}
+
+.sidebar-icon{
+  font-size: 20px;
+  padding: 0px 10px 0px 5px;
+}
+
+/*#########################  Fixed Sidebar End Red red ###############*/
+
+
+
+/*############## New Dashboard Styles ############*/
+.ddcust{
+  left:5%;
+  min-width: 180px;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 0px;
+  font-weight: 700;
+}
+
+/*######## TIMELINE ###########*/
+
+
+.timeline {
+  position: relative;
+  padding: 21px 0px 10px;
+  margin-top: 4px;
+  margin-bottom: 30px;
+}
+
+.timeline .line {
+  position: absolute;
+  width: 1px;
+  display: block;
+  background: currentColor;
+  top: 15px;
+  bottom: 0px;
+  margin-left: 30px;
+}
+
+.timeline .separator {
+  border-top: 1px solid currentColor;
+  padding: 5px;
+  padding-left: 40px;
+  font-style: italic;
+  font-size: .9em;
+  margin-left: 30px;
+}
+
+
+
+.timeline .panel {
+  position: relative;
+  margin: 0px 0px 40px 68px;
+  clear: both;
+  border-radius: 0px !important;
+}
+
+.timeline article{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.timeline .panel .panel-heading.icon * { font-size: 16px; vertical-align: middle; line-height: 35px; }
+.timeline .panel .panel-heading.icon {
+  position: absolute;
+  left: -55px;
+  top: 3px;
+  display: block;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  padding: 0px;
+  border-radius: 50%;
+  text-align: center;
+  float: left;
+  background-color: #337AB7;
+}
+
+.timeline .panel-outline {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.panel-body{
+  padding: 10px !important;
+}
+
+.timeline .panel-outline .panel-body {
+  padding: 10px 0px!important;
+}
+
+.timeline .panel-outline .panel-heading:not(.icon),
+.timeline .panel-outline .panel-footer {
+  display: none;
+}
+
+.timeline article:last-child{
+  opacity: 0.5
+}
+
+.tranfer{
+  font-weight: 500;
+  color: #A3CDEA;
+}
+
+.sent{
+  font-weight: 500;
+  color: #F3828B;
+}
+
+.recieve{
+  font-weight: 500;
+  color: #50C3D1;
+  word-wrap: break-word;
+}
+
+.green{
+  color: #00A79D;
+}
+
+.dukWidget{
+  margin-top: 3.3%;
+  padding: 15px;
+  border: solid 1px #D8D4D6;
+}
+
+.widget-icon{
+  color: #DEDDDD;
+  font-size: 20px;
+}
+
+
+/*Transaction Page Styles*/
+
+.filtersDiv{
+  padding: 10px;
+  border-top: solid 1px #E1E1E1;
+  background-color:#F5F7F9;
+  border-bottom: solid 1px #E1E1E1;
+}
+
+.filtersDiv ul li{
+  list-style: none;
+  float: left;
+  padding: 0 10px;
+  font-family: 'MontserratBold';
+}
+
+.filtersDiv ul li h4{
+  color: #ABADAF ;
+}
+
+
+.FilterActive a h4{
+  color: #000 !important;
+  border-bottom: solid 1px #000;
+  text-decoration: none !important;
+}
+
+
+.card{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 25px;
+  padding-right: 20px;
+  border-bottom: solid 1px #E1E1E1;
+}
+
+.card:hover{
+  background-color: #F5F7F9;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.trnsConfirm{
+  color: #20B281;
+}
+
+.TranferBtn{
+  background-color:#799EB2;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.SentBtn{
+  background-color:#F3828B;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.RecieveBtn{
+  background-color:#00A79D;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.SrchinpIcon{
+  height: 40px;
+    border-left: none;
+    background-color: #fff;
+    border-radius: 0px;
+}
+
+.xs-lis{
+  display: block;
+  width: 100%;
+}
+
+.xs-filtr-btn{
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'MontserratBold';
+}
+
+.wordWrap{
+  word-wrap: break-word;
+}
+
+/*.desc-button{
+  padding: 3px 10px;
+  background-color: #70CEEF;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.desc-button:hover{
+  background-color: #10ADE4;
+  color: #fff;
+}*/

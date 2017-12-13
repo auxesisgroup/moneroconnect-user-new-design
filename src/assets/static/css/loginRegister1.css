@@ -1,0 +1,269 @@
+
+
+/*Login Page css*/
+.form_wrap{
+  /*background-color: pink !important;*/
+  padding: 20px 15px 30px 15px;
+  background-color: #fff;
+  color: #5f5f5f;
+}
+
+.form_head{
+  position: relative;
+}
+
+.orSignUp{
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+#loginForm{
+  background-color: #004A7C;
+  height: auto;
+  padding: 100px 10px 80px 10px;
+}
+
+
+/*Iphone 4 adn 5*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 325px){
+    #loginForm{
+      height: 50em !important;
+    }
+
+    .modal-footer{
+      margin-top: 0% !important;
+    }
+
+    .otpResend{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+}
+
+/*Rest Mobiles*/
+@media only screen  and (min-device-width: 325px)  and (max-device-width: 500px){
+  #loginForm{
+    height: 100%;
+  }
+
+  .modal-footer{
+    margin-top: 0% !important;
+  }
+
+  .otpResend{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+/*Ipad*/
+@media only screen and (min-device-width: 768px){
+    #loginForm{
+      height: 100%;
+    }
+}
+
+
+/*Ipad pro and rest laptops*/
+@media screen and (min-device-width: 1200px) and (max-device-width: 1500px) and (-webkit-min-device-pixel-ratio: 1) {
+  #loginForm{
+    height: 100%;
+  }
+
+  .regPage{
+    height: 110% !important;
+  }
+
+
+}
+
+@-moz-document url-prefix() {
+  #loginForm{
+    height: 120%;
+  }
+}
+
+
+
+
+
+/*paymentReq page styles Start*/
+
+
+#paymentReq{
+  background-color: #004A7C;
+  height: auto;
+  position: relative;
+  padding: 100px 10px 80px 10px;
+}
+
+
+.copy-btn{
+  background-color: #10ADE4;
+  border-radius: 0px;
+  font-weight: 700;
+  font-family: 'MontserratBold';
+  height: 40px;
+  padding-top: 10px;
+}
+
+
+.payreqButton{
+  font-family: 'MontserratRegular';
+  font-size: 15px;
+  padding: 10px 10px;
+  margin-top: 10%;
+  border-radius: 3px;
+  background-color: #10ADE4;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.payreqButton:hover{
+  background-color: #0e9bcc;
+  color: #fff;
+  text-decoration: none;
+}
+
+.orange{
+  color: #F26C57;
+}
+
+.greyDiv{
+  padding: 15px 10px;
+  background-color:#F5F7F9;
+}
+
+
+
+#PayReqBody{
+  overflow: hidden;
+}
+
+/*Footer Styles*/
+
+footer{
+  background-color: #004A7C;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  height: 100%;
+}
+
+.foot-ul{
+  position: relative;
+}
+
+.foot-ul li{
+  display: inline-block;
+  list-style: none;
+  float: left;
+  padding: 10px 20px;
+}
+
+.foot-img{
+  width: 50px;
+  margin: 0 auto;
+}
+
+.foot-ul li a{
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+/*Iphone 4 adn 5*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 325px){
+
+    .payreqButton{
+      font-size: 10px !important;
+    }
+
+    .foot-ul li{
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    #PayReqBody{
+      overflow-y:scroll !important;
+    }
+
+    .foot-img{
+      width: 50px;
+      margin: 0 auto;
+    }
+
+    footer{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      height: auto !important;
+    }
+}
+
+/*Rest Mobiles*/
+@media only screen  and (min-device-width: 325px)  and (max-device-width: 500px){
+  #PayReqBody{
+    overflow-y:scroll !important;
+  }
+
+  .foot-ul li{
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .payreqButton{
+    font-size: 11px !important;
+  }
+
+  .foot-img{
+    width: 50px;
+    margin: 0 auto;
+  }
+
+  footer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: auto !important;
+  }
+}
+
+/*Ipad*/
+@media only screen and (min-device-width: 768px){
+
+    #PayReqBody{
+      overflow-y:hidden !important;
+    }
+
+    .payreqButton{
+      font-size: 14px !important;
+    }
+
+    footer{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      height: 100% !important;
+    }
+}
+
+
+/*Ipad pro and rest laptops*/
+@media screen and (min-device-width: 1200px) and (max-device-width: 1500px) and (-webkit-min-device-pixel-ratio: 1) {
+
+  #PayReqBody{
+    overflow-y:scroll !important;
+  }
+
+  footer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100% !important;
+  }
+
+}
+
+
+/*paymentReq page styles END*/

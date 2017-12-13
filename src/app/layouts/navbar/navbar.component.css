@@ -1,0 +1,123 @@
+/* .navbar-brand {
+    padding: 4px 4px;
+}
+nav.navbar {
+    box-shadow: 2px 2px 8px #888888;
+} */
+
+.navbar>.container, .navbar>.container-fluid {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: flex-start;
+}
+nav.navbar {
+    -webkit-box-shadow: 2px 8px 15px grey;
+    -moz-box-shadow: 2px 8px 15px grey;
+    box-shadow: 2px 8px 15px grey;
+} 
+.navbar-default {
+    background-color: #323232;
+}
+
+button.menubtn {
+    background: transparent;
+    border: transparent;
+    color: #fff;
+    position: fixed;
+    right: 0;
+    outline: none;
+    /* padding-top: 1.2%; */
+    /* padding-right: 1.2%; */
+    float: right;
+    height: 50px;
+    padding: 12px 12px;
+    /* font-size: 18px; */
+    /* line-height: 20px; */
+}
+button.menubtn i.fa.fa-cog {
+    font-size: 2.5em;
+}
+
+/* sidenav */
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index:99999;
+    top: 0;
+    left: 0;
+    background-color: #308cd1;/*#111;*/
+    overflow-x: hidden;
+    transition: 0.5s;
+    /* padding-top: 60px; */
+}
+
+.sidenav a,.sidenav ul li a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    /* color: #818181; */
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover,.sidenav ul li a:hover {
+    color: #f1f1f1;
+}
+
+/* .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+} */
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.overlaylist{
+    list-style: none;
+}
+
+/* Menulist in sidenav */
+.menulistsidenav {
+    padding-top: 15%;
+}
+.menulistsidenav a {
+    margin-top: 5%;
+}
+.sidemenufooter {
+    bottom: 0;
+    position: relative;
+    padding: 5%;
+    text-align: center;
+    width: 100%;
+    font-size: 15px;
+    margin-top: 25%;
+    font-weight: 600;
+    color: wheat;
+    text-shadow: 1px 2.5px darkslategrey;
+}
+
+img.img-responsive.tblogo {
+    width: 75%;
+    /* margin: 2px; */
+    /* position: fixed; */
+    left: 0;
+    /* margin-left: 3%; */
+    /* margin-top: 1.5%; */
+}
+
+a.nopad.referral {
+    cursor: pointer;
+}

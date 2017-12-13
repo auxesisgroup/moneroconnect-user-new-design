@@ -1,0 +1,88 @@
+<header>
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                      data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button> -->
+              <a class="navbar-brand" routerLink="">
+                <img src="assets/img/masscryp.png" class="img-responsive tblogo" alt="tokenbazaar">
+              </a>
+              <p class="titlemasscryp">Masscryp ICO</p>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                  <!--<li class="active"><a href="#">Wallet <span class="sr-only">(current)</span></a></li>-->
+                  <!--<li><a href="#">Charts</a></li>-->
+                  <!--<li class="#"><a href="#">Stats</a></li>-->
+                  <!--<li><a href="#">Markets</a></li>-->
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
+</header>
+<!-- <toaster-container></toaster-container> -->
+<section id="loginForm" class="">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 form_wrap clearfix">
+              <div class="col-sm-12 form_head">
+                  <h3 style="margin-bottom: 0px;">
+                      Terms Of Service
+                  </h3>
+                  <hr>
+                  <p class="tncinfo">Please scroll through our terms and enter your full name accepting T & C to continue.</p>
+              </div>
+              <div class="col-sm-12">
+
+                  <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                  style="display: block">
+                      <span class="text-center text-danger">{{errmsg?errmsg:""}}</span>
+                  </div>
+                  <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                  style="display: block">
+                      <span class="text-center text-success">{{sucmsg?sucmsg:""}}</span>
+                  </div>
+
+                      <div class="termsx">
+                          <h4 style="margin-bottom: 0px;">
+                                MASS CRYP Token Terms and Conditions
+                          </h4>
+
+                          <app-usertermsdescription></app-usertermsdescription>
+
+                          <div class="form-single-column" data-component="checkbox">
+                            <span class="form-checkbox-item" style="clear:left;">
+                              <span class="dragger-item">
+                              </span>
+                              <label id="label_input_7_0" for="input_7_0"> 
+                                 
+                                        <input type="checkbox" class="form-checkbox validate[required]" id="input_7_0" name="q7_terms" [(ngModel)]="terms" required="">
+                                    I  
+                                  <input type="text" class="pass name" [(ngModel)]="name" placeholder=" My name ">, 
+                                  referred by referral ID  <input type="text" class="pass refid" [(ngModel)]="referral" placeholder=" Referral id ">, 
+                                agree to the terms and agreement.  </label>
+                            </span>
+                            <div class="col-sm-6">
+                                  <button (click)="token_verification()"
+                                          class="btn btn-primary btn-block col-sm-offset-6 custBtnAnchor">
+                                      <strong style="letter-spacing: 1px;">Submit</strong>
+                                      &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
+                                  </button>
+                            </div>
+                          </div>
+              
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

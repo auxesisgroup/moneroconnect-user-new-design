@@ -1,0 +1,39 @@
+@import '~assets/static/css/w3css.css';
+p.earned {
+    position: relative;
+    right: 0;
+    float: right;
+    word-wrap: break-word;
+}
+
+.row.rowreferral {
+    margin-top: 3%;
+}
+img.loadingimgdonereferral {
+    width: 15px;
+    margin: 0.5%;
+}
+
+button.btnreferral {
+    width: 50%;
+    text-align: center;
+}
+
+img.loadingimgdone {
+    width: 15px;
+    margin: 0.5%;
+}
+.row.rowreferralotp {
+    margin-top: 10%;
+}
+
+img.yesreferral {
+    width: 25%;
+    padding: 0.5%;
+    margin-top: 5%;
+}
+
+
+img.social {
+    cursor: pointer;
+}

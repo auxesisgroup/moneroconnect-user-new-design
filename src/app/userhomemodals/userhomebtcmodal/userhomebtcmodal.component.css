@@ -1,0 +1,7 @@
+input[type=text], select {
+    width: 100%;
+}
+select.walletselect {
+    border: 0px solid;
+    height: 40px;
+}

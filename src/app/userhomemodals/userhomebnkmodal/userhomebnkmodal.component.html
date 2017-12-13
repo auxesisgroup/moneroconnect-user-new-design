@@ -1,0 +1,216 @@
+<div class="col-sm-12 nopad">
+        <a class="btn btn-default btn-block" id="openmodal" data-toggle="modal" (click)="open_recieve_modal(bankmodal)">
+            <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+        </a>
+    </div>
+                                            <ng-template #bankmodal>
+<div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h3 id="myModalLabel" class="noMarg text-left bnktitle">
+                    <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <span id="modal-header-content">{{bankmodaltitle}}</span>
+            </h3>
+</div>
+<hr> 
+<div class="modal-body customModalHeight bankmodaldiv" id="normalModalBody">
+
+    
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveBNK == 0">
+
+
+    <!-- <h3 id="myModalLabel" class="noMarg text-left bnktitle">
+            <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+        <span id="modal-header-content">{{bankmodaltitle}}</span>
+    </h3> -->
+            <div class="container-fluid">
+                <h4 class="pull-left">Provide detail:</h4>
+            </div>
+            <div class="container-fluid">
+                <div class="col-sm-3 text-center">
+                        <h5>Select Wallet</h5>
+                </div>
+                <div class="col-sm-9 text-center">
+                        <select class="walletselect" id="bnkwalletname" name="bnkwalletname" [(ngModel)]="bnkwalletname" (change)="bnkwalletnamechange($event)">
+                        <option selected value="Mist">Mist
+                        </option>
+                        <option value="Parity">Parity</option>
+                        <option value="MyEtherWallet">MyEtherWallet</option>
+                        <option value="MetaMask">MetaMask</option>
+                        <option value="imToken">imToken</option>
+                        <option value="Coinbase">Coinbase</option>
+                        <option value="Globitex">Globitex</option>
+                        <option value="Kraken">Kraken</option>
+                        <option value="Poloniex">Poloniex</option>
+                        <option value="Bittrex">Bittrex</option>
+                        <option value="Jaxx">Jaxx</option>
+                        <option value="Coinomi">Coinomi</option>
+                        <option value="Parity">Parity</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="container-fluid">
+                <div class="col-sm-12">
+                    <input type="text" width="100%" class="form-control sendCustInput" id="TmpAddress2" required="required" value="mwQNCTNHsQKPGHVVyWZy88uXv1i5Uc19sh" placeholder="your Bank address..." [(ngModel)]="bnkwalletaddress" (keyup)="bnkwalletaddresschange($event)">
+                </div>
+            </div>
+            <hr>            
+            <div class="container-fluid">
+                <div class="col-sm-12">
+                    <div *ngIf="toBank == 0">
+                        <button type="button" class="btn btn-primary btn-block" (click)="nextbnk1_1()">
+                            Submit & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+                        <!-- <p class="text-center">Skip this for now</p> -->
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block" *ngIf="toBank == 1" (click)="nextbnk1_2()">
+                        Review & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block" *ngIf="toBank == 2" (click)="nextbnk1_3()">
+                        Update & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+            <div class="tab-pane fade in active"   id="step1RecieveBNK" #step1RecieveBNK *ngIf="stepRecieveBNK == 1">
+
+
+                <!-- <h3 id="myModalLabel" class="noMarg text-left bnktitle">
+                    <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                <span id="modal-header-content">{{bankmodaltitle}}</span>
+            </h3> -->
+                <!--<div class="container-fluid">-->
+                    <!--<h4 class="pull-left">Your Bank Details</h4>-->
+                <!--</div>-->
+                <div class="container-fluid">
+                    <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                        <p align="left"><strong>YES Bank</strong></p>
+                        <p align="left">Account Name: SECURE BITCOIN TRADERS PRIVATE LIMITED</p>
+                        <p align="left">Account Number: 01846080000548</p>
+                        <p align="left">IFSC Code: YESB0000184</p>
+                        <p align="left">Account Type: Current Account</p>
+
+
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                        <p align="left"><strong>HDFC Bank</strong></p>
+                        <p align="left">Account Name: SECURE BITCOIN TRADERS PRIVATE LIMITED</p>
+                        <p align="left">Account Number: 01846080000548</p>
+                        <p align="left">IFSC Code: HDFC675765</p>
+                        <p align="left">Account Type: Current Account</p>
+                    </div>
+
+
+                </div>
+                <hr>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="step1">
+                        <!--<form action="" id="sendBITForm">-->
+
+                        <div class="container-fluid padTopBot10">
+                            <div class="col-sm-3 noPadLeftRight">
+                                <h5 class="">Please select your deposit mbnkod: </h5>
+                            </div>
+                            
+                            <div class="col-sm-8 inputwrap">
+                                <select class="" id="select_alias" name="selectalias" [(ngModel)]="selectalias">
+                                    <option selected="selected" value="default_alias">IMPS
+                                    </option>
+
+                                    <option value="teds1">IMPS
+                                    </option>
+
+                                    <option value="test1">IMPS
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid padTopBot10">
+                            <div class="col-sm-3 noPadLeftRight">
+                                <h5 class="">Enter Amount Deposited </h5>
+                            </div>
+                            <div class="col-sm-8 inputwrap">
+                                <input type="text" class="form-control sendCustInput" id="btcAddress" placeholder="Enter amount to be deposited" required="" name="amount" [(ngModel)]="amount">
+                            </div>
+                        </div>
+                        <div class="container-fluid padTopBot10">
+                            <div class="col-sm-3 noPadLeftRight">
+                                <h5 class="">Enter Bank Transaction Id </h5>
+                            </div>
+                            <div class="col-sm-8 inputwrap">
+                                <input type="text" class="form-control sendCustInput" id="btcAddress" placeholder="Enter Bank Transaction Id" required="" name="transid" [(ngModel)]="transid">
+                            </div>
+                        </div>
+
+                        <div class="container-fluid padTopBot10">
+                            <div class="col-sm-3 noPadLeftRight">
+                                <h5 class="">Please select the deposit bank: </h5>
+                            </div>
+                            
+                            <div class="col-sm-8 inputwrap">
+                                <select class="" id="select_alias" name="selectbank" [(ngModel)]="selectbank">
+                                    <option selected="selected" value="ICICI Bank">ICICI Bank
+                                    </option>
+
+                                    <option value="HDFC">HDFC
+                                    </option>
+
+                                    <option value="YES Bank">YES Bank
+                                    </option>
+
+                                </select>
+                                <br><br>
+                            </div>
+                        </div>
+
+
+
+                        <!--</form>-->
+                    </div>
+
+
+                </div>
+                <div class="container-fluid">
+                    <div class="col-md-12">
+
+                        <button type="button" class="btn btn-primary btn-block" (click)="nextbnk2()">
+                            Submit&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active"  id="step2RecieveBNK" #step2RecieveBNK *ngIf="stepRecieveBNK == 2">
+
+
+            <!-- <h3 id="myModalLabel" class="noMarg text-left bnktitle">
+                <span class="pull-left padRightOnly" style="font-size:18px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            <span id="modal-header-content">{{bankmodaltitle}}</span>
+        </h3> -->
+            <div class="container-fluid">
+                <div class="col-sm-12">
+                        {{message?message:'No transaction has been done'}}
+                </div>
+            </div>
+            <hr> 
+
+        </div>
+    </div>
+</div>
+<!-- <div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-primary">Save changes</button>
+</div> -->
+</ng-template>

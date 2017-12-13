@@ -1,0 +1,46 @@
+.recieve.done {
+    color: forestgreen;
+}
+
+.col-sm-12.col-md-10.boxshadowdiv {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding-bottom: 15%;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+@media(min-width:768px){
+    div.currentrate {
+        margin-top: 35%;
+        padding-top: 40px;
+        color: darkslategray;
+        text-align: left;
+    }
+}
+@media(max-width:767px){
+    div.currentrate {
+        margin-top: 10%;
+        padding-top: 5px;
+        color: darkslategray;
+        text-align: left;
+    }
+}
+
+.popmodaldiv .montBold {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.col-sm-12.nopad.popmodalradio {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.divsolddescription {
+    margin-top: 5%;
+    color: slategray;
+}
+.col-sm-9.col-md-9.myactivitypanel {
+    margin-top: 6%;
+}

@@ -1,0 +1,17 @@
+input[type=text], select {
+    width: 100%;
+}
+h3.bnktitle {
+    /* margin-top: 18%; */
+}
+ngb-modal-window.modal.fade.show {
+    /* margin-top: 5%; */
+    z-index: 999999999;
+}
+/* div#step1RecieveBNK {
+    margin-top: 15%;
+} */
+select.walletselect {
+    border: 0px solid;
+    height: 40px;
+}

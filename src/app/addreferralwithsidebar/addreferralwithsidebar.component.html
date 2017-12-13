@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+<ngx-loading [show]="ngxloading"></ngx-loading>
+<section id="main-sec">  
+  <div class="container-fluid" id="main-container">
+      <div class="hidden-xs">
+          <div id="sidebar-wrapper">
+              <nav id="sidenav" #sidenav>
+                  <app-sidemenu></app-sidemenu>
+              </nav>
+          </div>
+      </div> 
+      <div class="col-sm-9 col-md-10 pull-right nopad">
+        <div id="topbar">
+          
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+                
+                <div class="col-sm-9 col-md-9 col-sm-offset-1 col-md-offset-1 form_wrap">
+                    <div class="col-sm-12 form_head text-center">
+                        <h4 style="margin-bottom: 0px;">
+                            Please enter BTC & ETH addresses to access referral section.
+                        </h4>
+                        <hr>
+                        <!--</br>-->
+                    </div>
+                    <div class="col-sm-12">
+      
+                        <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                        style="display: block">
+                            <span class="text-center text-danger">{{errmsg}}</span>
+                        </div>
+                        <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                        style="display: block">
+                            <span class="text-center text-success">{{sucmsg}}</span>
+                        </div>
+                        <br><div class="col-sm-12">&nbsp;</div><br>
+                        
+                        <form [formGroup]="formReferral">
+                          <div class="col-sm-3 text-left">
+                              <div class="form-group labelfrmgrp">
+                                  <label for="bitcoinaddress">BTC Address:</label>
+                              </div>
+                          </div>
+                          <div class="col-sm-9">
+                              <div class="form-group">
+                                  <input type="text" class="form-control custInput" id="bitcoinaddress" [(ngModel)]="bitcoinaddress" name="bitcoinaddress"
+                                        aria-describedby="bitcoinAddress" placeholder="Enter your BTC address..." required formControlName="bitcoin">
+                              </div>
+                          </div>
+                          
+                          <br><div class="col-sm-12">&nbsp;</div><br>
+                          <div class="col-sm-3 text-left">
+                              <div class="form-group labelfrmgrp">
+                                  <label for="etheraddress">ETH Address:</label>
+                              </div>
+                          </div>
+                          <div class="col-sm-9">
+                              <div class="form-group">
+                                  <input type="text" class="form-control custInput" id="etheraddress" [(ngModel)]="etheraddress" name="etheraddress"
+                                        aria-describedby="etherAddress" placeholder="Enter your ETH address..." required formControlName="ether">
+                              </div>
+                          </div>
+                          
+                          <!-- <button class="btn btn-link btn-sm pull-right">Recover Funds?</button>
+                          <br> -->
+                          <br><div class="col-sm-12">&nbsp;</div><br>
+                          <br><div class="col-sm-12">&nbsp;</div><br>
+                          <div class="col-sm-12 text-center">
+                              <button (click)="addreferral()" class="btn btn-primary custBtnAnchor referralbtnsubmit">
+                                  <strong style="letter-spacing: 1px;">{{referralbtnTxt}}</strong>
+                                  &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
+                                  <!-- <div class="ngloader">Loading...</div> -->
+                              </button>
+                          </div>
+                        </form>
+                        <!-- <div class="col-sm-12">
+                          <div class="skipdiv text-center" style="margin-top:2%"><a (click)="notnow()"  class="skip">Not now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="gohome()"  class="skip">Go Home</a> </div>
+                        </div> -->
+                    </div>
+                </div>
+
+              </div>
+          </div>
+        </div><!--topbar-->
+      </div>
+  </div>
+</section> 

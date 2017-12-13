@@ -1,0 +1,109 @@
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <a class="navbar-brand" routerLink="">
+                    <img src="assets/img/masscryp.png" class="img-responsive tblogo" alt="tokenbazaar">
+                </a>
+                <p class="titlemasscryp">Masscryp ICO</p>
+            </div>
+  
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li class="active"><a href="#">Wallet <span class="sr-only">(current)</span></a></li>-->
+                    <!--<li><a href="#">Charts</a></li>-->
+                    <!--<li class="#"><a href="#">Stats</a></li>-->
+                    <!--<li><a href="#">Markets</a></li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- <toaster-container></toaster-container> -->
+  <section id="loginForm" class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 form_wrap clearfix">
+                <div class="col-sm-12 form_head">
+                    <h5 style="margin-bottom: 0px;">
+                            Please submit your KYC information. You can also skip this step for now and continue buying MASS Coins. Please ensure this is completed before 31st December 2017.
+                    </h5>
+                    <hr>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                    style="display: block">
+                        <span class="text-center text-danger">{{errmsg?errmsg:""}}</span>
+                    </div>
+                    <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                    style="display: block">
+                        <span class="text-center text-success">{{sucmsg?sucmsg:""}}</span>
+                    </div>
+                    <form [formGroup]="form" (ngSubmit)="signup_v2()">
+                      <div class="kycform">
+                        <!-- <div class="form-group">
+                            <label for="textname">Name</label>
+                            <input type="text" class="form-control custInput" id="textname" name="name" formControlName="name"
+                                   placeholder="Enter your name..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textaadharno">Aadhar card number</label>
+                            <input type="number" class="form-control custInput" id="textaadharno"  name="aadharno" formControlName="aadharno"
+                                   placeholder="Enter your aadhar card number..." required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="panUpload">Upload Proof Of Identity</label>
+                            <input type="file" name="pan_card" class="form-control-file" id="pan"
+                                   aria-describedby="fileHelp" accept=".png, .jpg, .jpeg, application/pdf" required=""  (change)="onFileChange1($event)" #fileInput1><br>
+                            <small id="fileHelp" class="form-text text-muted">
+                                Supported File Format: JPG, PNG, PDF.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <strong>Upload Proof Of Address</strong>
+                            <small class="text-muted">&nbsp;&nbsp; (Passport, Driving License, Aadhar Card)</small>
+                            <input type="file" name="id_proof" class="form-control-file" id="idproof"  (change)="onFileChange2($event)" #fileInput2
+                                   aria-describedby="fileHelp" accept=".png, .jpg, .jpeg, application/pdf" required="" multiple><br>
+                            <small id="fileHelp" class="form-text text-muted">
+                                Supported File Format: JPG, PNG, PDF.
+                            </small>
+                        </div>
+                        <!-- <div class="form-group">
+                            <strong>Upload Id Proof</strong>
+                            <small class="text-muted">&nbsp;&nbsp; (Passport, Driving License, Aadhar Card)</small>
+                            <input type="file" name="id_proof" class="form-control-file" id="proof1"  (change)="onFileChange3($event)" #fileInput3
+                                   aria-describedby="fileHelp" accept=".png, .jpg, .jpeg, application/pdf" required="" multiple><br>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="id_proof" class="form-control-file" id="proof2"  (change)="onFileChange4($event)" #fileInput4
+                                   aria-describedby="fileHelp" accept=".png, .jpg, .jpeg, application/pdf" required="" multiple><br>
+                            <small id="fileHelp" class="form-text text-muted">
+                                Supported File Format: JPG, PNG, PDF.
+                            </small>
+                        </div> -->
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block col-sm-offset-6 custBtnAnchor">
+                                <strong style="letter-spacing: 1px;">Submit</strong>
+                                &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
+                            </button><br>
+                        </div>
+                        <div class="skipdiv text-center"><a (click)="skipfornow()"  class="skip">Skip for now</a> </div>
+                      </div>
+                    </form>
+                </div>
+          </div>
+      </div>
+  </div>
+</section>

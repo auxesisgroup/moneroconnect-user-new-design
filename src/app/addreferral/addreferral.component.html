@@ -1,0 +1,85 @@
+<ngx-loading [show]="ngxloading"></ngx-loading>
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <a class="navbar-brand" routerLink="">
+                    <img src="assets/img/masscryp.png" class="img-responsive tblogo" alt="tokenbazaar">
+                </a>
+                <p class="titlemasscryp">Masscryp ICO</p>
+            </div>
+  
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li class="active"><a href="#">Wallet <span class="sr-only">(current)</span></a></li>-->
+                    <!--<li><a href="#">Charts</a></li>-->
+                    <!--<li class="#"><a href="#">Stats</a></li>-->
+                    <!--<li><a href="#">Markets</a></li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <section id="loginForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 form_wrap">
+                <div class="col-sm-12 form_head">
+                    <h4 style="margin-bottom: 0px;">
+                        Please enter BTC & ETH addresses to access referral section.
+                    </h4>
+                    <hr>
+                    <!--</br>-->
+                </div>
+                <div class="col-sm-12">
+  
+                    <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                    style="display: block">
+                        <span class="text-center text-danger">{{errmsg}}</span>
+                    </div>
+                    <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
+                    style="display: block">
+                        <span class="text-center text-success">{{sucmsg}}</span>
+                    </div>
+  
+                    <form [formGroup]="formReferral">
+                      <div class="form-group">
+                          <label for="bitcoinaddress">BTC Address:</label>
+                          <input type="text" class="form-control custInput" id="bitcoinaddress" [(ngModel)]="bitcoinaddress" name="bitcoinaddress"
+                                aria-describedby="bitcoinAddress" placeholder="Enter your BTC address..." required formControlName="bitcoin">
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label for="etheraddress">ETH Address:</label>
+                          <input type="text" class="form-control custInput" id="etheraddress" [(ngModel)]="etheraddress" name="etheraddress"
+                                aria-describedby="etherAddress" placeholder="Enter your ETH address..." required formControlName="ether">
+                      </div>
+                      <!-- <button class="btn btn-link btn-sm pull-right">Recover Funds?</button>
+                      <br> -->
+                      <br>
+                      <div class="col-sm-12 text-center">
+                          <button (click)="addreferral()" class="btn btn-primary custBtnAnchor referralbtnsubmit">
+                              <strong style="letter-spacing: 1px;">{{referralbtnTxt}}</strong>
+                              &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
+                              <!-- <div class="ngloader">Loading...</div> -->
+                          </button>
+                      </div>
+                    </form>
+                    <div class="col-sm-12">
+                      <div class="skipdiv text-center" style="margin-top:2%"><a (click)="notnow()"  class="skip">Not now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="gohome()"  class="skip">Go Home</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>

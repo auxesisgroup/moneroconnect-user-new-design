@@ -1,0 +1,42 @@
+.col-sm-12.kycform {
+    /* border-bottom: 1px solid; */
+    box-shadow: 2px 5px 5px 2px #888888;
+    height: 350px;
+}
+button.btn.custBtnAnchor2 {
+    width: 40%;
+}
+
+.nokycdiv p {
+    text-align: center;
+    font-size: larger;
+    font-weight: 600;
+    color: slategrey;
+}
+img.kycimage {
+    width: 100%;
+}
+img.kycimagemd {
+    width: 200px;
+    cursor: pointer;
+    /* padding: 15%; */
+    height: 200px;
+
+}
+img.kycimagemdpdf {
+    width: 200px;
+    height: 200px;
+    margin-top: 5%;
+    cursor: pointer;
+}
+.kycdiv p {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/*image modal*/
+.modal-footer.imagefooter {
+    margin-top: 0%;
+}
+

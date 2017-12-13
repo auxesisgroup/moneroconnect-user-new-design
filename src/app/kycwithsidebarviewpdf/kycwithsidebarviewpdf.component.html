@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<ngx-loading [show]="ngxloading"></ngx-loading>
+<section id="main-sec">  
+  <div class="container-fluid" id="main-container">
+      <div class="hidden-xs">
+          <div id="sidebar-wrapper">
+              <nav id="sidenav" #sidenav>
+                  <app-sidemenu></app-sidemenu>
+              </nav>
+          </div>
+      </div> 
+      <div class="col-sm-9 col-md-10 pull-right nopad">
+        <div id="topbar">
+          
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+
+                <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-primary" (click)="back()">
+                  <strong style="letter-spacing: 1px;">Back</strong>
+                </button><br>
+                &nbsp;</div>
+                <br>
+                <br>
+
+                <ngx-imageviewer [src]="kycimg"></ngx-imageviewer>
+                <div class="col-sm-12">&nbsp;</div>
+              </div>
+            </div>
+          </div><!--topbar-->
+        </div>
+    </div>
+  </section> 
