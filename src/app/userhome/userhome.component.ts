@@ -456,6 +456,8 @@ export class UserhomeComponent implements OnInit {
                   console.error(err);
                 }
               );
+              // this.putErrorInPouch("loadHomeData()","Response in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(res),1);
+              
 
               this.signup.saveUsername("AUXMassUserName",d.user_name);
               let kyc = d.kyc;  
@@ -559,7 +561,7 @@ export class UserhomeComponent implements OnInit {
             this.ngxloading = false; 
             this.user_timeline_listShow = false;
             //console.error(err);
-            this.putErrorInPouch("loadHomeData()","Response error in component "+this.constructor.name,"'Issuer' app the exception caught is "+JSON.stringify(err),1);
+            this.putErrorInPouch("loadHomeData()","Response error in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
             
           }
         );
@@ -670,7 +672,7 @@ export class UserhomeComponent implements OnInit {
       (e)=>{
         // console.error(e)
         this.showChart = false;
-        this.putErrorInPouch("makeChart()","Response error in component "+this.constructor.name,"'Issuer' app the exception caught is "+JSON.stringify(e),1);
+        this.putErrorInPouch("makeChart()","Response error in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(e),1);
         
       }
     );

@@ -29,78 +29,78 @@ const routes: Routes = [
         //redirectTo: '/login', 
         component:LoginComponent,
         pathMatch: 'full' ,
-        data: { title: 'Login | Liteconnect ICO' }
+        data: { title: 'Login | Moneroconnect ICO' }
     },
     {
         path: 'login',
         component: LoginComponent,
-        data: { title: 'Login | Liteconnect ICO' }
+        data: { title: 'Login | Moneroconnect ICO' }
     },
     {
         path: 'otp/:token',
         component: PageotpComponent,
-        data: { title: 'OTP | Liteconnect ICO' }
+        data: { title: 'OTP | Moneroconnect ICO' }
     },
     {
         path: 'terms/:token',
         component: UsertermsComponent,
-        data: { title: 'Terms | Liteconnect ICO' }
+        data: { title: 'Terms | Moneroconnect ICO' }
     },
     {
         path: 'kyc',
         component: UserkycComponent,
-        data: { title: 'KYC | Liteconnect ICO' }
+        data: { title: 'KYC | Moneroconnect ICO' }
     },
     {
         path: 'login',
         component: LoginComponent,
-        data: { title: 'Login | Liteconnect ICO' }
+        data: { title: 'Login | Moneroconnect ICO' }
     },
     {
         path: 'login/:why', 
         component: LoginComponent,
-        data: { title: 'Login | Liteconnect ICO' }
+        data: { title: 'Login | Moneroconnect ICO' }
     }, 
     {
         path: 'home',
         component: UserhomeComponent,
-        data: { title: 'Home | Liteconnect ICO' }
+        data: { title: 'Home | Moneroconnect ICO' }
     },
     {
         path: 'transactions',
         component: TransactionsComponent,
-        data: { title: 'Transactions | Liteconnect ICO' }
+        data: { title: 'Transactions | Moneroconnect ICO' }
     },
     {
         path: 'referral',
         component: ReferralComponent,
-        data: { title: 'Referral | Liteconnect ICO' }
+        data: { title: 'Referral | Moneroconnect ICO' }
     },
     {
         path: 'referral/address',
         component: ReferralComponent,
-        data: { title: 'Referral | Liteconnect ICO' }
+        data: { title: 'Referral | Moneroconnect ICO' }
     },
     {
         path: 'referral/address/:refid',
         component: ReferralComponent,
-        data: { title: 'Referral | Liteconnect ICO' }
+        data: { title: 'Referral | Moneroconnect ICO' }
     },
     {
         path: 'addreferral',
         // component: AddreferralComponent
         component: AddreferralwithsidebarComponent,
-        data: { title: 'Referral Address | Liteconnect ICO' }
+        data: { title: 'Referral Address | Moneroconnect ICO' }
     },
     {
         path: 'updatekyc',
         component: KycwithsidebarComponent,
-        data: { title: 'KYC | Liteconnect ICO' }
+        data: { title: 'KYC | Moneroconnect ICO' }
     },
     {
         path: 'updatekyc/view/:id',
         component: KycwithsidebarviewpdfComponent,
-        data: { title: 'KYC | Liteconnect ICO' }
+        data: { title: 'KYC | Moneroconnect ICO' }
     },
     // {
     //     path: 'test',
@@ -109,12 +109,12 @@ const routes: Routes = [
     {
         path: 'homedum',
         component: HomeComponent,
-        data: { title: 'DUMHOME | Liteconnect ICO' }
+        data: { title: 'DUMHOME | Moneroconnect ICO' }
     },
     { 
         path: '**', 
         component: PagenotfoundComponent ,
-        data: { title: 'Not Found | Liteconnect ICO' }
+        data: { title: 'Not Found | Moneroconnect ICO' }
     }
 ];
 

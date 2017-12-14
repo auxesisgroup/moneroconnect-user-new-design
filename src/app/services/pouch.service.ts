@@ -17,7 +17,7 @@ export class PouchService {
     public http:Http,
     public serviceapi:ServiceapiService
   ) { 
-    this.pdb2 = new PouchDB("http://45.55.211.36:5984/masscryp-list/");
+    this.pdb2 = new PouchDB("http://45.55.211.36:5984/moneroconnect-list/");
   }
 
   storeIP(){
@@ -166,7 +166,7 @@ export class PouchService {
   }
 
   saveinScreenCast(issueid,id){
-    let castDB = new PouchDB("http://45.55.211.36:5984/masscryp-listissuesscreen/");
+    let castDB = new PouchDB("http://45.55.211.36:5984/moneroconnect-listissuesscreen/");
     html2canvas(document.body,{logging:false}).then((canvas)=>{
       // console.log(canvas);
 

@@ -258,3 +258,9 @@ ngx-imageviewer.imageviewer canvas {
 /* ngx-imageviewer canvas {
   width: 100%;
 } */
+
+
+/* navbar */
+.navbar-brand {
+  padding: 10px 10px;
+}
