@@ -7,6 +7,9 @@ import * as _ from 'lodash';
 // import * as Raven from 'raven-js';
 import * as html2canvas from 'html2canvas';
 import {ServiceapiService} from './serviceapi.service';
+
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap'; //to fetch url params
 @Injectable()
 export class PouchService {
 
@@ -15,7 +18,9 @@ export class PouchService {
 
   constructor(
     public http:Http,
-    public serviceapi:ServiceapiService
+    public serviceapi:ServiceapiService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { 
     this.pdb2 = new PouchDB("http://45.55.211.36:5984/moneroconnect-list/");
   }
@@ -189,5 +194,17 @@ export class PouchService {
         // console.log("ScreenCaptured:",d)
       });
     })
+  }
+
+  putErrorInPouch(fun,desc,notes,priority){
+    let id = this.serviceapi.retrieveFromLocal("AUXUserEmail");
+    if(id == null || id == "" || id == undefined || !id){
+      id = "Global-User";
+    }
+    let page = this.router.url;
+    let func = fun;
+    let description = desc;
+    // console.log(id,page,func,description)
+    this.letsIssuing(id,page,func,description,notes,priority);
   }
 }

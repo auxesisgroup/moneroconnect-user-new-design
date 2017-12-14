@@ -15,11 +15,13 @@ import { FbapiService } from '../services/fbapi.service';
 
 import { Compiler } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';//
+
+import { PouchService } from '../services/pouch.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers:[SignupService,FbapiService]
+  providers:[SignupService,FbapiService,PouchService]
 })
 export class LoginComponent implements OnInit {
 
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
     public signup:SignupService,
     public http:Http,
     private route: ActivatedRoute,
+    public pouchserv:PouchService,
     private router: Router,
     private storage:LocalStorageService, 
     private fbapi:FbapiService,
@@ -192,6 +195,7 @@ export class LoginComponent implements OnInit {
         setTimeout(()=>{
           this.errmsg = "";
         },2500);
+        this.pouchserv.putErrorInPouch("signup_v2()","Response error in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(err),3);        
       })
       .catch(function(err){
         this.loadingimage = false;
@@ -201,6 +205,8 @@ export class LoginComponent implements OnInit {
         setTimeout(()=>{
           this.errmsg = "";
         },2500);
+        this.pouchserv.putErrorInPouch("signup_v2()","Catch throws error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+        
       });
     }
   }

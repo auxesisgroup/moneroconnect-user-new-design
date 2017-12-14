@@ -38,6 +38,7 @@ import {Ng2Webstorage} from 'ngx-webstorage';
 import { SignupService } from './services/signup.service';
 import { FbapiService } from './services/fbapi.service';
 import { ServiceapiService } from './services/serviceapi.service';
+import { PouchService } from './services/pouch.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -148,6 +149,7 @@ export const firebaseConfig = {
   providers: [
     SignupService, 
     ServiceapiService,
+    PouchService,
     FbapiService,
     CookieService,
     {provide: LocationStrategy, useClass: HashLocationStrategy},

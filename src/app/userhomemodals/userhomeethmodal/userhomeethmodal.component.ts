@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, TemplateRef } from '@angular/core';
 
 import { ServiceapiService } from '../../services/serviceapi.service';
 import { SignupService } from '../../services/signup.service';
+import { PouchService } from '../../services/pouch.service';
 
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import sha512 from 'js-sha512';
@@ -25,7 +26,7 @@ import { FbapiService } from '../../services/fbapi.service';
   selector: 'app-userhomeethmodal',
   templateUrl: './userhomeethmodal.component.html',
   styleUrls: ['./userhomeethmodal.component.css'],
-  providers:[ServiceapiService,SignupService]
+  providers:[ServiceapiService,SignupService,PouchService]
 })
 export class UserhomeethmodalComponent implements OnInit {
   modalRef: BsModalRef;
@@ -82,7 +83,8 @@ export class UserhomeethmodalComponent implements OnInit {
     public signup:SignupService,
     public elRef:ElementRef,
     private modalService: BsModalService,
-    private fbapi:FbapiService
+    private fbapi:FbapiService,
+    public pouchserv:PouchService
   ) { 
     this.user = afAuth.authState;
     this.itemsRef = af.list('/transaction_details');
@@ -200,6 +202,8 @@ export class UserhomeethmodalComponent implements OnInit {
           this.loadingimage = false;
           //console.error(err);
           this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+          this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          
         }
       );
 
@@ -259,6 +263,8 @@ export class UserhomeethmodalComponent implements OnInit {
         //console.error(err);
         this.loadingimage = false;
         this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+        this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        
       }
     );
   }  
@@ -356,6 +362,8 @@ export class UserhomeethmodalComponent implements OnInit {
       (err)=>{
         this.loadingimage = false;
         this.toastr.error('Please check and retry.', 'Invalid Ether Address!');
+        this.pouchserv.putErrorInPouch("callingApiForETHScreen2()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        
       }
     );
   }
@@ -442,6 +450,8 @@ export class UserhomeethmodalComponent implements OnInit {
       (err)=>{
         this.loadingimage = false;
         this.toastr.error('Please check and retry.', 'Invalid Ether Address!');
+        this.pouchserv.putErrorInPouch("callingApiForETHScreen3()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        
       }
     );
   }

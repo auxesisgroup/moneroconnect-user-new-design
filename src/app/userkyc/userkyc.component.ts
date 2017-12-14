@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import { SignupService } from '../services/signup.service';
 import { ServiceapiService } from '../services/serviceapi.service';
+import { PouchService } from '../services/pouch.service';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap'; //to fetch url params
@@ -13,7 +14,7 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
   selector: 'app-userkyc',
   templateUrl: './userkyc.component.html',
   styleUrls: ['./userkyc.component.css'],
-  providers:[SignupService,ServiceapiService]
+  providers:[SignupService,ServiceapiService,PouchService]
 })
 export class UserkycComponent implements OnInit {
 
@@ -36,7 +37,8 @@ export class UserkycComponent implements OnInit {
     public api:ServiceapiService,
     private route: ActivatedRoute,
     private router: Router,
-    private storage:LocalStorageService
+    private storage:LocalStorageService,
+    public pouchserv:PouchService
   ) { 
     this.form = this.fb.group({
       // name:['',Validators.required],
@@ -358,12 +360,16 @@ export class UserkycComponent implements OnInit {
           this.loadingimage = false;
           this.failmsg("Network interuptted to submit KYC detail try again.");
           //console.log(err);
+          this.pouchserv.putErrorInPouch("signup_v2()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          
         }
       )
       .catch((err)=>{
         this.loadingimage = false;
         this.failmsg("Network interuptted to submit KYC detail try again.");
         //console.log(err);
+        this.pouchserv.putErrorInPouch("signup_v2()","Catch throws error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        
       });
     }
   }

@@ -9,12 +9,12 @@ import sha512 from 'js-sha512';
 import CryptoJS from 'crypto-js';
 
 import { FbapiService } from '../services/fbapi.service';
-
+import { PouchService } from '../services/pouch.service';
 @Component({
   selector: 'app-pageotp',
   templateUrl: './pageotp.component.html',
   styleUrls: ['./pageotp.component.css'],
-  providers:[SignupService,FbapiService]
+  providers:[SignupService,FbapiService,PouchService]
 })
 export class PageotpComponent implements OnInit {
 
@@ -31,7 +31,8 @@ export class PageotpComponent implements OnInit {
     private router: Router,
     private storage:LocalStorageService,
     private sessionStorage:SessionStorageService,
-    private fbapi:FbapiService
+    private fbapi:FbapiService,
+    public pouchserv:PouchService
   ) {
     
    }
@@ -245,11 +246,15 @@ export class PageotpComponent implements OnInit {
           this.loadingimage = false;
           //console.log(err);
           this.printmsg("Wrong OTP, please check the e-mail and try again.");
+          this.pouchserv.putErrorInPouch("signup_new_user()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          
         }
       ).catch(err => {  
         this.loadingimage = false;
         //console.log(err);
         this.printmsg("Wrong OTP, please check the e-mail and try again.");
+        this.pouchserv.putErrorInPouch("signup_new_user()","Catch throws error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+        
       });
     }
   }

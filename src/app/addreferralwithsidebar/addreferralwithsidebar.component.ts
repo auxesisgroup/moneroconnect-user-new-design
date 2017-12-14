@@ -14,10 +14,14 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import sha512 from 'js-sha512';
 import CryptoJS from 'crypto-js';
 import { ToastrService } from 'ngx-toastr';
+
+import { PouchService } from '../services/pouch.service';
+
 @Component({
   selector: 'app-addreferralwithsidebar',
   templateUrl: './addreferralwithsidebar.component.html',
-  styleUrls: ['./addreferralwithsidebar.component.css']
+  styleUrls: ['./addreferralwithsidebar.component.css'],
+  providers:[ServiceapiService,PouchService,SignupService]
 })
 export class AddreferralwithsidebarComponent implements OnInit {
   
@@ -36,6 +40,7 @@ export class AddreferralwithsidebarComponent implements OnInit {
     constructor(
       public serv:ServiceapiService,
       public signup:SignupService,
+      public pouchserv:PouchService,
       private route: ActivatedRoute,
       private router: Router,
       private toastr: ToastrService,
@@ -166,6 +171,8 @@ export class AddreferralwithsidebarComponent implements OnInit {
         err=>{
             this.ngxloading = true; 
             // console.error(err);
+            this.pouchserv.putErrorInPouch("loadFromWeb()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+            
         }
       );
     }
@@ -240,6 +247,8 @@ export class AddreferralwithsidebarComponent implements OnInit {
             this.loadingimage = false;
             // console.error(err);
             this.printmsg("Addresses are failed to submit");
+            this.pouchserv.putErrorInPouch("sendToReferral()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+            
         }
       );
     }
