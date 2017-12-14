@@ -33,6 +33,13 @@ export class SidemenuComponent implements OnInit {
   
   isClassActive:string;
 
+  routeHomeActive:string = "";
+  routeReferralActive:string = "";
+  routeKycActive:string = "";
+  routeAddreferralActive:string = "";
+  routeSettingActive:string = "";
+  routeSettingin:string = "";
+
   constructor(
     public serv:ServiceapiService,
     private storage:LocalStorageService,
@@ -53,6 +60,58 @@ export class SidemenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+  }
+
+  ngDoCheck(){
+    this.checklistactive();
+  }
+
+  checklistactive(){
+    let urls = this.router.url;
+    switch (urls) {
+      case "/home":
+          this.routeHomeActive = "active"; 
+          this.routeReferralActive = "";
+          this.routeKycActive= "";
+          this.routeAddreferralActive= "";
+          this.routeSettingActive= "";
+          this.routeSettingin= "";
+        break;
+      case "/referral":
+      case "/referral/address":
+        this.routeHomeActive = "";
+        this.routeReferralActive = "active";
+        this.routeKycActive= "";
+        this.routeAddreferralActive= "";
+        this.routeSettingActive= "";
+        this.routeSettingin= "";
+        break;
+      case "/addreferral":
+          this.routeHomeActive = "";
+          this.routeReferralActive = "";
+          this.routeKycActive= "";
+          this.routeAddreferralActive= "active";
+          this.routeSettingActive= "settingactive";
+          this.routeSettingin= "in";
+          break;
+      case "/updatekyc":
+          this.routeHomeActive = "";
+          this.routeReferralActive = "";
+          this.routeKycActive= "active";
+          this.routeAddreferralActive= "";
+          this.routeSettingActive= "settingactive";
+          this.routeSettingin= "in";
+          break;
+      default:
+        this.routeHomeActive = "";
+        this.routeReferralActive = "";
+        this.routeKycActive= "";
+        this.routeAddreferralActive= "";
+        this.routeSettingActive= "";
+        this.routeSettingin= "";
+        break;
+    }
   }
 
   clickonReferral(){

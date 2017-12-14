@@ -14,6 +14,8 @@ import 'hammerjs';
 import * as urlencode from 'urlencode';
 import * as _ from 'lodash';
 
+import sha512 from 'js-sha512';
+
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -578,7 +580,13 @@ export class KycwithsidebarComponent implements OnInit {
         // console.log(val.value)
         // var myWindow = window.open(val.value);//, "KYC Documents", "width=800,height=600,fullscreen=no,top=50,left=300,resizable=no");
         // this.api.saveToLocal("AUXDOCImageAddressProof",val.value);
-        this.router.navigate(["/updatekyc/view/",val.value]);
+        // this.router.navigate(["/updatekyc/view/",val.value]);
+
+        let name = this.signup.retrieveUsername("AUXMassUserName");
+        let email  = this.storage.retrieve("AUXUserEmail");
+        let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
+        this.downloadURI(val.value, filename+".pdf");
+
       }else{
         this.modalRef = this.modalService.show(
           this.imagemodal,
@@ -586,6 +594,23 @@ export class KycwithsidebarComponent implements OnInit {
         );
         this.kycimg = val.value;
       }
+    }
+
+    downloadFile(val){
+      let name = this.signup.retrieveUsername("AUXMassUserName");
+      let email  = this.storage.retrieve("AUXUserEmail");
+      let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
+      this.downloadURI(val, filename+".png");
+    }
+
+    downloadURI(uri, name) {
+      var link = document.createElement("a");
+      link.download = name;
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      // delete link;
     }
   }
   
