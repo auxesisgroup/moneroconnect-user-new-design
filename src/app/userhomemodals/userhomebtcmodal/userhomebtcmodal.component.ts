@@ -106,7 +106,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       //console.log(this.element.nativeElement.parentElement);
 
       //starterDisableButton disabled
-      // let dis = this.storage.retrieve("AUXstarterSecretButton");
+      // let dis = this.storage.retrieve("MoneroAUXstarterSecretButton");
       // if(dis == "yes")
         this.starterDisableButton = false;
       // else 
@@ -121,8 +121,8 @@ export class UserhomebtcmodalComponent implements OnInit {
     this.stepRecieveBTH = 1;
     this.toBTC = 0;//if user not submitted wallet address and wallet name
       //screen1
-    let btcwn = this.serv.retrieveFromLocal("AUXBTCTransactionWN");//wallet name
-    let btcwa = this.serv.retrieveFromLocal("AUXBTCTransactionWA");//wallet address
+    let btcwn = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWN");//wallet name
+    let btcwa = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWA");//wallet address
     //console.log(btcwa,btcwn)
     if((btcwa == "" || btcwa == null || btcwa == undefined || !btcwa) && (btcwn == "" || btcwn == undefined || btcwn == null || !btcwn)){
       this.toBTC = 0;//show submitnextskip btn
@@ -132,7 +132,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       this.btcwalletaddress = btcwa;
     }
       //screen2
-    let btcra = this.serv.retrieveFromLocal("AUXBTCTransactionRA");//refund address
+    let btcra = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionRA");//refund address
     if((btcra == "" || btcra == null || !btcra)){
       this.toBTCRefund = 0;//show submitnextskip btn
     }else{
@@ -140,7 +140,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       this.btcrefundaddress = btcra;
     }
       //screen3 not used
-    // let btcdone = this.serv.retrieveFromLocal("AUXBTCTransactionDone");//refund address
+    // let btcdone = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionDone");//refund address
     // if((btcdone == false || btcdone == "" || btcdone == null || !btcdone)){
     //   this.toBTCConfirm = 0;//show confirm btn
     // }else if(btcdone == true || btcdone == "done"){
@@ -149,7 +149,7 @@ export class UserhomebtcmodalComponent implements OnInit {
   }
 
   loggedInFBauth(){
-    let email = this.signup.retrieveFromLocal("AUXUserEmail");
+    let email = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
     let password = "tokenbazaar";
     // console.log("fb,",email,password);
     this.fbapi.login(email,password);
@@ -161,30 +161,30 @@ export class UserhomebtcmodalComponent implements OnInit {
 
   //modal functionality
   hideme(){
-    //this.storage.clear("AUXsavelocalpaytype");
-    //this.storage.clear("AUXsavelocalamount");
+    //this.storage.clear("MoneroAUXsavelocalpaytype");
+    //this.storage.clear("MoneroAUXsavelocalamount");
     this.clearERC();
     this.modalRef.hide();
   }
   open_recieve_modal(modalBTC: TemplateRef<any>){
     //console.log(this.cas)
     //console.log(this.optradio)
-    // let dis = this.storage.retrieve("AUXstarterSecretButton");
+    // let dis = this.storage.retrieve("MoneroAUXstarterSecretButton");
     // if(dis == "no") return true;
       
     
-    let type =this.signup.retrieveFromLocal("AUXsavelocalpaytype");
-    let cash = this.signup.retrieveFromLocal("AUXsavelocalamount");
+    let type =this.signup.retrieveFromLocal("MoneroAUXsavelocalpaytype");
+    let cash = this.signup.retrieveFromLocal("MoneroAUXsavelocalamount");
     //console.log(type,cash)
     if(cash == undefined || cash == "" || cash == null){
-      this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2000});
+      this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2000});
     }else if(type == undefined || type == "" || type == null){
       this.toastr.error('Choose any one payment method!', 'Not a payment type',{timeOut:2000});
     }else{ 
       this.loadingimage = true;
       let d = {
-        'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-        'token':this.signup.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'token_amount':cash
       };
       //console.log(d)
@@ -197,7 +197,7 @@ export class UserhomebtcmodalComponent implements OnInit {
           if(response != null || response != ""){
             if(response.valid == true){
                 if(type == "btc"){
-                  this.serv.saveToLocal("AUXBTCTransaction_token_amount",cash);
+                  this.serv.saveToLocal("MoneroAUXBTCTransaction_token_amount",cash);
                   this.callforpaywithcurrencyonmodaltoshow("btc",cash,modalBTC);
                 }else{
                   this.loadingimage = false;
@@ -205,17 +205,17 @@ export class UserhomebtcmodalComponent implements OnInit {
                 }
             }else{
               this.loadingimage = false;
-              this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
+              this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
             }
           }else{
             this.loadingimage = false;
-            this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
+            this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
           }
         },
         err=>{
           this.loadingimage = false;
           //console.error(err);
-          this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+          this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
           this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
           
         }
@@ -226,8 +226,8 @@ export class UserhomebtcmodalComponent implements OnInit {
   }  
   callforpaywithcurrencyonmodaltoshow(type,amount,modalBTC){
     let d = {
-      email:this.serv.retrieveFromLocal("AUXUserEmail"),
-      token:this.serv.retrieveFromLocal("AUXHomeUserToken"),
+      email:this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      token:this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
       currency:type,//('eth','btc','fiat'),
       token_amount:amount
     }
@@ -248,11 +248,11 @@ export class UserhomebtcmodalComponent implements OnInit {
           let erc_wallet = response.erc_wallet;
           this.loadingimage = false;
           if(type == "btc"){
-            this.serv.saveToLocal("AUXBTCTransaction_id",_id);
-            this.serv.saveToLocal("AUXBTCTransaction_to_address",to_address);
+            this.serv.saveToLocal("MoneroAUXBTCTransaction_id",_id);
+            this.serv.saveToLocal("MoneroAUXBTCTransaction_to_address",to_address);
             if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
-              this.serv.saveToLocal("AUXBTCTransactionWN",erc_wallet);
-              this.serv.saveToLocal("AUXBTCTransactionWA",erc_address);
+              this.serv.saveToLocal("MoneroAUXBTCTransactionWN",erc_wallet);
+              this.serv.saveToLocal("MoneroAUXBTCTransactionWA",erc_address);
             }
             this.modalRef = this.modalService.show(
                 modalBTC,
@@ -273,17 +273,17 @@ export class UserhomebtcmodalComponent implements OnInit {
 
             //this.childModal.show();
           }else{
-            this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+            this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
           }
         }else{
           this.loadingimage = false;
-          this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+          this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
         }
       },
       (err)=>{
         //console.error(err);
         this.loadingimage = false;
-        this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+        this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
         this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
@@ -295,12 +295,12 @@ export class UserhomebtcmodalComponent implements OnInit {
   /****
    * BTC Payment
    */
-  //Screen1 Not required for Masscryp
+  //Screen1 Not required for XMRCcryp
   doTheseIfChangeDetectInBTC(val){
     //console.log(this.btcwalletaddress,this.btcwalletname);//console.log(val.target.value);
     if(this.toBTC == 1 || this.toBTC == 2){
-      let btcwn = this.serv.retrieveFromLocal("AUXBTCTransactionWN");//wallet name
-      let btcwa = this.serv.retrieveFromLocal("AUXBTCTransactionWA");//wallet address
+      let btcwn = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWN");//wallet name
+      let btcwa = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWA");//wallet address
       if(btcwa == val.target.value || btcwn == val.target.value){ 
         this.toBTC = 1;//stay with review and submit btn
         //console.log("Im not changed");
@@ -321,11 +321,11 @@ export class UserhomebtcmodalComponent implements OnInit {
     }else if(this.btcwalletaddress == "" || this.btcwalletaddress == null || this.btcwalletaddress == undefined){
       this.toastr.warning('Wallet address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXBTCTransactionWN",this.btcwalletname);
-      this.serv.saveToLocal("AUXBTCTransactionWA",this.btcwalletaddress);
+      this.serv.saveToLocal("MoneroAUXBTCTransactionWN",this.btcwalletname);
+      this.serv.saveToLocal("MoneroAUXBTCTransactionWA",this.btcwalletaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'erc_address':this.btcwalletaddress,
         'eth_wallet':this.btcwalletname
       };//console.log(data);
@@ -333,12 +333,12 @@ export class UserhomebtcmodalComponent implements OnInit {
     }
   } 
   nextbtc1_2(){//if stored wallet name & address then to 2nd refund address modal
-    this.serv.saveToLocal("AUXBTCTransactionWN",this.btcwalletname);
-    this.serv.saveToLocal("AUXBTCTransactionWA",this.btcwalletaddress);
+    this.serv.saveToLocal("MoneroAUXBTCTransactionWN",this.btcwalletname);
+    this.serv.saveToLocal("MoneroAUXBTCTransactionWA",this.btcwalletaddress);
     let data = {
-      'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-      'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
-      '_id':this.serv.retrieveFromLocal("AUXBTCTransaction_id"),
+      'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
+      '_id':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id"),
       'currency':'btc'
     };//console.log(data);
     this.callingApiForBTCScreen2("review_erc_address",data);
@@ -349,15 +349,15 @@ export class UserhomebtcmodalComponent implements OnInit {
     }else if(this.btcwalletaddress == "" || this.btcwalletaddress == null || this.btcwalletaddress == undefined){
       this.toastr.warning('Wallet address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXBTCTransactionWN",this.btcwalletname);
-      this.serv.saveToLocal("AUXBTCTransactionWA",this.btcwalletaddress);
+      this.serv.saveToLocal("MoneroAUXBTCTransactionWN",this.btcwalletname);
+      this.serv.saveToLocal("MoneroAUXBTCTransactionWA",this.btcwalletaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
-        '_id':this.serv.retrieveFromLocal("AUXBTCTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
+        '_id':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id"),
         'currency':'btc',
-        'new_erc_address':this.serv.retrieveFromLocal("AUXBTCTransactionWA"),
-        'new_erc_wallet':this.serv.retrieveFromLocal("AUXBTCTransactionWN")
+        'new_erc_address':this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWA"),
+        'new_erc_wallet':this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWN")
       };//console.log(data);
       this.callingApiForBTCScreen2("update_erc_address",data);
     }
@@ -402,10 +402,10 @@ export class UserhomebtcmodalComponent implements OnInit {
 
 
 
-  //Screen2 started here forMasscryp
+  //Screen2 started here forXMRCcryp
   btcrefundaddresschange(val){
     if(this.toBTCRefund == 1 || this.toBTCRefund == 2){
-      let btcra = this.serv.retrieveFromLocal("AUXBTCTransactionRA");//refund address
+      let btcra = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionRA");//refund address
       if(btcra == val.target.value){ 
         this.toBTCRefund = 1;//stay with review and submit btn
       }else{ 
@@ -417,26 +417,26 @@ export class UserhomebtcmodalComponent implements OnInit {
     if(this.btcrefundaddress == "" || this.btcrefundaddress == null || this.btcrefundaddress == undefined){
       this.toastr.warning('Refund address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXBTCTransactionRA",this.btcrefundaddress);
+      this.serv.saveToLocal("MoneroAUXBTCTransactionRA",this.btcrefundaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),  
-        '_id':this.serv.retrieveFromLocal("AUXBTCTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),  
+        '_id':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id"),
         'currency':'btc',
-        'token_amount':this.serv.retrieveFromLocal("AUXBTCTransaction_token_amount"),
+        'token_amount':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_token_amount"),
         'new_refund_address':this.btcrefundaddress
       };
       this.callingApiForBTCScreen3("update_refund_address",data);
     }
   } 
   nextbtc2_2(){//if stored wallet name & address then to 2nd refund address modal
-    this.serv.saveToLocal("AUXBTCTransactionRA",this.btcrefundaddress);
+    this.serv.saveToLocal("MoneroAUXBTCTransactionRA",this.btcrefundaddress);
     let data = {
-      'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-      'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),  
-      '_id':this.serv.retrieveFromLocal("AUXBTCTransaction_id"),
+      'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),  
+      '_id':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id"),
       'currency':'btc',
-      'token_amount':this.serv.retrieveFromLocal("AUXBTCTransaction_token_amount")
+      'token_amount':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_token_amount")
     };
     this.callingApiForBTCScreen3("review_refund_address",data);
   } 
@@ -444,13 +444,13 @@ export class UserhomebtcmodalComponent implements OnInit {
     if(this.btcrefundaddress == "" || this.btcrefundaddress == null || this.btcrefundaddress == undefined){
       this.toastr.warning('Refund address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXBTCTransactionRA",this.btcrefundaddress);
+      this.serv.saveToLocal("MoneroAUXBTCTransactionRA",this.btcrefundaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),  
-        '_id':this.serv.retrieveFromLocal("AUXBTCTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),  
+        '_id':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id"),
         'currency':'btc',
-        'token_amount':this.serv.retrieveFromLocal("AUXBTCTransaction_token_amount"),
+        'token_amount':this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_token_amount"),
         'new_refund_address':this.btcrefundaddress
       };
       this.callingApiForBTCScreen3("update_refund_address",data);
@@ -458,8 +458,8 @@ export class UserhomebtcmodalComponent implements OnInit {
   } 
   callingApiForBTCScreen3(reviewfor,data){//call web api for refund  ***********web
     //console.log(this.btcwalletaddress,this.btcwalletname)
-    this.serv.saveToLocal("AUXBTCTransactionWN",this.btcwalletname);
-    this.serv.saveToLocal("AUXBTCTransactionWA",this.btcwalletaddress);
+    this.serv.saveToLocal("MoneroAUXBTCTransactionWN",this.btcwalletname);
+    this.serv.saveToLocal("MoneroAUXBTCTransactionWA",this.btcwalletaddress);
     this.loadingimage = true;
     //console.log(data)
     this.serv.resolveApi(reviewfor,data)
@@ -493,7 +493,7 @@ export class UserhomebtcmodalComponent implements OnInit {
 
   //calling firebase response
   callfb(){ 
-    // this.showtransidin3 = this.serv.retrieveFromLocal("AUXBTCTransaction_id");
+    // this.showtransidin3 = this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id");
     // this.stepRecieveBTH = 3;this.btcmodaltitle = "Pay through BTC (Transfer Confirmation)";//next firebase
     //console.log("calling fb");
     this.fbinterval = setInterval(()=>{
@@ -504,8 +504,8 @@ export class UserhomebtcmodalComponent implements OnInit {
 
   //call fb **************************************************************************
   gettransaction_details(){
-    let useremail = this.signup.retrieveFromLocal("AUXUserEmail");
-    let useraddress = this.signup.retrieveFromLocal("AUXBTCTransaction_to_address");
+    let useremail = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
+    let useraddress = this.signup.retrieveFromLocal("MoneroAUXBTCTransaction_to_address");
     //console.log(useraddress,useremail)
     let ar = [];
     return this.itemsRef.snapshotChanges().map(arr => {
@@ -542,7 +542,7 @@ export class UserhomebtcmodalComponent implements OnInit {
         if(this.initialCount == 0 || val.confirmations == 0){
           this.progresstype = "danger";
           this.progressvalue = 0;
-          this.showtransidin3 = val.txid;//this.serv.retrieveFromLocal("AUXBTCTransaction_id");
+          this.showtransidin3 = val.txid;//this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id");
           this.stepRecieveBTH = 3;this.btcmodaltitle = "Pay through BTC";//next firebase
         }
         if(this.initialCount == 1 || val.confirmations == 1){
@@ -590,20 +590,20 @@ export class UserhomebtcmodalComponent implements OnInit {
     this.btcmodaltitle = "Congratulations";
     //this.toastr.success('BTC transaction is done successfully', 'Transaction completed');
     this.stepRecieveBTH = 4;
-    this.signup.saveToLocal("AUXPageChange","yes");
-    let cas = this.serv.retrieveFromLocal("AUXBTCTransaction_token_amount");
-    let transaction_id = this.serv.retrieveFromLocal("AUXBTCTransaction_id");
+    this.signup.saveToLocal("MoneroAUXPageChange","yes");
+    let cas = this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_token_amount");
+    let transaction_id = this.serv.retrieveFromLocal("MoneroAUXBTCTransaction_id");
     this.message1 = cas;
     this.message = this.showtransidin3;
     setTimeout(()=>{  
       // this.hideme();
       clearInterval(this.fbinterval);
-      this.storage.clear("AUXBTCTransactionRA");
-      this.storage.clear("AUXBTCTransactionWA");
-      this.storage.clear("AUXBTCTransactionWN");
-      this.storage.clear("AUXBTCTransaction_id");
-      this.storage.clear("AUXBTCTransaction_to_address");
-      this.storage.clear("AUXBTCTransaction_token_amount");
+      this.storage.clear("MoneroAUXBTCTransactionRA");
+      this.storage.clear("MoneroAUXBTCTransactionWA");
+      this.storage.clear("MoneroAUXBTCTransactionWN");
+      this.storage.clear("MoneroAUXBTCTransaction_id");
+      this.storage.clear("MoneroAUXBTCTransaction_to_address");
+      this.storage.clear("MoneroAUXBTCTransaction_token_amount");
       // this.stepRecieveBTH = 1;
       // this.btcmodaltitle = "Pay through BTC";
       this.btcwalletname = "";
@@ -629,12 +629,12 @@ export class UserhomebtcmodalComponent implements OnInit {
   clearERC(){
     clearInterval(this.fbinterval);
     this.loggedOutFBauth();
-    this.storage.clear("AUXBTCTransactionRA");
-    this.storage.clear("AUXBTCTransactionWA");
-    this.storage.clear("AUXBTCTransactionWN");
-    this.storage.clear("AUXBTCTransaction_id");
-    this.storage.clear("AUXBTCTransaction_to_address");
-    this.storage.clear("AUXBTCTransaction_token_amount");
+    this.storage.clear("MoneroAUXBTCTransactionRA");
+    this.storage.clear("MoneroAUXBTCTransactionWA");
+    this.storage.clear("MoneroAUXBTCTransactionWN");
+    this.storage.clear("MoneroAUXBTCTransaction_id");
+    this.storage.clear("MoneroAUXBTCTransaction_to_address");
+    this.storage.clear("MoneroAUXBTCTransaction_token_amount");
     this.stepRecieveBTH = 1;
     this.btcmodaltitle = "Pay through BTC (ERC20 Token)";
     this.btcwalletname = "";

@@ -52,13 +52,13 @@ export class AddreferralComponent implements OnInit {
   }
 
   loadAddReferralAuth(){
-    let isAuth = this.storage.retrieve("AUXAuthLogin");
+    let isAuth = this.storage.retrieve("MoneroAUXAuthLogin");
     let cookieExists = this.signup.checkUserActivity();
     if(isAuth == null){
       this.signup.UnAuthlogoutFromApp(); 
     }
     else if(cookieExists == false){
-      this.storage.store("AUXAuthLogin",false);
+      this.storage.store("MoneroAUXAuthLogin",false);
       this.signup.UnAuthlogoutFromApp();
     }
     else{
@@ -79,14 +79,14 @@ export class AddreferralComponent implements OnInit {
       },2000);
     }
 
-    let etheraddress = this.signup.retrieveRefundAddressFromLocal("AUXUserRefundEtherAddress");
-    let bitcoinaddress = this.signup.retrieveRefundAddressFromLocal("AUXUserRefundBitcoinAddress");
+    let etheraddress = this.signup.retrieveRefundAddressFromLocal("MoneroAUXUserRefundEtherAddress");
+    let bitcoinaddress = this.signup.retrieveRefundAddressFromLocal("MoneroAUXUserRefundBitcoinAddress");
     if(etheraddress == "" || etheraddress == null || !etheraddress){
       this.loadFromCookie();
-      // console.log("do not touch form inputs",etheraddress,this.signup.retrieveRefundAddress("AUXUserRefundEtherAddress"));
+      // console.log("do not touch form inputs",etheraddress,this.signup.retrieveRefundAddress("MoneroAUXUserRefundEtherAddress"));
     }else if(bitcoinaddress == "" || bitcoinaddress == null || !bitcoinaddress){
       this.loadFromCookie();
-      // console.log("do not touch form inputs",bitcoinaddress,this.signup.retrieveRefundAddress("AUXUserRefundBitcoinAddress")); 
+      // console.log("do not touch form inputs",bitcoinaddress,this.signup.retrieveRefundAddress("MoneroAUXUserRefundBitcoinAddress")); 
     }else{ 
       this.referralbtnTxt = "Update";
       this.bitcoinaddress = bitcoinaddress;// console.log("append to btcaddress");
@@ -95,8 +95,8 @@ export class AddreferralComponent implements OnInit {
   }
 
   loadFromCookie(){
-    let e = this.signup.retrieveRefundAddress("AUXUserRefundEtherAddress");
-    let b = this.signup.retrieveRefundAddress("AUXUserRefundBitcoinAddress");
+    let e = this.signup.retrieveRefundAddress("MoneroAUXUserRefundEtherAddress");
+    let b = this.signup.retrieveRefundAddress("MoneroAUXUserRefundBitcoinAddress");
     if(e == "" || e == null || !e){
       // console.log("cookie",e)
       this.loadFromWeb();
@@ -114,8 +114,8 @@ export class AddreferralComponent implements OnInit {
   loadFromWeb(){
     this.ngxloading = true; 
     let d = {
-      'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-      'token':this.signup.retrieveFromLocal("AUXHomeUserToken")
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken")
     };
     // console.info(d);
     this.serv.resolveApi("get_referral_details",d)
@@ -130,12 +130,12 @@ export class AddreferralComponent implements OnInit {
             let ethrefund = response.referral_json.eth_refund_address;
             if(btcrefund == null || btcrefund == "" || ethrefund == null || ethrefund == ""){
               // this.signup.setRouteMsgPass("BTC & ETH refund address is not taken try to add first");
-              this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+              this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
               // this.router.navigate(["/addreferral"]);
             }else{ 
-              this.signup.saveToLocal("AUXUserAddReferralStatus","done");
-              this.signup.saveRefundAddress("AUXUserRefundEtherAddress",ethrefund);
-              this.signup.saveRefundAddress("AUXUserRefundBitcoinAddress",btcrefund);
+              this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","done");
+              this.signup.saveRefundAddress("MoneroAUXUserRefundEtherAddress",ethrefund);
+              this.signup.saveRefundAddress("MoneroAUXUserRefundBitcoinAddress",btcrefund);
               this.referralbtnTxt = "Update";
               this.bitcoinaddress = btcrefund;// console.log("append to address");
               this.etheraddress =ethrefund;
@@ -148,11 +148,11 @@ export class AddreferralComponent implements OnInit {
               this.etheraddress = ethrefund;// console.log("append to address");
             }
           }else if(response.code == 400){
-            // this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+            // this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
             // this.signup.setRouteMsgPass("BTH & ETH refund address is not taken try to add first");
             // this.router.navigate(["/addreferral"]);
           }else if(response.code == 401){
-            this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+            this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
             this.signup.UnAuthlogoutFromApp();
           }else{
             
@@ -196,8 +196,8 @@ export class AddreferralComponent implements OnInit {
   sendToReferral(btc,eth){
     this.loadingimage = true;
     let d = {
-      'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-      'token':this.signup.retrieveFromLocal("AUXHomeUserToken"),
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
       'refund_btc_address':btc,
       'refund_eth_address':eth
     };
@@ -212,8 +212,8 @@ export class AddreferralComponent implements OnInit {
           if(response.code == 200){
             //n3qoMXxdmuwFxSZkFhvXqXiDRzsfy7MqCm tx4343654645754767
             this.signup.setRouteMsgPass("BTC & ETH addresses are stored");
-            this.signup.saveRefundAddress("AUXUserRefundEtherAddress",eth);
-            this.signup.saveRefundAddress("AUXUserRefundBitcoinAddress",btc);
+            this.signup.saveRefundAddress("MoneroAUXUserRefundEtherAddress",eth);
+            this.signup.saveRefundAddress("MoneroAUXUserRefundBitcoinAddress",btc);
             this.router.navigate(["/referral"]);
           }else if(response.code == 400){
             if(response.eth_address_validation == false){
@@ -256,17 +256,17 @@ export class AddreferralComponent implements OnInit {
   }
 
   ifValue(){
-    let e = this.signup.retrieveRefundAddress("AUXUserRefundEtherAddress");
-    let b = this.signup.retrieveRefundAddress("AUXUserRefundBitcoinAddress");
+    let e = this.signup.retrieveRefundAddress("MoneroAUXUserRefundEtherAddress");
+    let b = this.signup.retrieveRefundAddress("MoneroAUXUserRefundBitcoinAddress");
     if(e == "" || e == null || !e){
       // console.log("donothing",e)
     }else if(b == "" || b == null || !b){
       // console.log("donothing",b)
       this.loadFromWeb();
     }else{
-      this.signup.saveToLocal("AUXUserAddReferralStatus","done");
-      this.signup.saveRefundAddress("AUXUserRefundEtherAddress",e);
-      this.signup.saveRefundAddress("AUXUserRefundBitcoinAddress",b);
+      this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","done");
+      this.signup.saveRefundAddress("MoneroAUXUserRefundEtherAddress",e);
+      this.signup.saveRefundAddress("MoneroAUXUserRefundBitcoinAddress",b);
     }
   }
 }

@@ -66,8 +66,8 @@ export class UserhomebnkmodalComponent implements OnInit {
     this.stepRecieveBNK = 0;
     this.toBank = 0;//if user not submitted wallet address and wallet name
       //screen1
-    let bnkwn = this.serv.retrieveFromLocal("AUXBankTransactionWN");//wallet name
-    let bnkwa = this.serv.retrieveFromLocal("AUXBankTransactionWA");//wallet address
+    let bnkwn = this.serv.retrieveFromLocal("MoneroAUXBankTransactionWN");//wallet name
+    let bnkwa = this.serv.retrieveFromLocal("MoneroAUXBankTransactionWA");//wallet address
     //console.log(bnkwa,bnkwn)
     if((bnkwa == "" || bnkwa == null || bnkwa == undefined || !bnkwa) && (bnkwn == "" || bnkwn == undefined || bnkwn == null || !bnkwn)){
       this.toBank = 0;//show submitnextskip btn
@@ -84,15 +84,15 @@ export class UserhomebnkmodalComponent implements OnInit {
    */
   hideme(){
     
-    //this.storage.clear("AUXsavelocalpaytype");
-    //this.storage.clear("AUXsavelocalamount");
+    //this.storage.clear("MoneroAUXsavelocalpaytype");
+    //this.storage.clear("MoneroAUXsavelocalamount");
     this.modalRef.hide();
   }
   open_recieve_modal(modalBNK: TemplateRef<any>){
     //console.log(this.cas)
     //console.log(this.optradio)
-    let type =this.signup.retrieveFromLocal("AUXsavelocalpaytype");
-    let cash = this.signup.retrieveFromLocal("AUXsavelocalamount");
+    let type =this.signup.retrieveFromLocal("MoneroAUXsavelocalpaytype");
+    let cash = this.signup.retrieveFromLocal("MoneroAUXsavelocalamount");
     //console.log(type,cash)
     if(cash == undefined || cash == "" || cash == null){
       this.toastr.error('Please give specific cash amount', 'Cash Invalid',{timeOut:2000});
@@ -101,8 +101,8 @@ export class UserhomebnkmodalComponent implements OnInit {
     }else{ 
       this.loadingimage = true;
       let d = {
-        'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-        'token':this.signup.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'token_amount':cash
       };
       //console.log(d)
@@ -115,7 +115,7 @@ export class UserhomebnkmodalComponent implements OnInit {
           if(response != null || response != ""){
             if(response.valid == true){
               if(type == "bnk"){
-                this.serv.saveToLocal("AUXBankTransaction_token_amount",cash);
+                this.serv.saveToLocal("MoneroAUXBankTransaction_token_amount",cash);
                 this.callforpaywithcurrencyonmodaltoshow("fiat",cash,modalBNK);
               }else{
                   this.loadingimage = false;
@@ -142,8 +142,8 @@ export class UserhomebnkmodalComponent implements OnInit {
   }  
   callforpaywithcurrencyonmodaltoshow(type,amount,modalBNK){
     let d = {
-      email:this.serv.retrieveFromLocal("AUXUserEmail"),
-      token:this.serv.retrieveFromLocal("AUXHomeUserToken"),
+      email:this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      token:this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
       currency:type,//('eth','btc','fiat'),
       token_amount:amount
     }
@@ -160,11 +160,11 @@ export class UserhomebnkmodalComponent implements OnInit {
           let erc_wallet = response.erc_wallet;
           this.loadingimage = false;
           if(type == "fiat"){
-            this.serv.saveToLocal("AUXBankTransaction_id",_id);
-            this.serv.saveToLocal("AUXBankTransaction_to_address",to_address);
+            this.serv.saveToLocal("MoneroAUXBankTransaction_id",_id);
+            this.serv.saveToLocal("MoneroAUXBankTransaction_to_address",to_address);
             if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
-              this.serv.saveToLocal("AUXBankTransactionWN",erc_wallet);
-              this.serv.saveToLocal("AUXBankTransactionWA",erc_address);
+              this.serv.saveToLocal("MoneroAUXBankTransactionWN",erc_wallet);
+              this.serv.saveToLocal("MoneroAUXBankTransactionWA",erc_address);
             }
             this.modalRef = this.modalService.show(
               modalBNK,
@@ -193,8 +193,8 @@ export class UserhomebnkmodalComponent implements OnInit {
   doTheseIfChangeDetectInBank(val){
     //console.log(this.bnkwalletaddress,this.bnkwalletname);//console.log(val.target.value);
     if(this.toBank == 1 || this.toBank == 2){
-      let bnkwn = this.serv.retrieveFromLocal("AUXBankTransactionWN");//wallet name
-      let bnkwa = this.serv.retrieveFromLocal("AUXBankTransactionWA");//wallet address
+      let bnkwn = this.serv.retrieveFromLocal("MoneroAUXBankTransactionWN");//wallet name
+      let bnkwa = this.serv.retrieveFromLocal("MoneroAUXBankTransactionWA");//wallet address
       if(bnkwa == val.target.value || bnkwn == val.target.value){ 
         this.toBank = 1;//stay with review and submit btn
         //console.log("Im not changed");
@@ -215,11 +215,11 @@ export class UserhomebnkmodalComponent implements OnInit {
     }else if(this.bnkwalletaddress == "" || this.bnkwalletaddress == null || this.bnkwalletaddress == undefined){
       this.toastr.warning('Wallet address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXBankTransactionWN",this.bnkwalletname);
-      this.serv.saveToLocal("AUXBankTransactionWA",this.bnkwalletaddress);
+      this.serv.saveToLocal("MoneroAUXBankTransactionWN",this.bnkwalletname);
+      this.serv.saveToLocal("MoneroAUXBankTransactionWA",this.bnkwalletaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'erc_address':this.bnkwalletaddress,
         'eth_wallet':this.bnkwalletname
       };//console.log(data);
@@ -227,12 +227,12 @@ export class UserhomebnkmodalComponent implements OnInit {
     }
   } 
   nextbnk1_2(){//if stored wallet name & address then to 2nd refund address modal
-    this.serv.saveToLocal("AUXBankTransactionWN",this.bnkwalletname);
-    this.serv.saveToLocal("AUXBankTransactionWA",this.bnkwalletaddress);
+    this.serv.saveToLocal("MoneroAUXBankTransactionWN",this.bnkwalletname);
+    this.serv.saveToLocal("MoneroAUXBankTransactionWA",this.bnkwalletaddress);
     let data = {
-      'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-      'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
-      '_id':this.serv.retrieveFromLocal("AUXBankTransaction_id"),
+      'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
+      '_id':this.serv.retrieveFromLocal("MoneroAUXBankTransaction_id"),
       'currency':'fiat'
     };//console.log(data);
     this.callingApiForBankScreen2("review_erc_address",data);
@@ -243,15 +243,15 @@ export class UserhomebnkmodalComponent implements OnInit {
     }else if(this.bnkwalletaddress == "" || this.bnkwalletaddress == null || this.bnkwalletaddress == undefined){
       this.toastr.warning('Wallet address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXBankTransactionWN",this.bnkwalletname);
-      this.serv.saveToLocal("AUXBankTransactionWA",this.bnkwalletaddress);
+      this.serv.saveToLocal("MoneroAUXBankTransactionWN",this.bnkwalletname);
+      this.serv.saveToLocal("MoneroAUXBankTransactionWA",this.bnkwalletaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
-        '_id':this.serv.retrieveFromLocal("AUXBankTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
+        '_id':this.serv.retrieveFromLocal("MoneroAUXBankTransaction_id"),
         'currency':'fiat',
-        'new_erc_address':this.serv.retrieveFromLocal("AUXBankTransactionWA"),
-        'new_erc_wallet':this.serv.retrieveFromLocal("AUXBankTransactionWN")
+        'new_erc_address':this.serv.retrieveFromLocal("MoneroAUXBankTransactionWA"),
+        'new_erc_wallet':this.serv.retrieveFromLocal("MoneroAUXBankTransactionWN")
       };//console.log(data);
       this.callingApiForBankScreen2("update_erc_address",data);
 
@@ -300,13 +300,13 @@ export class UserhomebnkmodalComponent implements OnInit {
   findingfiat_currency_for_approval(amount,transid,selectalias,selectbank){
     this.loadingimage = true;
     let data = {
-      'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-      'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
+      'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
       'payment_method':selectalias,
       'amount_deposited':amount,
       'transaction_id':transid,
       'deposit_bank':selectbank,
-      '_id':this.signup.retrieveFromLocal("AUXBankTransaction_id")
+      '_id':this.signup.retrieveFromLocal("MoneroAUXBankTransaction_id")
     };console.log(data)
     this.serv.resolveApi("fiat_currency_for_approval",data)
     .subscribe(
@@ -316,8 +316,8 @@ export class UserhomebnkmodalComponent implements OnInit {
         if(response.success == true || response.code == 200){
           this.stepRecieveBNK = 2;
           this.bankmodaltitle = "Congratulations";
-          let cas = this.serv.retrieveFromLocal("AUXBankTransaction_token_amount");
-          let transaction_id = this.serv.retrieveFromLocal("AUXBankTransaction_id");
+          let cas = this.serv.retrieveFromLocal("MoneroAUXBankTransaction_token_amount");
+          let transaction_id = this.serv.retrieveFromLocal("MoneroAUXBankTransaction_id");
           this.message = cas+" CAS Token from transaction id "+transaction_id+"  is deposited in your account.";
           this.nexbnk3();
         }else if(response.code == 401){
@@ -341,12 +341,12 @@ export class UserhomebnkmodalComponent implements OnInit {
     this.toastr.success('Bank transaction is done successfully', 'Transaction completed');
     setTimeout(()=>{
       this.hideme();
-      this.storage.clear("AUXBankTransactionRA");
-      this.storage.clear("AUXBankTransactionWA");
-      this.storage.clear("AUXBankTransactionWN");
-      this.storage.clear("AUXBankTransaction_id");
-      this.storage.clear("AUXBankTransaction_to_address");
-      this.storage.clear("AUXBankTransaction_token_amount");
+      this.storage.clear("MoneroAUXBankTransactionRA");
+      this.storage.clear("MoneroAUXBankTransactionWA");
+      this.storage.clear("MoneroAUXBankTransactionWN");
+      this.storage.clear("MoneroAUXBankTransaction_id");
+      this.storage.clear("MoneroAUXBankTransaction_to_address");
+      this.storage.clear("MoneroAUXBankTransaction_token_amount");
       this.stepRecieveBNK = 0;
       this.bankmodaltitle = "Pay through Bank (ERC20 Token)";
       this.bnkwalletname = "";

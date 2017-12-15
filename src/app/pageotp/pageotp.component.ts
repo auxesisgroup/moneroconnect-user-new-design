@@ -78,7 +78,7 @@ export class PageotpComponent implements OnInit {
 
   signINFBAuth(){
     //firebase auth
-    let emailFB = this.signup.retrieveFromLocal("AUXUserEmail");
+    let emailFB = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
     let passwordFB = "tokenbazaar";
     //console.log(emailFB,passwordFB);
     this.fbapi.signup(emailFB,passwordFB);
@@ -86,7 +86,7 @@ export class PageotpComponent implements OnInit {
   }
 
   loggedInFBauth(){
-    let email = this.signup.retrieveFromLocal("AUXUserEmail");
+    let email = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
     let password = "tokenbazaar";
     // this.fbapi.login(email,password);
     this.fbapi.check(email,password);
@@ -104,7 +104,7 @@ export class PageotpComponent implements OnInit {
     }else{ //Password does not match. Please try again!
       //console.log(agree+" "+otp);
       this.loadingimage = true;
-      let email = this.storage.retrieve("AUXUserEmail");//localStorage.getItem("AUXUserEmail");
+      let email = this.storage.retrieve("MoneroAUXUserEmail");//localStorage.getItem("MoneroAUXUserEmail");
       //let pval = this.signup.findUserEmail(email);
       otp = otp.toString().trim();
       // console.log(email,"a-"+otp+"-b")
@@ -131,27 +131,27 @@ export class PageotpComponent implements OnInit {
               }else{this.printmsg("Wrong OTP, please check the e-mail and try again.");}
             }else if(res.tnc == true && (res.kyc == true || res.kyc == "accepted" || res.kyc == "pending" || res.kyc == "rejected")){
               if(res.kyc == false){
-                this.signup.saveToLocal("AUXHomeStatus","pending");
+                this.signup.saveToLocal("MoneroAUXHomeStatus","pending");
                 // this.sucmsg = "Otp is verified but you did not uploaded documents for KYC detail. Submit in next section.";
                 // setTimeout(()=>{ 
                   // this.sucmsg = ""; 
                   let msgToPass = "Otp is verified but you did not uploaded documents for KYC detail. Submit in next section.";
                   this.signup.setRouteMsgPass(msgToPass);               
-                  this.signup.saveToLocal("AUXTNCStatus","done"); 
+                  this.signup.saveToLocal("MoneroAUXTNCStatus","done"); 
                   this.router.navigate(["/kyc"]); 
                 // },4000);
                 // /**FBAuth */
                 setTimeout(()=>{this.loggedInFBauth();},1000);
               }else if(res.kyc == "accepted"){
-                this.signup.saveToLocal("AUXHomeStatus","done");
+                this.signup.saveToLocal("MoneroAUXHomeStatus","done");
                 // this.sucmsg = "Otp is verified but your KYC is in pending stage.";
                 // setTimeout(()=>{ 
                   // this.sucmsg = ""; 
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to Monero Connect ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
-                  this.storage.store("AUXAuthLogin",true);
-                  this.signup.saveToLocal("AUXKYCStatus","done");                
-                  this.signup.saveToLocal("AUXTNCStatus","done"); 
+                  this.storage.store("MoneroAUXAuthLogin",true);
+                  this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+                  this.signup.saveToLocal("MoneroAUXTNCStatus","done"); 
                   this.signup.setUserSession(email,res.token); 
                   // this.router.navigate(["/home"]);
                   this.router.navigateByUrl("/home"); 
@@ -159,15 +159,15 @@ export class PageotpComponent implements OnInit {
                 // /**FBAuth */
                 this.loggedInFBauth();
               }else if(res.kyc == "pending"){
-                this.signup.saveToLocal("AUXHomeStatus","pending");
+                this.signup.saveToLocal("MoneroAUXHomeStatus","pending");
                 // this.sucmsg = "Otp is verified but your KYC is in pending stage.";
                 // setTimeout(()=>{ 
                   // this.sucmsg = ""; 
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to Monero Connect ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
-                  this.storage.store("AUXAuthLogin",true);
-                  this.signup.saveToLocal("AUXKYCStatus","done");                
-                  this.signup.saveToLocal("AUXTNCStatus","done");
+                  this.storage.store("MoneroAUXAuthLogin",true);
+                  this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+                  this.signup.saveToLocal("MoneroAUXTNCStatus","done");
                   this.signup.setUserSession(email,res.token);  
                   // this.router.navigate(["/home"]); 
                   this.router.navigateByUrl("/home");
@@ -175,15 +175,15 @@ export class PageotpComponent implements OnInit {
                 // /**FBAuth */
                 this.loggedInFBauth();
               }else if(res.kyc == "rejected"){
-                this.signup.saveToLocal("AUXHomeStatus","rejected");                
+                this.signup.saveToLocal("MoneroAUXHomeStatus","rejected");                
                 // this.sucmsg = "Otp is verified and your KYC detail has been rejected.";
                 // setTimeout(()=>{ 
                   // this.sucmsg = "";
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to Monero Connect ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
-                this.storage.store("AUXAuthLogin",true);
-                this.signup.saveToLocal("AUXKYCStatus","done");                
-                this.signup.saveToLocal("AUXTNCStatus","done"); 
+                this.storage.store("MoneroAUXAuthLogin",true);
+                this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done"); 
                 this.signup.setUserSession(email,res.token); 
                 // this.router.navigate(["/home"]);  
                 this.router.navigateByUrl("/home");
@@ -202,17 +202,17 @@ export class PageotpComponent implements OnInit {
               // this.sucmsg = "Otp is verified, loading your asset...";
               // setTimeout(()=>{
                 // this.sucmsg = "";
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to Monero Connect ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
-                this.signup.saveToLocal("AUXHomeUserToken",res.token); 
-                if(res.kyc == false){ this.signup.saveToLocal("AUXHomeStatus","nokyc");  this.signup.saveToLocal("AUXKYCStatus","nokyc");  }
-                if(res.kyc == true){ this.signup.saveToLocal("AUXHomeStatus","done"); this.signup.saveToLocal("AUXKYCStatus","done");       }          
-                if(res.kyc == "accepted"){ this.signup.saveToLocal("AUXHomeStatus","done"); this.signup.saveToLocal("AUXKYCStatus","done");  }              
-                if(res.kyc == "pending"){ this.signup.saveToLocal("AUXHomeStatus","pending");  this.signup.saveToLocal("AUXKYCStatus","pending"); }
-                if(res.kyc == "rejected"){ this.signup.saveToLocal("AUXHomeStatus","rejected");  this.signup.saveToLocal("AUXKYCStatus","rejected"); }
+                this.signup.saveToLocal("MoneroAUXHomeUserToken",res.token); 
+                if(res.kyc == false){ this.signup.saveToLocal("MoneroAUXHomeStatus","nokyc");  this.signup.saveToLocal("MoneroAUXKYCStatus","nokyc");  }
+                if(res.kyc == true){ this.signup.saveToLocal("MoneroAUXHomeStatus","done"); this.signup.saveToLocal("MoneroAUXKYCStatus","done");       }          
+                if(res.kyc == "accepted"){ this.signup.saveToLocal("MoneroAUXHomeStatus","done"); this.signup.saveToLocal("MoneroAUXKYCStatus","done");  }              
+                if(res.kyc == "pending"){ this.signup.saveToLocal("MoneroAUXHomeStatus","pending");  this.signup.saveToLocal("MoneroAUXKYCStatus","pending"); }
+                if(res.kyc == "rejected"){ this.signup.saveToLocal("MoneroAUXHomeStatus","rejected");  this.signup.saveToLocal("MoneroAUXKYCStatus","rejected"); }
                               
-                this.signup.saveToLocal("AUXTNCStatus","done");   
-                this.storage.store("AUXAuthLogin",true);
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");   
+                this.storage.store("MoneroAUXAuthLogin",true);
                 this.signup.setUserSession(email,res.token);             
                 // this.router.navigate(["/home"]); 
                 this.router.navigateByUrl("/home");
@@ -221,7 +221,7 @@ export class PageotpComponent implements OnInit {
               // },4000);
             }else if(res.tnc == false){
               // console.log("im going in false verifyotp")
-              this.signup.saveToLocal("AUXHomeUserToken",res.token); 
+              this.signup.saveToLocal("MoneroAUXHomeUserToken",res.token); 
               this.signINFBAuth();
               // this.sucmsg = "Otp is verified";
               // setTimeout(()=>{ 

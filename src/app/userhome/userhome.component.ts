@@ -90,7 +90,7 @@ export class UserhomeComponent implements OnInit {
     public pouchserv:PouchService
   ) {
     this.qrvalue = "Its Demo For QR Angular";
-    //this.signup.setUserSession(this.storage.retrieve("AUXUserEmail"),"7764611b-fdee-4804-8f2f-fab678e63526a704b8ef-5cb5-45b1-b367-98c89b91f1aeba1abd08-0b64-4f05-8d60-a049344a1a28");
+    //this.signup.setUserSession(this.storage.retrieve("MoneroAUXUserEmail"),"7764611b-fdee-4804-8f2f-fab678e63526a704b8ef-5cb5-45b1-b367-98c89b91f1aeba1abd08-0b64-4f05-8d60-a049344a1a28");
 
     this.serv.callCSV();
   }
@@ -117,8 +117,8 @@ export class UserhomeComponent implements OnInit {
     let cas = this.cas;//(this.cas).toString();
     let s = cas.match(/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/);
     // console.log(this.cas,cas,s,evt)
-    this.signup.saveToLocal("AUXsavelocalamount",this.cas);
-    // console.log(this.cas,this.serv.retrieveFromLocal("AUXsavelocalamount"))
+    this.signup.saveToLocal("MoneroAUXsavelocalamount",this.cas);
+    // console.log(this.cas,this.serv.retrieveFromLocal("MoneroAUXsavelocalamount"))
   }
 
 
@@ -132,11 +132,11 @@ export class UserhomeComponent implements OnInit {
     }else{
       this.radioclick = 'btc';
     }
-    this.signup.saveToLocal("AUXsavelocalpaytype",optradio);
-    //console.log(optradio,this.radioclick,this.serv.retrieveFromLocal("AUXsavelocalpaytype"))
+    this.signup.saveToLocal("MoneroAUXsavelocalpaytype",optradio);
+    //console.log(optradio,this.radioclick,this.serv.retrieveFromLocal("MoneroAUXsavelocalpaytype"))
   }
   loggedInFBauth(){
-    let email = this.signup.retrieveFromLocal("AUXUserEmail");
+    let email = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
     let password = "tokenbazaar";
     // console.log("fb,",email,password);
     this.fbapi.login(email,password);
@@ -159,12 +159,12 @@ export class UserhomeComponent implements OnInit {
 
     this.loadHomeStatus();
     
-    this.signup.saveToLocal("AUXPageChange","no");
+    this.signup.saveToLocal("MoneroAUXPageChange","no");
 
     
     
     this.starterDisableButton = true;
-    this.storage.store("AUXstarterSecretButton","yes");
+    this.storage.store("MoneroAUXstarterSecretButton","yes");
 
     // let f = 0.021239966675122334;
     // console.log(f);
@@ -187,20 +187,20 @@ export class UserhomeComponent implements OnInit {
   
 
   ngDoCheck(){
-    let take = this.signup.retrieveFromLocal("AUXPageChange");
+    let take = this.signup.retrieveFromLocal("MoneroAUXPageChange");
     // console.log(take)
     if(take=="yes"){
       // console.log("2:",take)
       this.optradio = "";
       this.cas = "";
-      setTimeout(()=>{this.signup.saveToLocal("AUXPageChange","no");},600);
+      setTimeout(()=>{this.signup.saveToLocal("MoneroAUXPageChange","no");},600);
       this.loadHomeData();
     }
   }
 
   loadAlert(){
     let msg;
-    let seen = this.signup.retrieveFromLocal("AUXHomeNGXSeen");
+    let seen = this.signup.retrieveFromLocal("MoneroAUXHomeNGXSeen");
     //console.log(seen)
     if(seen == "seen"){ 
       //if success msg from login page
@@ -214,7 +214,7 @@ export class UserhomeComponent implements OnInit {
         },4000);
       }
     }else{
-      this.signup.saveToLocal("AUXHomeNGXSeen","seen");
+      this.signup.saveToLocal("MoneroAUXHomeNGXSeen","seen");
       let retrieve = this.signup.retrieveRouteMsgPass();
       setTimeout(()=>{
         if(retrieve != null){
@@ -236,8 +236,8 @@ export class UserhomeComponent implements OnInit {
     setTimeout(()=>{
           this.apiMethod = "dashboard";
           let data = {
-            'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-            'token':this.signup.retrieveFromLocal("AUXHomeUserToken")
+            'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+            'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken")
           }; 
           this.serv.resolveApi(this.apiMethod,data) 
           .subscribe(
@@ -319,7 +319,7 @@ export class UserhomeComponent implements OnInit {
   }
 
   loadHomeStatus(){
-    let isAuth = this.storage.retrieve("AUXAuthLogin");
+    let isAuth = this.storage.retrieve("MoneroAUXAuthLogin");
     let cookieExists = this.signup.checkUserActivity();
     // console.log("isAuthorized",isAuth,cookieExists);
     if(isAuth == null){
@@ -328,24 +328,24 @@ export class UserhomeComponent implements OnInit {
     }
     else if(cookieExists == false){
       this.ngxloading = false; 
-      this.storage.store("AUXAuthLogin",false);
+      this.storage.store("MoneroAUXAuthLogin",false);
       this.signup.UnAuthlogoutFromApp();
     }
     else{
-      let status = this.signup.retrieveFromLocal("AUXHomeStatus");
+      let status = this.signup.retrieveFromLocal("MoneroAUXHomeStatus");
       //console.log(status)
-      this.storage.clear("AUXsavelocalamount");
-      this.storage.clear("AUXsavelocalpaytype");
+      this.storage.clear("MoneroAUXsavelocalamount");
+      this.storage.clear("MoneroAUXsavelocalpaytype");
       if(status == "nokyc" || status == "done" || status == "pending" || status == "rejected" || status == false || status == true || status == "accepted"){
         this.homeStatusDone = true;
         this.homeStatusYet = false;
         this.user_timeline_listShow = true;
-        // let seen = this.signup.retrieveFromLocal("AUXHomeNGXSeen");
+        // let seen = this.signup.retrieveFromLocal("MoneroAUXHomeNGXSeen");
         // //console.log(seen)
         // if(seen == "seen"){ 
         //   //do not open toastr
         // }else{
-        //   this.signup.saveToLocal("AUXHomeNGXSeen","seen");
+        //   this.signup.saveToLocal("MoneroAUXHomeNGXSeen","seen");
         //   setTimeout(()=>{this.toastr.success('Token bazaar with ease!', 'Welcome!!!',{timeOut:5000});},1000);
         // }
         this.loadAlert();
@@ -375,7 +375,7 @@ export class UserhomeComponent implements OnInit {
   }
 
   callAgainForStatus(){
-    let status = this.signup.retrieveFromLocal("AUXHomeStatus");
+    let status = this.signup.retrieveFromLocal("MoneroAUXHomeStatus");
     //console.log(status)
     if(status == "nokyc" || status == "done" || status == "pending" || status == "rejected" || status == false || status == true || status == "accepted"){
       if(status == "nokyc"){
@@ -401,7 +401,7 @@ export class UserhomeComponent implements OnInit {
     }
   }
   viewAlways(view){
-    let a = this.serv.retrieveFromLocal("AUXKYCDetailSeenAlways");
+    let a = this.serv.retrieveFromLocal("MoneroAUXKYCDetailSeenAlways");
     //console.log(a)
     if(a || a == "seen"){
       // console.log("Do nothing bcoze one seen success msg of seen")
@@ -409,7 +409,7 @@ export class UserhomeComponent implements OnInit {
       if( view == 1 ){
         this.kycalertpanelview = true;
         this.kycalertpanel = view;
-        this.serv.saveToLocal("AUXKYCDetailSeenAlways","seen");
+        this.serv.saveToLocal("MoneroAUXKYCDetailSeenAlways","seen");
         setTimeout(()=>{
             this.kycalertpanelview = false;
         },8000);
@@ -429,8 +429,8 @@ export class UserhomeComponent implements OnInit {
     this.apiMethod = "dashboard";
     
         let data = {
-          'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-          'token':this.signup.retrieveFromLocal("AUXHomeUserToken")
+          'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+          'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken")
         };
         setTimeout(()=>{
           // console.log(data,"called");
@@ -459,14 +459,14 @@ export class UserhomeComponent implements OnInit {
               // this.putErrorInPouch("loadHomeData()","Response in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(res),1);
               
 
-              this.signup.saveUsername("AUXMassUserName",d.user_name);
+              this.signup.saveUsername("MoneroAUXMassUserName",d.user_name);
               let kyc = d.kyc;  
-              if(kyc == false)  this.serv.saveToLocal("AUXHomeStatus","nokyc");
-              if(kyc == null)  this.serv.saveToLocal("AUXHomeStatus","nokyc");
-              if(kyc == "pending")  this.serv.saveToLocal("AUXHomeStatus","pending");
-              if(kyc == "rejected")  this.serv.saveToLocal("AUXHomeStatus","rejected");
-              // if(kyc == true)  {this.serv.saveToLocal("AUXHomeStatus","done");}
-              if(kyc == "accepted") { this.serv.saveToLocal("AUXHomeStatus","done");}
+              if(kyc == false)  this.serv.saveToLocal("MoneroAUXHomeStatus","nokyc");
+              if(kyc == null)  this.serv.saveToLocal("MoneroAUXHomeStatus","nokyc");
+              if(kyc == "pending")  this.serv.saveToLocal("MoneroAUXHomeStatus","pending");
+              if(kyc == "rejected")  this.serv.saveToLocal("MoneroAUXHomeStatus","rejected");
+              // if(kyc == true)  {this.serv.saveToLocal("MoneroAUXHomeStatus","done");}
+              if(kyc == "accepted") { this.serv.saveToLocal("MoneroAUXHomeStatus","done");}
                
               // this.user_timeline_list = d.user_timeline_list;
               if(d.user_timeline_list == "" || d.user_timeline_list == null){
@@ -757,7 +757,7 @@ export class UserhomeComponent implements OnInit {
   }
 
   putErrorInPouch(fun,desc,notes,priority){
-    let id = this.serv.retrieveFromLocal("AUXUserEmail");
+    let id = this.serv.retrieveFromLocal("MoneroAUXUserEmail");
     let page = this.router.url;
     let func = fun;
     let description = desc;

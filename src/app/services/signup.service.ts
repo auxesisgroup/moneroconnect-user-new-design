@@ -37,7 +37,7 @@ export class SignupService {
     private fbapi:FbapiService,
     private cookieService:CookieService
   ) { 
-    this.url = this.storage.retrieve("AUXUserUrl");//localStorage.getItem("AUXUserUrl");
+    this.url = this.storage.retrieve("MoneroAUXUserUrl");//localStorage.getItem("MoneroAUXUserUrl");
 
     this.headers = new Headers({ 
       'Content-Type': 'application/json', 
@@ -54,7 +54,7 @@ export class SignupService {
     // // console.log("isAuthorized",isAuth,cookieExists);
     // if(cookieExists == false || !cookieExists){
     //   console.log("false")
-    //   this.storage.store("AUXAuthLogin",false);
+    //   this.storage.store("MoneroAUXAuthLogin",false);
     //   this.UnAuthlogoutFromApp();
     // }
   }
@@ -97,15 +97,15 @@ export class SignupService {
     let secureStr = (Math.floor((Math.random() * 100000000) + 1)).toString();
     let token = sha512(secureStr);
 
-    let cached:Boolean = this.cookieService.check("AUXUserCookieServe");
+    let cached:Boolean = this.cookieService.check("MoneroAUXUserCookieServe");
     if(cached){
       //console.log("im retrive cookie")
-      token = this.cookieService.get("AUXUsersecureLocalTokenAuth");
+      token = this.cookieService.get("MoneroAUXUsersecureLocalTokenAuth");
       this.storage.store('secureLocalTokenAuth', token);
     }else{
       this.storage.store('secureLocalTokenAuth', token);
     }
-    //this.saveToLocal("AUXUserEmail","jitendra@auxesisgroup.com");
+    //this.saveToLocal("MoneroAUXUserEmail","jitendra@auxesisgroup.com");
     //console.log(token);
 
     // let a = CryptoJS.AES.encrypt("Message",token);
@@ -120,12 +120,12 @@ export class SignupService {
   setRouteMsgPass(msg){
     let token = this.storage.retrieve("secureLocalTokenAuth");
     let storeStr = (CryptoJS.AES.encrypt(msg,token)).toString();
-    this.sessionStorage.store("AUXRouteMsgPass",storeStr);
+    this.sessionStorage.store("MoneroAUXRouteMsgPass",storeStr);
   }
 
   retrieveRouteMsgPass(){
     let token = this.storage.retrieve("secureLocalTokenAuth");
-    let fromStorage = this.sessionStorage.retrieve("AUXRouteMsgPass");
+    let fromStorage = this.sessionStorage.retrieve("MoneroAUXRouteMsgPass");
     if(fromStorage == "" || fromStorage == null || !fromStorage){
       return null;
     }else{
@@ -136,7 +136,7 @@ export class SignupService {
   }
 
   removeRouteMsgPass(){
-    this.sessionStorage.clear("AUXRouteMsgPass");
+    this.sessionStorage.clear("MoneroAUXRouteMsgPass");
   }
 
   saveReferralId(name,str){
@@ -198,7 +198,7 @@ export class SignupService {
 
   // username
   saveUsername(name,str){
-    let token = "Mass-Cryp-For-User";
+    let token = "XMRC-Token-For-User";
     let storeStr = (CryptoJS.AES.encrypt(str,token)).toString();
     this.storage.store(name,storeStr);
     var today = new Date();
@@ -208,7 +208,7 @@ export class SignupService {
   }
 
   retrieveUsername(name){
-    let token = "Mass-Cryp-For-User";
+    let token = "XMRC-Token-For-User";
     let fromStorage = this.cookieService.get(name);    
     if(fromStorage == "" || fromStorage == null){
       return "there!";
@@ -244,7 +244,7 @@ export class SignupService {
 
   verifyPageOtp(token){
     let auth = this.storage.retrieve("secureLocalTokenAuth");
-    let verifyWith = this.storage.retrieve("AUXUserEmail");
+    let verifyWith = this.storage.retrieve("MoneroAUXUserEmail");
     return new Promise((resolve,reject)=>{
       if(verifyWith==token){
         resolve({"status":true});
@@ -304,7 +304,7 @@ export class SignupService {
 
   makeTNC(name,email,refid){
     //console.log(email);
-    let email2 = localStorage.getItem("AUXUserEmailLocal");//this.findUserEmail(email);//get encrypted email
+    let email2 = localStorage.getItem("MoneroAUXUserEmailLocal");//this.findUserEmail(email);//get encrypted email
     let data;
     if(refid == "" || refid == null || refid == undefined || !refid){
       data = JSON.stringify({name:name,email:email2,ref_id:refid});
@@ -345,11 +345,11 @@ export class SignupService {
   }
 
   UnAuthlogoutFromApp(){
-    let url = this.storage.retrieve("AUXUserUrl");
+    let url = this.storage.retrieve("MoneroAUXUserUrl");
     this.storage.clear();
     localStorage.clear();
     this.fbapi.logout();
-    this.storage.store("AUXUserUrl",url);
+    this.storage.store("MoneroAUXUserUrl",url);
     this.router.navigate(["/login","you_are_unauthorized"]);
     location.reload();
     this.clearUserSession(); 
@@ -358,11 +358,11 @@ export class SignupService {
  
   logoutFromApp(){
     clearInterval(this.interval);
-    let url = this.storage.retrieve("AUXUserUrl");
+    let url = this.storage.retrieve("MoneroAUXUserUrl");
     this.storage.clear();
     localStorage.clear();
     this.fbapi.logout();
-    this.storage.store("AUXUserUrl",url);
+    this.storage.store("MoneroAUXUserUrl",url);
     this.router.navigate(["/login"]);
     // location.reload();
     this.clearUserSession();
@@ -371,9 +371,9 @@ export class SignupService {
   setUserSession(email,token){
     
     let id = sha512(email);
-    this.sessionStorage.store("AUXUserSessionID",id);
-    this.sessionStorage.store("AUXUserSessionValue",email);
-    this.sessionStorage.store("AUXUserSessionToken",token);
+    this.sessionStorage.store("MoneroAUXUserSessionID",id);
+    this.sessionStorage.store("MoneroAUXUserSessionValue",email);
+    this.sessionStorage.store("MoneroAUXUserSessionToken",token);
  
     var today = new Date();
     var expiresValue = new Date(today);
@@ -390,17 +390,17 @@ export class SignupService {
     var today = new Date();
     var expiresValue = new Date(today);
     expiresValue.setHours(today.getHours() + 24*7); 
-    this.cookieService.set("AUXUsersecureLocalTokenAuth",token,expiresValue);
-    let cachetoken = this.cookieService.get("AUXUsersecureLocalTokenAuth");
+    this.cookieService.set("MoneroAUXUsersecureLocalTokenAuth",token,expiresValue);
+    let cachetoken = this.cookieService.get("MoneroAUXUsersecureLocalTokenAuth");
     let storeStr = (CryptoJS.AES.encrypt(email,cachetoken)).toString();
-    this.cookieService.set("AUXUserCacheEmail",storeStr,expiresValue);
-    let gets = this.cookieService.get("AUXUserCacheEmail");
+    this.cookieService.set("MoneroAUXUserCacheEmail",storeStr,expiresValue);
+    let gets = this.cookieService.get("MoneroAUXUserCacheEmail");
     //console.log("stored",this.retrieveFromLocal(gets),"\nits validity")
   }
 
   retrieveCacheEmail(){
-    let token = this.cookieService.get("AUXUsersecureLocalTokenAuth");
-    let fromStorage = this.cookieService.get("AUXUserCacheEmail");
+    let token = this.cookieService.get("MoneroAUXUsersecureLocalTokenAuth");
+    let fromStorage = this.cookieService.get("MoneroAUXUserCacheEmail");
     //console.log(fromStorage)
     if(fromStorage == "" || fromStorage == null){
       return "";
@@ -441,7 +441,7 @@ export class SignupService {
   checkUserActivity(){
     const cookieExists: boolean = this.cookieService.check('AUXUserCookieServe');
     if(cookieExists){
-      let token = this.sessionStorage.retrieve("AUXUserSessionToken");
+      let token = this.sessionStorage.retrieve("MoneroAUXUserSessionToken");
       let cookie = this.cookieService.get('AUXUserCookieServe');
       // if(token == cookie){
       //   //console.log("true1")
@@ -463,7 +463,7 @@ export class SignupService {
     this.interval = setInterval(()=>{
       let cookieExists = this.cookieService.check('AUXUserCookieServe');
       if(cookieExists){
-        let token = this.sessionStorage.retrieve("AUXUserSessionToken");
+        let token = this.sessionStorage.retrieve("MoneroAUXUserSessionToken");
         let cookie = this.cookieService.get('AUXUserCookieServe');
         // if(token == cookie){
         //   //console.log("true1")
@@ -477,11 +477,11 @@ export class SignupService {
       }else{
         clearInterval(this.interval);
         // console.log("false2")
-        let url = this.storage.retrieve("AUXUserUrl");
+        let url = this.storage.retrieve("MoneroAUXUserUrl");
         this.storage.clear();
         localStorage.clear();
         this.fbapi.logout();
-        this.storage.store("AUXUserUrl",url);
+        this.storage.store("MoneroAUXUserUrl",url);
         this.router.navigate(["/login"]);
         // this.router.navigate(["/login","session_timedout"]);
         location.reload();

@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     
-    let isAuth = this.storage.retrieve("AUXAuthLogin");
+    let isAuth = this.storage.retrieve("MoneroAUXAuthLogin");
     let cookieExists = this.signup.checkUserActivity();
     //console.log("isAuthorized",isAuth,cookieExists);
     if(isAuth != null){
@@ -146,10 +146,10 @@ export class LoginComponent implements OnInit {
       let email = this.emailid;
       email = email.toLowerCase();
       // console.log(email)
-      localStorage.setItem("AUXUserEmailLocal",email);
+      localStorage.setItem("MoneroAUXUserEmailLocal",email);
       
-      this.signup.saveToLocal("AUXUserEmail",email);
-      //console.log(this.signup.retrieveFromLocal("AUXUserEmail"));
+      this.signup.saveToLocal("MoneroAUXUserEmail",email);
+      //console.log(this.signup.retrieveFromLocal("MoneroAUXUserEmail"));
       this.signup.saveCacheEmail(email);
       //console.log(this.mssg);
       this.signup.makeSignup(this.emailid)
@@ -163,12 +163,12 @@ export class LoginComponent implements OnInit {
           // setTimeout(()=>{
           //   this.sucmsg = "";
           //   //location.href = "otp";
-          //   let token = this.storage.retrieve("AUXUserEmail");
+          //   let token = this.storage.retrieve("MoneroAUXUserEmail");
           //   this.router.navigate(['/otp',token]);
           // },5000);
           // console.log("before",this.signup.retrieveRouteMsgPass());
           let msgToPass = "OTP is sent at your provided E-mail ID. Please check Spam/Others box if you don’t receive it under 2 minutes.";
-          let token = this.storage.retrieve("AUXUserEmail");
+          let token = this.storage.retrieve("MoneroAUXUserEmail");
           this.signup.setRouteMsgPass(msgToPass);
           // console.log("after",this.signup.retrieveRouteMsgPass());
           this.router.navigate(['/otp',token]);

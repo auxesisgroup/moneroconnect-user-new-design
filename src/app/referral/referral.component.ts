@@ -106,9 +106,9 @@ export class ReferralComponent implements OnInit {
       this.ngxloading = false; 
       let referenceid = this.route.snapshot.paramMap.get("refid");
       // console.log("its ref url",referenceid,"\nredirect and save");
-      this.signup.saveReferralId("AUXUserReferralID",referenceid);
+      this.signup.saveReferralId("MoneroAUXUserReferralID",referenceid);
       // this.router.navigateByUrl("/login");
-      location.href = "http://masscryptoken.io";
+      location.href = "http://moneroconnect.io";
     }
     // console.log(this.router.url,this.sendUrl)
 
@@ -130,7 +130,7 @@ export class ReferralComponent implements OnInit {
 
 
   loadReferralAuth(){
-    let isAuth = this.storage.retrieve("AUXAuthLogin");
+    let isAuth = this.storage.retrieve("MoneroAUXAuthLogin");
     let cookieExists = this.signup.checkUserActivity();
     if(isAuth == null){
       this.ngxloading = false; 
@@ -138,7 +138,7 @@ export class ReferralComponent implements OnInit {
     }
     else if(cookieExists == false){
       this.ngxloading = false; 
-      this.storage.store("AUXAuthLogin",false);
+      this.storage.store("MoneroAUXAuthLogin",false);
       this.signup.UnAuthlogoutFromApp();
     }
     else{
@@ -151,8 +151,8 @@ export class ReferralComponent implements OnInit {
 
   checkReferral(){
     let retrieve = this.signup.retrieveRouteMsgPass();
-    let etheraddress = this.signup.retrieveRefundAddress("AUXUserRefundEtherAddress");
-    let bitcoinaddress = this.signup.retrieveRefundAddress("AUXUserRefundBitcoinAddress");
+    let etheraddress = this.signup.retrieveRefundAddress("MoneroAUXUserRefundEtherAddress");
+    let bitcoinaddress = this.signup.retrieveRefundAddress("MoneroAUXUserRefundBitcoinAddress");
     let msg;
     if(retrieve != null && etheraddress != null && bitcoinaddress != null){
       msg = retrieve;
@@ -200,8 +200,8 @@ export class ReferralComponent implements OnInit {
 
   callToOpenModal(type,modal){
     let d = {
-      'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-      'token':this.signup.retrieveFromLocal("AUXHomeUserToken"),
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
       'currency':type
     };
     // console.info(d);
@@ -258,8 +258,8 @@ export class ReferralComponent implements OnInit {
 
   callApi(){
     let d = {
-      'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-      'token':this.signup.retrieveFromLocal("AUXHomeUserToken")
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken")
     };
     // console.info(d);
     this.serv.resolveApi("get_referral_details",d)
@@ -274,12 +274,12 @@ export class ReferralComponent implements OnInit {
             let ethrefund = response.referral_json.eth_refund_address;
             if(btcrefund == null || btcrefund == "" || ethrefund == null || ethrefund == ""){
               // this.signup.setRouteMsgPass("BTC & ETH refund address is not taken try to add first");
-              this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+              this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
               this.router.navigate(["/addreferral"]);
             }else{ 
-              this.signup.saveToLocal("AUXUserAddReferralStatus","done");
-              this.signup.saveRefundAddress("AUXUserRefundEtherAddress",ethrefund);
-              this.signup.saveRefundAddress("AUXUserRefundBitcoinAddress",btcrefund);
+              this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","done");
+              this.signup.saveRefundAddress("MoneroAUXUserRefundEtherAddress",ethrefund);
+              this.signup.saveRefundAddress("MoneroAUXUserRefundBitcoinAddress",btcrefund);
               this.referridvalue = response.referral_json.ref_id;
               this.referraladdressvalue = this.sendUrl+"/address/"+this.referridvalue;
 
@@ -325,14 +325,14 @@ export class ReferralComponent implements OnInit {
             }
 
           }else if(response.code == 400){
-            this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+            this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
             // this.signup.setRouteMsgPass("BTH & ETH refund address is not taken try to add first");
             this.router.navigate(["/addreferral"]);
           }else if(response.code == 401){
-            this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+            this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
             this.signup.UnAuthlogoutFromApp();
           }else{
-            this.signup.saveToLocal("AUXUserAddReferralStatus","none");
+            this.signup.saveToLocal("MoneroAUXUserAddReferralStatus","none");
             // this.signup.setRouteMsgPass("BTH & ETH refund address is not taken try to add first");
             this.router.navigate(["/addreferral"]);
           }
@@ -466,8 +466,8 @@ export class ReferralComponent implements OnInit {
   sendingToWithdrawOTP(type){
     this.loadingimage = true;
     let d = {
-      'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-      'token':this.signup.retrieveFromLocal("AUXHomeUserToken")
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken")
     };
     // console.info(d);
     this.serv.resolveApi("send_withdraw_otp",d)
@@ -515,8 +515,8 @@ export class ReferralComponent implements OnInit {
     }else{
       this.loadingimage = true;
       let d = {
-        'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-        'token':this.signup.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'otp':otp,
         'currency':type
       };
@@ -628,7 +628,7 @@ export class ReferralComponent implements OnInit {
   }
 
   putErrorInPouch(fun,desc,notes,priority){
-    let id = this.serv.retrieveFromLocal("AUXUserEmail");
+    let id = this.serv.retrieveFromLocal("MoneroAUXUserEmail");
     let page = this.router.url;
     let func = fun;
     let description = desc;
@@ -644,7 +644,7 @@ export class ReferralComponent implements OnInit {
       // var myWindow = window.open("https://web.skype.com/share?url=?u="+url, "Skype Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
       // var myWindow = window.open("whatsapp://send?text="+url, "Whatsapp Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="tw"){
-      var myWindow = window.open("https://twitter.com/intent/tweet?url="+url+"&text=Referral Share&via=Masscryp&hashtags='Masscryp,ICO'", "Twitter Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
+      var myWindow = window.open("https://twitter.com/intent/tweet?url="+url+"&text=Referral Share&via=Moneroconnect&hashtags='Moneroconnect,XMRC,ICO'", "Twitter Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="ln"){
       var myWindow = window.open("https://www.linkedin.com/shareArticle?url="+url+"&title=Referral Share", "Linkedin Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="tl"){

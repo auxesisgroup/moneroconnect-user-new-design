@@ -93,7 +93,7 @@ export class UserhomeethmodalComponent implements OnInit {
     //console.log(this.elRef.nativeElement.parentElement)
 
     //starterDisableButton disabled
-    // let dis = this.storage.retrieve("AUXstarterSecretButton");
+    // let dis = this.storage.retrieve("MoneroAUXstarterSecretButton");
     // if(dis == "yes")
       this.starterDisableButton = false;
     // else 
@@ -101,7 +101,7 @@ export class UserhomeethmodalComponent implements OnInit {
   }
 
   loggedInFBauth(){
-    let email = this.signup.retrieveFromLocal("AUXUserEmail");
+    let email = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
     let password = "tokenbazaar";
     // console.log("fb,",email,password);
     this.fbapi.login(email,password);
@@ -116,8 +116,8 @@ export class UserhomeethmodalComponent implements OnInit {
     this.stepRecieveETH = 1;
     this.toETH = 0;//if user not submitted wallet address and wallet name
       //screen1
-    let ethwn = this.serv.retrieveFromLocal("AUXETHTransactionWN");//wallet name
-    let ethwa = this.serv.retrieveFromLocal("AUXETHTransactionWA");//wallet address
+    let ethwn = this.serv.retrieveFromLocal("MoneroAUXETHTransactionWN");//wallet name
+    let ethwa = this.serv.retrieveFromLocal("MoneroAUXETHTransactionWA");//wallet address
     //console.log(ethwa,ethwn)
     if((ethwa == "" || ethwa == null || ethwa == undefined || !ethwa) && (ethwn == "" || ethwn == undefined || ethwn == null || !ethwn)){
       this.toETH = 0;//show submitnextskip btn
@@ -127,7 +127,7 @@ export class UserhomeethmodalComponent implements OnInit {
       this.ethwalletaddress = ethwa;
     }
       //screen2
-    let ethra = this.serv.retrieveFromLocal("AUXETHTransactionRA");//refund address
+    let ethra = this.serv.retrieveFromLocal("MoneroAUXETHTransactionRA");//refund address
     if((ethra == "" || ethra == null || !ethra)){
       this.toETHRefund = 0;//show submitnextskip btn
     }else{
@@ -135,7 +135,7 @@ export class UserhomeethmodalComponent implements OnInit {
       this.ethrefundaddress = ethra;
     }
       //screen3 not used
-    // let ethdone = this.serv.retrieveFromLocal("AUXETHTransactionDone");//refund address
+    // let ethdone = this.serv.retrieveFromLocal("MoneroAUXETHTransactionDone");//refund address
     // if((ethdone == false || ethdone == "" || ethdone == null || !ethdone)){
     //   this.toETHConfirm = 0;//show confirm btn
     // }else if(ethdone == true || ethdone == "done"){
@@ -151,26 +151,26 @@ export class UserhomeethmodalComponent implements OnInit {
    * Modal
    */
   hideme(){
-    //this.storage.clear("AUXsavelocalpaytype");
-    //this.storage.clear("AUXsavelocalamount");
+    //this.storage.clear("MoneroAUXsavelocalpaytype");
+    //this.storage.clear("MoneroAUXsavelocalamount");
     this.clearERC();
     this.modalRef.hide();
   }
   open_recieve_modal(modalETH: TemplateRef<any>){
     //console.log(this.cas)
     //console.log(this.optradio)
-    let type =this.signup.retrieveFromLocal("AUXsavelocalpaytype");
-    let cash = this.signup.retrieveFromLocal("AUXsavelocalamount");
+    let type =this.signup.retrieveFromLocal("MoneroAUXsavelocalpaytype");
+    let cash = this.signup.retrieveFromLocal("MoneroAUXsavelocalamount");
     //console.log(type,cash)
     if(cash == undefined || cash == "" || cash == null){
-      this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2000});
+      this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2000});
     }else if(type == undefined || type == "" || type == null){
       this.toastr.error('Choose any one payment method!', 'Not a payment type',{timeOut:2000});
     }else{ 
       this.loadingimage = true;
       let d = {
-        'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-        'token':this.signup.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'token_amount':cash
       };
       //console.log(d)
@@ -183,7 +183,7 @@ export class UserhomeethmodalComponent implements OnInit {
           if(response != null || response != ""){
             if(response.valid == true){
               if(type == "eth"){
-                this.serv.saveToLocal("AUXETHTransaction_token_amount",cash);
+                this.serv.saveToLocal("MoneroAUXETHTransaction_token_amount",cash);
                 this.callforpaywithcurrencyonmodaltoshow("eth",cash,modalETH);
               }else{
                   this.loadingimage = false;
@@ -191,17 +191,17 @@ export class UserhomeethmodalComponent implements OnInit {
                 }
             }else{
               this.loadingimage = false;
-              this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
+              this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
             }
           }else{
             this.loadingimage = false;
-            this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
+            this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});  
           }
         },
         err=>{
           this.loadingimage = false;
           //console.error(err);
-          this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+          this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
           this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
           
         }
@@ -212,8 +212,8 @@ export class UserhomeethmodalComponent implements OnInit {
   }  
   callforpaywithcurrencyonmodaltoshow(type,amount,modalETH){
     let d = {
-      email:this.serv.retrieveFromLocal("AUXUserEmail"),
-      token:this.serv.retrieveFromLocal("AUXHomeUserToken"),
+      email:this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      token:this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
       currency:type,//('eth','btc','fiat'),
       token_amount:amount
     }
@@ -230,11 +230,11 @@ export class UserhomeethmodalComponent implements OnInit {
           let erc_wallet = response.erc_wallet;
           this.loadingimage = false;
           if(type == "eth"){
-            this.serv.saveToLocal("AUXETHTransaction_id",_id);
-            this.serv.saveToLocal("AUXETHTransaction_to_address",to_address);
+            this.serv.saveToLocal("MoneroAUXETHTransaction_id",_id);
+            this.serv.saveToLocal("MoneroAUXETHTransaction_to_address",to_address);
             if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
-              this.serv.saveToLocal("AUXETHTransactionWN",erc_wallet);
-              this.serv.saveToLocal("AUXETHTransactionWA",erc_address);
+              this.serv.saveToLocal("MoneroAUXETHTransactionWN",erc_wallet);
+              this.serv.saveToLocal("MoneroAUXETHTransactionWA",erc_address);
             }
             this.modalRef = this.modalService.show(
               modalETH,
@@ -252,17 +252,17 @@ export class UserhomeethmodalComponent implements OnInit {
             }
              this.stepRecieveETH = 1;this.ethmodaltitle = "Pay through ETH";
           }else{
-            this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+            this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
           }
         }else{
           this.loadingimage = false;
-          this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+          this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
         }
       },
       (err)=>{
         //console.error(err);
         this.loadingimage = false;
-        this.toastr.error('Minimum $20 worth of MASS Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
+        this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
         this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
@@ -274,12 +274,12 @@ export class UserhomeethmodalComponent implements OnInit {
   /****
    * ETH Payment
    */
-  //Screen1 Not required for Masscryp
+  //Screen1 Not required for XMRCcryp
   doTheseIfChangeDetectInETH(val){
     //console.log(this.ethwalletaddress,this.ethwalletname);//console.log(val.target.value);
     if(this.toETH == 1 || this.toETH == 2){
-      let ethwn = this.serv.retrieveFromLocal("AUXETHTransactionWN");//wallet name
-      let ethwa = this.serv.retrieveFromLocal("AUXETHTransactionWA");//wallet address
+      let ethwn = this.serv.retrieveFromLocal("MoneroAUXETHTransactionWN");//wallet name
+      let ethwa = this.serv.retrieveFromLocal("MoneroAUXETHTransactionWA");//wallet address
       if(ethwa == val.target.value || ethwn == val.target.value){ 
         this.toETH = 1;//stay with review and submit btn
         //console.log("Im not changed");
@@ -300,11 +300,11 @@ export class UserhomeethmodalComponent implements OnInit {
     }else if(this.ethwalletaddress == "" || this.ethwalletaddress == null || this.ethwalletaddress == undefined){
       this.toastr.warning('Wallet address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXETHTransactionWN",this.ethwalletname);
-      this.serv.saveToLocal("AUXETHTransactionWA",this.ethwalletaddress);
+      this.serv.saveToLocal("MoneroAUXETHTransactionWN",this.ethwalletname);
+      this.serv.saveToLocal("MoneroAUXETHTransactionWA",this.ethwalletaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
         'erc_address':this.ethwalletaddress,
         'eth_wallet':this.ethwalletname
       };//console.log(data);
@@ -312,12 +312,12 @@ export class UserhomeethmodalComponent implements OnInit {
     }
   } 
   nexteth1_2(){//if stored wallet name & address then to 2nd refund address modal
-    this.serv.saveToLocal("AUXETHTransactionWN",this.ethwalletname);
-    this.serv.saveToLocal("AUXETHTransactionWA",this.ethwalletaddress);
+    this.serv.saveToLocal("MoneroAUXETHTransactionWN",this.ethwalletname);
+    this.serv.saveToLocal("MoneroAUXETHTransactionWA",this.ethwalletaddress);
     let data = {
-      'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-      'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
-      '_id':this.serv.retrieveFromLocal("AUXETHTransaction_id"),
+      'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
+      '_id':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id"),
       'currency':'eth'
     };//console.log(data);
     this.callingApiForETHScreen2("review_erc_address",data);
@@ -328,15 +328,15 @@ export class UserhomeethmodalComponent implements OnInit {
     }else if(this.ethwalletaddress == "" || this.ethwalletaddress == null || this.ethwalletaddress == undefined){
       this.toastr.warning('Wallet address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXETHTransactionWN",this.ethwalletname);
-      this.serv.saveToLocal("AUXETHTransactionWA",this.ethwalletaddress);
+      this.serv.saveToLocal("MoneroAUXETHTransactionWN",this.ethwalletname);
+      this.serv.saveToLocal("MoneroAUXETHTransactionWA",this.ethwalletaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),
-        '_id':this.serv.retrieveFromLocal("AUXETHTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),
+        '_id':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id"),
         'currency':'eth',
-        'new_erc_address':this.serv.retrieveFromLocal("AUXETHTransactionWA"),
-        'new_erc_wallet':this.serv.retrieveFromLocal("AUXETHTransactionWN")
+        'new_erc_address':this.serv.retrieveFromLocal("MoneroAUXETHTransactionWA"),
+        'new_erc_wallet':this.serv.retrieveFromLocal("MoneroAUXETHTransactionWN")
       };//console.log(data);
       this.callingApiForETHScreen2("update_erc_address",data);
     }
@@ -368,10 +368,10 @@ export class UserhomeethmodalComponent implements OnInit {
     );
   }
 
-  //Screen2 started here for Masscryp
+  //Screen2 started here for XMRCcryp
   ethrefundaddresschange(val){
     if(this.toETHRefund == 1 || this.toETHRefund == 2){
-      let ethra = this.serv.retrieveFromLocal("AUXETHTransactionRA");//refund address
+      let ethra = this.serv.retrieveFromLocal("MoneroAUXETHTransactionRA");//refund address
       if(ethra == val.target.value){ 
         this.toETHRefund = 1;//stay with review and submit btn
       }else{ 
@@ -383,26 +383,26 @@ export class UserhomeethmodalComponent implements OnInit {
     if(this.ethrefundaddress == "" || this.ethrefundaddress == null || this.ethrefundaddress == undefined){
       this.toastr.warning('Refund address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXETHTransactionRA",this.ethrefundaddress);
+      this.serv.saveToLocal("MoneroAUXETHTransactionRA",this.ethrefundaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),  
-        '_id':this.serv.retrieveFromLocal("AUXETHTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),  
+        '_id':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id"),
         'currency':'eth',
-        'token_amount':this.serv.retrieveFromLocal("AUXETHTransaction_token_amount"),
+        'token_amount':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_token_amount"),
         'new_refund_address':this.ethrefundaddress
       };
       this.callingApiForETHScreen3("update_refund_address",data);
     }
   } 
   nexteth2_2(){//if stored wallet name & address then to 2nd refund address modal
-    this.serv.saveToLocal("AUXETHTransactionRA",this.ethrefundaddress);
+    this.serv.saveToLocal("MoneroAUXETHTransactionRA",this.ethrefundaddress);
     let data = {
-      'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-      'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),  
-      '_id':this.serv.retrieveFromLocal("AUXETHTransaction_id"),
+      'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),  
+      '_id':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id"),
       'currency':'eth',
-      'token_amount':this.serv.retrieveFromLocal("AUXETHTransaction_token_amount"),
+      'token_amount':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_token_amount"),
     };
     this.callingApiForETHScreen3("review_refund_address",data);
   } 
@@ -410,21 +410,21 @@ export class UserhomeethmodalComponent implements OnInit {
     if(this.ethrefundaddress == "" || this.ethrefundaddress == null || this.ethrefundaddress == undefined){
       this.toastr.warning('Refund address is required', 'Form is empty!');
     }else{
-      this.serv.saveToLocal("AUXETHTransactionRA",this.ethrefundaddress);
+      this.serv.saveToLocal("MoneroAUXETHTransactionRA",this.ethrefundaddress);
       let data = {
-        'email':this.serv.retrieveFromLocal("AUXUserEmail"),
-        'token':this.serv.retrieveFromLocal("AUXHomeUserToken"),  
-        '_id':this.serv.retrieveFromLocal("AUXETHTransaction_id"),
+        'email':this.serv.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.serv.retrieveFromLocal("MoneroAUXHomeUserToken"),  
+        '_id':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id"),
         'currency':'eth',
-        'token_amount':this.serv.retrieveFromLocal("AUXETHTransaction_token_amount"),
+        'token_amount':this.serv.retrieveFromLocal("MoneroAUXETHTransaction_token_amount"),
         'new_refund_address':this.ethrefundaddress
       };
       this.callingApiForETHScreen3("update_refund_address",data);
     }
   } 
   callingApiForETHScreen3(reviewfor,data){//call web api for refund  ***********web
-    this.serv.saveToLocal("AUXETHTransactionWN",this.ethwalletname);
-    this.serv.saveToLocal("AUXETHTransactionWA",this.ethwalletaddress);
+    this.serv.saveToLocal("MoneroAUXETHTransactionWN",this.ethwalletname);
+    this.serv.saveToLocal("MoneroAUXETHTransactionWA",this.ethwalletaddress);
     this.loadingimage = true;
     //console.log(data)
     this.serv.resolveApi(reviewfor,data)
@@ -458,7 +458,7 @@ export class UserhomeethmodalComponent implements OnInit {
 
   //calling firebase response
   callfb(){
-    // this.showtransidin3 = this.serv.retrieveFromLocal("AUXETHTransaction_id");
+    // this.showtransidin3 = this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id");
     // this.stepRecieveETH = 3;this.ethmodaltitle = "Pay through ETH (Transfer Confirmation)";//next firebase
     //console.log("calling fb");
     this.fbinterval = "";
@@ -470,8 +470,8 @@ export class UserhomeethmodalComponent implements OnInit {
 
   //call fb **************************************************************************
   gettransaction_details(){
-    let useremail = this.signup.retrieveFromLocal("AUXUserEmail");
-    let useraddress = this.signup.retrieveFromLocal("AUXETHTransaction_to_address");
+    let useremail = this.signup.retrieveFromLocal("MoneroAUXUserEmail");
+    let useraddress = this.signup.retrieveFromLocal("MoneroAUXETHTransaction_to_address");
     //console.log(useraddress,useremail)
     let ar = [];
     return this.itemsRef.snapshotChanges().map(arr => {
@@ -508,7 +508,7 @@ export class UserhomeethmodalComponent implements OnInit {
         if(this.initialCount == 0 || val.confirmations == 0){
           this.progresstype = "danger";
           this.progressvalue = 0;
-          this.showtransidin3 = val.txid;//this.serv.retrieveFromLocal("AUXETHTransaction_id");
+          this.showtransidin3 = val.txid;//this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id");
           this.stepRecieveETH = 3;this.ethmodaltitle = "Pay through ETH";//next firebase
         }
         if(this.initialCount == 1 || val.confirmations == 1){
@@ -555,20 +555,20 @@ export class UserhomeethmodalComponent implements OnInit {
     this.ethmodaltitle = "Congratulations";
     //this.toastr.success('ETH transaction is done successfully', 'Transaction completed');
     this.stepRecieveETH = 4;
-    this.signup.saveToLocal("AUXPageChange","yes");
-    let cas = this.serv.retrieveFromLocal("AUXETHTransaction_token_amount");
-    let transaction_id = this.serv.retrieveFromLocal("AUXETHTransaction_id");
+    this.signup.saveToLocal("MoneroAUXPageChange","yes");
+    let cas = this.serv.retrieveFromLocal("MoneroAUXETHTransaction_token_amount");
+    let transaction_id = this.serv.retrieveFromLocal("MoneroAUXETHTransaction_id");
     this.message1 = cas;
-    this.message = this.showtransidin3;//cas+" MASS Token from transaction id "+this.showtransidin3+"  is deposited in your account.";
+    this.message = this.showtransidin3;//cas+" XMRC Token from transaction id "+this.showtransidin3+"  is deposited in your account.";
     setTimeout(()=>{  
       // this.hideme();
       clearInterval(this.fbinterval);
-      this.storage.clear("AUXETHTransactionRA");
-      this.storage.clear("AUXETHTransactionWA");
-      this.storage.clear("AUXETHTransactionWN");
-      this.storage.clear("AUXETHTransaction_id");
-      this.storage.clear("AUXETHTransaction_to_address");
-      this.storage.clear("AUXETHTransaction_token_amount");
+      this.storage.clear("MoneroAUXETHTransactionRA");
+      this.storage.clear("MoneroAUXETHTransactionWA");
+      this.storage.clear("MoneroAUXETHTransactionWN");
+      this.storage.clear("MoneroAUXETHTransaction_id");
+      this.storage.clear("MoneroAUXETHTransaction_to_address");
+      this.storage.clear("MoneroAUXETHTransaction_token_amount");
       // this.stepRecieveETH = 1;
       // this.ethmodaltitle = "Pay through ETH";
       this.ethwalletname = "";
@@ -594,12 +594,12 @@ export class UserhomeethmodalComponent implements OnInit {
   clearERC(){
     clearInterval(this.fbinterval);
     this.loggedOutFBauth();
-    this.storage.clear("AUXETHTransactionRA");
-    this.storage.clear("AUXETHTransactionWA");
-    this.storage.clear("AUXETHTransactionWN");
-    this.storage.clear("AUXETHTransaction_id");
-    this.storage.clear("AUXETHTransaction_to_address");
-    this.storage.clear("AUXETHTransaction_token_amount");
+    this.storage.clear("MoneroAUXETHTransactionRA");
+    this.storage.clear("MoneroAUXETHTransactionWA");
+    this.storage.clear("MoneroAUXETHTransactionWN");
+    this.storage.clear("MoneroAUXETHTransaction_id");
+    this.storage.clear("MoneroAUXETHTransaction_to_address");
+    this.storage.clear("MoneroAUXETHTransaction_token_amount");
     this.stepRecieveETH = 1;
     this.ethmodaltitle = "Pay through ETH";
     this.ethwalletname = "";

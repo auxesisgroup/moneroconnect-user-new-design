@@ -33,7 +33,7 @@ export class PouchService {
         let dt = JSON.parse(JSON.stringify(d));
         let dt2 = JSON.parse(dt._body);
         // console.log(dt2,dt2.ip);
-        this.serviceapi.saveToLocal("AUXMassAppUserInfo",dt._body);
+        this.serviceapi.saveToLocal("MoneroAUXMassAppUserInfo",dt._body);
         // console.log(this.datastoreServ.retrieveFromLocal("IssuerAppUserInfo"));
       },
       e=>{
@@ -52,7 +52,7 @@ export class PouchService {
         let dt2 = JSON.parse(dt._body);
         // console.log(dt2,dt2.ip);
         // localStorage.setItem("dummyuserinfo",dt._body)
-        this.serviceapi.saveToLocal("AUXMassAppUserInfo",dt._body);
+        this.serviceapi.saveToLocal("MoneroAUXMassAppUserInfo",dt._body);
         this.updateIssue(id,page,func,description,notes,priority);
         // this.getIP();
       },
@@ -64,7 +64,7 @@ export class PouchService {
   }
   updateIssue(id,page,func,description,notes,priority){
 
-    let userinfo = JSON.parse(this.serviceapi.retrieveFromLocal("AUXMassAppUserInfo"));
+    let userinfo = JSON.parse(this.serviceapi.retrieveFromLocal("MoneroAUXMassAppUserInfo"));
 
     this.pdb2.get(id).then((arr) =>{
       // console.log("then1",arr);
@@ -128,7 +128,7 @@ export class PouchService {
     });
   }
   insertAtFirstEntry(id,page,func,description,notes,priority){   
-    let userinfo = JSON.parse(this.serviceapi.retrieveFromLocal("AUXMassAppUserInfo"));
+    let userinfo = JSON.parse(this.serviceapi.retrieveFromLocal("MoneroAUXMassAppUserInfo"));
     let issueid = 'issue'+1;
     let doc = {
       _id:id,
@@ -197,7 +197,7 @@ export class PouchService {
   }
 
   putErrorInPouch(fun,desc,notes,priority){
-    let id = this.serviceapi.retrieveFromLocal("AUXUserEmail");
+    let id = this.serviceapi.retrieveFromLocal("MoneroAUXUserEmail");
     if(id == null || id == "" || id == undefined || !id){
       id = "Global-User";
     }

@@ -116,14 +116,14 @@ export class SidemenuComponent implements OnInit {
 
   clickonReferral(){
     // console.log("sdf")
-    // let status = this.signup.retrieveFromLocal("AUXUserAddReferralStatus");//,"none" // "done"
+    // let status = this.signup.retrieveFromLocal("MoneroAUXUserAddReferralStatus");//,"none" // "done"
     // if(status == "done" || status){
     //   this.router.navigate(["/referral"]);
     // }else{
     //   this.router.navigate(["/addreferral"]);
     // }
-    let e = this.signup.retrieveRefundAddress("AUXUserRefundEtherAddress");
-    let b = this.signup.retrieveRefundAddress("AUXUserRefundBitcoinAddress");
+    let e = this.signup.retrieveRefundAddress("MoneroAUXUserRefundEtherAddress");
+    let b = this.signup.retrieveRefundAddress("MoneroAUXUserRefundBitcoinAddress");
     if(e == "" || e == null || !e){
       this.router.navigate(["/addreferral"]);
       // this.toastr.info("Dear "+name+"! , you need to update refund address by clicking on addreferral button",null,{timeOut:2500});    
@@ -150,13 +150,13 @@ export class SidemenuComponent implements OnInit {
   }
  
   decline(): void {
-    let name = this.signup.retrieveUsername("AUXMassUserName");
-    // this.toastr.info("Dear "+name+"! , you are continuing MASS Cryp ICO","Continued...",{timeOut:2500});
+    let name = this.signup.retrieveUsername("MoneroAUXMassUserName");
+    // this.toastr.info("Dear "+name+"! , you are continuing XMRC Cryp ICO","Continued...",{timeOut:2500});
     this.modalRef.hide();
   }
 
   checkKYC(){
-    let status = this.signup.retrieveFromLocal("AUXKYCStatus"); 
+    let status = this.signup.retrieveFromLocal("MoneroAUXKYCStatus"); 
     if(status == "nokyc"){
       this.toastr.error("You have not uploaded the KYC documents","Upload KYC",{timeOut:2500});
       this.router.navigate(["/updatekyc"]);
@@ -166,7 +166,7 @@ export class SidemenuComponent implements OnInit {
     //   this.router.navigate(["/updatekyc"]);
     // }
     else if(status == "pending"){
-      this.toastr.warning("KYC is waiting for administrator approval. You can continue buying MASS Coins.",null,{timeOut:2500});
+      this.toastr.warning("KYC is waiting for administrator approval. You can continue buying XMRC Coins.",null,{timeOut:2500});
       this.router.navigate(["/updatekyc"]);
     }else if(status == "rejected"){
       this.toastr.error("Your KYC detail has been rejected","KYC rejected",{timeOut:2500});

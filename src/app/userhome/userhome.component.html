@@ -30,7 +30,7 @@
                               <div class="col-sm-12 col-xs-11 text-right">
                                   <div class="col-sm-12 col-xs-12 nopad">
                                       <h3 class="montBold">
-                                          <span id="balance">{{tokens}}</span> MASS
+                                          <span id="balance">{{tokens}}</span> XMRC
                                       </h3>
                                   </div>
                                   <!--<div class="col-sm-12 col-xs-12 nopad">-->
@@ -72,7 +72,7 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         
                                     </button>
-                                    <span>KYC Details submitted successfully, waiting for administrator approval. You can continue buying MASS Coins.</span>
+                                    <span>KYC Details submitted successfully, waiting for administrator approval. You can continue buying XMRC Coins.</span>
                                 </div>
                             </div>
                             <hr>
@@ -143,7 +143,7 @@
                                                         <div class="input-group col-sm-10">
                                                             <input  type="text"  class="form-control" placeholder="0" [(ngModel)]="cas" aria-describedby="basic-addon2" (keypress)="keyevent($event)" (keyup)="keyup($event)">
                                                             <!--  (keyup)="keyevent($event)"   ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"-->
-                                                            <span class="input-group-addon" id="basic-addon2">MASS</span>
+                                                            <span class="input-group-addon" id="basic-addon2">XMRC</span>
                                                         </div>
                                                     </div>
                             
@@ -311,13 +311,13 @@
                                                                 <i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
                                                         </div>
                                                         <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'btc_transaction'">
-                                                            <span class="recieve done">Purchase of {{t.mass}} MASS Coin successful with 
+                                                            <span class="recieve done">Purchase of {{t.mass}} XMRC Coin successful with 
                                                                 <!-- <i class="fa fa-btc" aria-hidden="true"></i>  -->
                                                                 {{t.amount}} BTC </span>     
                                                                  <!-- {{t.content}} -->
                                                         </div>
                                                         <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'eth_transaction'">
-                                                                <span class="recieve done">Purchase of {{t.mass}} MASS Coin successful with 
+                                                                <span class="recieve done">Purchase of {{t.mass}} XMRC Coin successful with 
                                                                     <!-- <img class="ethereum home" src="assets/img/ethereum.png">  -->
                                                                     {{t.amount}} ETH </span>   
                                                                  <!-- {{t.content}} -->
@@ -343,8 +343,8 @@
                                                                 <i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
                                                         </div>
                                                         <div class="col-md-12 col-sm-12 text-left">
-                                                            <span class="recieve done" *ngIf="t.content == 'signup'">You logged into MASS CRYP ICO Platform</span>     
-                                                            <span class="recieve done" *ngIf="t.content == 'kyc_submitted'">You uploaded kyc documents</span>     
+                                                            <span class="recieve done" *ngIf="t.content == 'signup'">You logged into Moneroconnect ICO Platform</span>     
+                                                            <span class="recieve done" *ngIf="t.content == 'kyc_submitted'">You updated kyc documents</span>     
                                                         </div>
                         
                                                     </div>

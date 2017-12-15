@@ -82,6 +82,8 @@ export class KycwithsidebarComponent implements OnInit {
   
     @ViewChild('fileInput1') fileInput1: ElementRef; 
     @ViewChild('fileInput2') fileInput2: ElementRef;
+
+    link: HTMLAnchorElement;
   
     name:string; 
     aadharno:number;
@@ -135,7 +137,7 @@ export class KycwithsidebarComponent implements OnInit {
     }
   
     ngOnInit() {
-      // let a = this.signup.retrieveFromLocal("AUXKYCStatus"); 
+      // let a = this.signup.retrieveFromLocal("MoneroAUXKYCStatus"); 
       // if(a=="done"){
       //   this.router.navigate(["login"]);
       // }
@@ -162,8 +164,8 @@ export class KycwithsidebarComponent implements OnInit {
     findKYCs(){
       this.ngxloading = true; 
       let d = {
-        'email':this.signup.retrieveFromLocal("AUXUserEmail"),
-        'token':this.signup.retrieveFromLocal("AUXHomeUserToken")
+        'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken")
       };
       // console.info(d);
       this.api.resolveApi("user_kyc_details/",d)
@@ -273,10 +275,10 @@ export class KycwithsidebarComponent implements OnInit {
     }
   
     skipfornow(){
-      this.storage.store("AUXAuthLogin",true);
-      this.signup.saveToLocal("AUXKYCStatus","nokyc");   //for page             
-      this.signup.saveToLocal("AUXTNCStatus","done");  
-      this.signup.saveToLocal("AUXHomeStatus","nokyc"); 
+      this.storage.store("MoneroAUXAuthLogin",true);
+      this.signup.saveToLocal("MoneroAUXKYCStatus","nokyc");   //for page             
+      this.signup.saveToLocal("MoneroAUXTNCStatus","done");  
+      this.signup.saveToLocal("MoneroAUXHomeStatus","nokyc"); 
       this.router.navigate(["/home"]);
     }
   
@@ -497,7 +499,7 @@ export class KycwithsidebarComponent implements OnInit {
         this.loadingimage = true;
         let data = {
           // 'name':formModel.name,
-          'email':localStorage.getItem("AUXUserEmailLocal"),
+          'email':localStorage.getItem("MoneroAUXUserEmailLocal"),
           // 'aadhar_no':formModel.aadharno,
           'idproofs':formModel.idproof,
           // 'aadhar_card_front':formModel.proof1,
@@ -515,36 +517,36 @@ export class KycwithsidebarComponent implements OnInit {
             //console.log(res);
             let r = JSON.parse(JSON.stringify(res));
             if((r.code == 200 && r.kyc == "pending") || (r.code == 200 && r.kyc == "rejected")){
-              this.signup.saveToLocal("AUXHomeStatus","pending");
+              this.signup.saveToLocal("MoneroAUXHomeStatus","pending");
               // this.sucmsg = "KYC detail submitted successfully wait after administrator verified.\nWe redirecting to your dashboard...";
               // setTimeout(()=>{
                 // this.sucmsg;              
-                let msgToPass = "KYC is updated. You can continue buying MASS Coins.";
+                let msgToPass = "KYC is updated. You can continue buying XMRC Coins.";
                 this.signup.setRouteMsgPass(msgToPass);
-                this.storage.store("AUXAuthLogin",true);
-                this.signup.saveToLocal("AUXKYCStatus","done");   //for page             
-                this.signup.saveToLocal("AUXTNCStatus","done");  
-                this.signup.saveToLocal("AUXHomeStatus","pending"); 
+                this.storage.store("MoneroAUXAuthLogin",true);
+                this.signup.saveToLocal("MoneroAUXKYCStatus","done");   //for page             
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");  
+                this.signup.saveToLocal("MoneroAUXHomeStatus","pending"); 
                 this.router.navigate(["/home"]);
               // },3500);
             }else if( (r.code == 400 && r.kyc == "pending") || r.status == "already_done"){
-              // this.failmsg("KYC is waiting for administrator approval. You can continue buying MASS Coins.");
+              // this.failmsg("KYC is waiting for administrator approval. You can continue buying XMRC Coins.");
               // setTimeout(()=>{
-                let msgToPass = "KYC is updated. You can continue buying MASS Coins.";
+                let msgToPass = "KYC is updated. You can continue buying XMRC Coins.";
                 this.signup.setRouteMsgPass(msgToPass);
-                this.storage.store("AUXAuthLogin",true);
-                this.signup.saveToLocal("AUXKYCStatus","done");                
-                this.signup.saveToLocal("AUXTNCStatus","done");
-                this.signup.saveToLocal("AUXHomeStatus","pending"); //for kyc current
+                this.storage.store("MoneroAUXAuthLogin",true);
+                this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXHomeStatus","pending"); //for kyc current
                 this.router.navigate(["/home"]);
               // },2010);
             }else{
-              this.failmsg("KYC is waiting for administrator approval. You can continue buying MASS Coins.");
+              this.failmsg("KYC is waiting for administrator approval. You can continue buying XMRC Coins.");
               // setTimeout(()=>{
-                this.storage.store("AUXAuthLogin",true);
-                this.signup.saveToLocal("AUXKYCStatus","done");                
-                this.signup.saveToLocal("AUXTNCStatus","done");
-                this.signup.saveToLocal("AUXHomeStatus","pending"); //for kyc current
+                this.storage.store("MoneroAUXAuthLogin",true);
+                this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXHomeStatus","pending"); //for kyc current
                 this.router.navigate(["/home"]);
             }
             this.loadingimage = false;
@@ -588,11 +590,11 @@ export class KycwithsidebarComponent implements OnInit {
         // location.href = val.value;
         // console.log(val.value)
         // var myWindow = window.open(val.value);//, "KYC Documents", "width=800,height=600,fullscreen=no,top=50,left=300,resizable=no");
-        // this.api.saveToLocal("AUXDOCImageAddressProof",val.value);
+        // this.api.saveToLocal("MoneroAUXDOCImageAddressProof",val.value);
         // this.router.navigate(["/updatekyc/view/",val.value]);
 
-        let name = this.signup.retrieveUsername("AUXMassUserName");
-        let email  = this.storage.retrieve("AUXUserEmail");
+        let name = this.signup.retrieveUsername("MoneroAUXMassUserName");
+        let email  = this.storage.retrieve("MoneroAUXUserEmail");
         let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
         this.downloadURI(val.value, filename+".pdf");
 
@@ -606,20 +608,21 @@ export class KycwithsidebarComponent implements OnInit {
     }
 
     downloadFile(val){
-      let name = this.signup.retrieveUsername("AUXMassUserName");
-      let email  = this.storage.retrieve("AUXUserEmail");
+      let name = this.signup.retrieveUsername("MoneroAUXMassUserName");
+      let email  = this.storage.retrieve("MoneroAUXUserEmail");
       let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
       this.downloadURI(val, filename+".png");
     }
 
     downloadURI(uri, name) {
-      var link = document.createElement("a");
-      link.download = name;
-      link.href = uri;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      // delete link;
+      
+      this.link = document.createElement("a");
+      this.link.download = name;
+      this.link.href = uri;
+      document.body.appendChild(this.link);
+      this.link.click();
+      document.body.removeChild(this.link);
+      delete this.link;
     }
   }
   

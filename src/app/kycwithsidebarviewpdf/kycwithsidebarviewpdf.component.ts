@@ -35,7 +35,7 @@ export class KycwithsidebarviewpdfComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.api.retrieveFromLocal("AUXDOCImageAddressProof"))
+    // console.log(this.api.retrieveFromLocal("MoneroAUXDOCImageAddressProof"))
     this.ngxloading = true;
     this.loadPDF();
     

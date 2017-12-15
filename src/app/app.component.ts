@@ -20,15 +20,15 @@ export class AppComponent {
     private router: Router,
     private titleService: Title
   ){
-    //localStorage.setItem("AUXUserUrl","http://139.59.9.73:8000");//"http://192.168.0.116:8000/");
+    //localStorage.setItem("MoneroAUXUserUrl","http://139.59.9.73:8000");//"http://192.168.0.116:8000/");
     // main "http://104.236.95.166:8000/" -->Masscryp
     // staging "http://139.59.156.145:8000/"
 
  
     //main   -->Moneroconnect
     //staging "198.199.75.214:8000"
-    this.storage.store("AUXUserUrl","http://198.199.75.214:8000/");
-  }
+    this.storage.store("MoneroAUXUserUrl","http://198.199.75.214:8000/");
+  } 
 
   ngOnInit() {
     this.router.events

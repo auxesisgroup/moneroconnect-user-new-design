@@ -113,10 +113,10 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="step2RecieveBTH" #step2RecieveBTH *ngIf="stepRecieveETH == 2">
                     <div class="container-fluid text-center">
-                            <h4>{{token_amount}} MASS</h4>
+                            <h4>{{token_amount}} XMRC</h4>
                             <h4><img class="ethereum" src="assets/img/ethereum.png">  {{amount_to_pay}} ETH</h4>
                             <h5 class="pull-center text-center">
-                                    Please transfer ETH to the following address to successfully buy MASS Coins. Please provide sufficient mining fee to ensure required amount reach us.
+                                    Please transfer ETH to the following address to successfully buy XMRC Coins. Please provide sufficient mining fee to ensure required amount reach us.
                             </h5>
                     </div>
                     <div class="container-fluid">
@@ -186,7 +186,7 @@
                                         <p *ngIf="i.confirmations == 3" style="color:#43694f">3 confirmation</p>
                                 </div>
                                 <div class="col-sm-12" *ngIf="initialCount != 3">
-                                        Please wait while we receive 3 confirmations of payment to allot the MASS coins.  We will also send a confirmation mail as receipt.
+                                        Please wait while we receive 3 confirmations of payment to allot the XMRC coins.  We will also send a confirmation mail as receipt.
                                 </div>
                                 <div class="col-sm-12" *ngIf="initialCount == 3">
                                     Confirmations have been completed, please wait <img src="assets/img/loading.gif" class="loadingimgdone">
@@ -204,7 +204,7 @@
                 <div class="tab-pane fade in active" id="step4RecieveBTH" #step4RecieveBTH *ngIf="stepRecieveETH == 4">
                         <div class="container-fluid">
                             <div class="col-sm-12">
-                                {{message1}} MASS Token from transaction id <a href="{{etherurl}}/{{showtransidin3}}" target="_blank">{{message?message:'No transaction ID'}}</a>  is deposited in your account.                                    
+                                {{message1}} XMRC Token from transaction id <a href="{{etherurl}}/{{showtransidin3}}" target="_blank">{{message?message:'No transaction ID'}}</a>  is deposited in your account.                                    
                             </div>
                         </div>
                         <hr>                

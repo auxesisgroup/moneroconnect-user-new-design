@@ -60,7 +60,7 @@ export class UsertermsComponent implements OnInit {
       }
     );
 
-    let tnc = this.signup.retrieveFromLocal("AUXTNCStatus");
+    let tnc = this.signup.retrieveFromLocal("MoneroAUXTNCStatus");
     if(tnc == "done"){
       this.router.navigate(["login"]);
     }
@@ -83,7 +83,7 @@ export class UsertermsComponent implements OnInit {
   }
 
   loadIfReferral(){
-    let referralid = this.signup.retrieveReferralId("AUXUserReferralID");
+    let referralid = this.signup.retrieveReferralId("MoneroAUXUserReferralID");
     if(referralid == "" || referralid == null || referralid == undefined || !referralid){
       this.referral = null;
     }else{
@@ -107,21 +107,21 @@ export class UsertermsComponent implements OnInit {
       this.loadingimage = true;
       //this.sucmsg = ("I have written "+this.terms+" "+this.name);
       let a = {};
-      let email = this.storage.retrieve("AUXUserEmail");
+      let email = this.storage.retrieve("MoneroAUXUserEmail");
       //console.log(this.signup.findUserEmail(email));
       let name = this.name;
       let ref = this.referral;
       this.signup.makeTNC(name,email,ref)
       .then(
         (data)=>{
-          this.signup.saveUsername("AUXMassUserName",name);
+          this.signup.saveUsername("MoneroAUXMassUserName",name);
           let dat = JSON.parse(JSON.stringify(data));
           //console.log(dat);
           if(dat.code == 200){// && dat.status == "accepted"
             let t = dat.token;
             if(t!="" || t!= null || t!=undefined || t){  
-              this.storage.store("AUXAuthLogin",true);
-              this.signup.saveToLocal("AUXHomeUserToken",dat.token);
+              this.storage.store("MoneroAUXAuthLogin",true);
+              this.signup.saveToLocal("MoneroAUXHomeUserToken",dat.token);
               this.signup.setUserSession(email,dat.token);
             }
             if(dat.tnc == true && dat.kyc == false){
@@ -131,20 +131,20 @@ export class UsertermsComponent implements OnInit {
                   // let msgToPass = "Just one step remain, upload your KYC detail submit below.";
                   // this.signup.setRouteMsgPass(msgToPass);
                 this.router.navigate(["kyc"]);                
-                this.signup.saveToLocal("AUXTNCStatus","done");  
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");  
               // },2500);
             }else{
               // this.sucmsg = "Loading your dashboard.";//
               // setTimeout(()=>{
                 // this.sucmsg = "";
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to XMRC Cryp ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
-                this.signup.saveToLocal("AUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
                 this.router.navigate(["home"]);
                 let t = dat.token;
                 if(t!="" || t!= null || t!=undefined){  
-                  this.storage.store("AUXAuthLogin",true);
-                  this.signup.saveToLocal("AUXHomeUserToken",dat.token);
+                  this.storage.store("MoneroAUXAuthLogin",true);
+                  this.signup.saveToLocal("MoneroAUXHomeUserToken",dat.token);
                   this.signup.setUserSession(email,dat.token);
                 }
               // },2500);
@@ -152,17 +152,17 @@ export class UsertermsComponent implements OnInit {
           }else if(dat.code == 400){
             let t = dat.token;
             if(t!="" || t!= null || t!=undefined || t){  
-              this.storage.store("AUXAuthLogin",true);
-              this.signup.saveToLocal("AUXHomeUserToken",dat.token);
+              this.storage.store("MoneroAUXAuthLogin",true);
+              this.signup.saveToLocal("MoneroAUXHomeUserToken",dat.token);
               this.signup.setUserSession(email,dat.token);
             }
             if(dat.kyc == true){
               // this.sucmsg = "You have already submitted the KYC Details, now we redirecting to your dashboard.";
               // setTimeout(()=>{
                 // this.sucmsg = "";
-                  let msgToPass = "KYC is waiting for administrator approval. You can continue buying MASS Coins.";
+                  let msgToPass = "KYC is waiting for administrator approval. You can continue buying XMRC Coins.";
                   this.signup.setRouteMsgPass(msgToPass);
-                this.signup.saveToLocal("AUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
                 this.router.navigate(["home"]);
               // },2500);
             }else if(dat.kyc == false){
@@ -173,28 +173,28 @@ export class UsertermsComponent implements OnInit {
                   let msgToPass = "Successfully registered but your KYC detail is not submitted";
                   this.signup.setRouteMsgPass(msgToPass);
                 this.router.navigate(["kyc"]);                
-                this.signup.saveToLocal("AUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
               // },2500);
             }else if(dat.kyc == "pending"){
               // this.sucmsg = "Your KYC details is in pending stage. You are navigating to your dashboard in few moment.";
               // setTimeout(()=>{
                 // this.sucmsg = "";
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to XMRC Cryp ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
                 this.router.navigate(["kyc"]);  
-                this.signup.saveToLocal("AUXKYCStatus","pending");               
-                this.signup.saveToLocal("AUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXKYCStatus","pending");               
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
                 this.router.navigate(["home"]);
               // },2500);
             }else if(dat.kyc == "rejected"){
               // this.sucmsg  = "Your KYC details is rejected. You are navigating to your dashboard in few moment";
               // setTimeout(()=>{
                 // this.sucmsg = "";
-                  let msgToPass = "Welcome to MASS Cryp ICO Platform! Your login is successful.";
+                  let msgToPass = "Welcome to XMRC Cryp ICO Platform! Your login is successful.";
                   this.signup.setRouteMsgPass(msgToPass);
                 this.router.navigate(["kyc"]);  
-                this.signup.saveToLocal("AUXKYCStatus","rejected");               
-                this.signup.saveToLocal("AUXTNCStatus","done");
+                this.signup.saveToLocal("MoneroAUXKYCStatus","rejected");               
+                this.signup.saveToLocal("MoneroAUXTNCStatus","done");
                 this.router.navigate(["home"]);
               // },2500);
             }else if(dat.error == "invalid_ref_id"){
@@ -203,8 +203,8 @@ export class UsertermsComponent implements OnInit {
               this.failmsg("Unable to verify terms and condition");    
             }
             // if(dat.token){  
-            //   this.storage.store("AUXAuthLogin",true);
-            //   this.signup.saveToLocal("AUXHomeUserToken",dat.token);
+            //   this.storage.store("MoneroAUXAuthLogin",true);
+            //   this.signup.saveToLocal("MoneroAUXHomeUserToken",dat.token);
             //   this.signup.setUserSession(email,dat.token);
             // }
           }else{

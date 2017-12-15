@@ -20,7 +20,7 @@ export class ServiceapiService {
     public http:Http,
     private storage:LocalStorageService
   ) { 
-    this.url = this.storage.retrieve("AUXUserUrl");//localStorage.getItem("AUXUserUrl");
+    this.url = this.storage.retrieve("MoneroAUXUserUrl");//localStorage.getItem("MoneroAUXUserUrl");
     
     this.headers = new Headers({ 
       'Content-Type': 'application/json', 

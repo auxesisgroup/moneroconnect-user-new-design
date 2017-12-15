@@ -51,13 +51,13 @@ export class UserkycComponent implements OnInit {
   }
 
   ngOnInit() {
-    let isAuth = this.storage.retrieve("AUXAuthLogin");
+    let isAuth = this.storage.retrieve("MoneroAUXAuthLogin");
     if(isAuth == true){
       this.router.navigate(["home"]);
     }else{
       this.router.navigate(["login"]);
     }
-    let a = this.signup.retrieveFromLocal("AUXKYCStatus"); 
+    let a = this.signup.retrieveFromLocal("MoneroAUXKYCStatus"); 
     if(a=="done"){
       this.router.navigate(["login"]);
     }
@@ -87,10 +87,10 @@ export class UserkycComponent implements OnInit {
   }
 
   skipfornow(){
-    this.storage.store("AUXAuthLogin",true);
-    this.signup.saveToLocal("AUXKYCStatus","nokyc");   //for page             
-    this.signup.saveToLocal("AUXTNCStatus","done");  
-    this.signup.saveToLocal("AUXHomeStatus","nokyc"); 
+    this.storage.store("MoneroAUXAuthLogin",true);
+    this.signup.saveToLocal("MoneroAUXKYCStatus","nokyc");   //for page             
+    this.signup.saveToLocal("MoneroAUXTNCStatus","done");  
+    this.signup.saveToLocal("MoneroAUXHomeStatus","nokyc"); 
     this.router.navigate(["/home"]);
   }
 
@@ -306,7 +306,7 @@ export class UserkycComponent implements OnInit {
       this.loadingimage = true;
       let data = {
         // 'name':formModel.name,
-        'email':localStorage.getItem("AUXUserEmailLocal"),
+        'email':localStorage.getItem("MoneroAUXUserEmailLocal"),
         // 'aadhar_no':formModel.aadharno,
         'idproofs':formModel.idproof,
         // 'aadhar_card_front':formModel.proof1,
@@ -324,34 +324,34 @@ export class UserkycComponent implements OnInit {
           //console.log(res);
           let r = JSON.parse(JSON.stringify(res));
           if((r.code == 200 && r.kyc == "pending") || (r.code == 200 && r.kyc == "rejected")){
-            this.signup.saveToLocal("AUXHomeStatus","pending");
+            this.signup.saveToLocal("MoneroAUXHomeStatus","pending");
             // this.sucmsg = "KYC detail submitted successfully wait after administrator verified.\nWe redirecting to your dashboard...";
             // setTimeout(()=>{
               // this.sucmsg;              
-              let msgToPass = "KYC is waiting for administrator approval. You can continue buying MASS Coins.";
+              let msgToPass = "KYC is waiting for administrator approval. You can continue buying XMRC Coins.";
               this.signup.setRouteMsgPass(msgToPass);
-              this.storage.store("AUXAuthLogin",true);
-              this.signup.saveToLocal("AUXKYCStatus","done");   //for page             
-              this.signup.saveToLocal("AUXTNCStatus","done");  
-              this.signup.saveToLocal("AUXHomeStatus","pending"); 
+              this.storage.store("MoneroAUXAuthLogin",true);
+              this.signup.saveToLocal("MoneroAUXKYCStatus","done");   //for page             
+              this.signup.saveToLocal("MoneroAUXTNCStatus","done");  
+              this.signup.saveToLocal("MoneroAUXHomeStatus","pending"); 
               this.router.navigate(["/home"]);
             // },3500);
           }else if( (r.code == 400 && r.kyc == "pending") || r.status == "already_done"){
-            this.failmsg("KYC is waiting for administrator approval. You can continue buying MASS Coins.");
+            this.failmsg("KYC is waiting for administrator approval. You can continue buying XMRC Coins.");
             // setTimeout(()=>{
-              this.storage.store("AUXAuthLogin",true);
-              this.signup.saveToLocal("AUXKYCStatus","done");                
-              this.signup.saveToLocal("AUXTNCStatus","done");
-              this.signup.saveToLocal("AUXHomeStatus","pending"); //for kyc current
+              this.storage.store("MoneroAUXAuthLogin",true);
+              this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+              this.signup.saveToLocal("MoneroAUXTNCStatus","done");
+              this.signup.saveToLocal("MoneroAUXHomeStatus","pending"); //for kyc current
               this.router.navigate(["/home"]);
             // },2010);
           }else{
-            this.failmsg("KYC is waiting for administrator approval. You can continue buying MASS Coins.");
+            this.failmsg("KYC is waiting for administrator approval. You can continue buying XMRC Coins.");
             // setTimeout(()=>{
-              this.storage.store("AUXAuthLogin",true);
-              this.signup.saveToLocal("AUXKYCStatus","done");                
-              this.signup.saveToLocal("AUXTNCStatus","done");
-              this.signup.saveToLocal("AUXHomeStatus","pending"); //for kyc current
+              this.storage.store("MoneroAUXAuthLogin",true);
+              this.signup.saveToLocal("MoneroAUXKYCStatus","done");                
+              this.signup.saveToLocal("MoneroAUXTNCStatus","done");
+              this.signup.saveToLocal("MoneroAUXHomeStatus","pending"); //for kyc current
               this.router.navigate(["/home"]);
           }
           this.loadingimage = false;
