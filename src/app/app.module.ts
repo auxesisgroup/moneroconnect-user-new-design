@@ -27,6 +27,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 // import { CeiboShare } from 'ng2-social-share';
 import { ImageViewerModule } from '@hallysonh/ngx-imageviewer';
+import { ParticlesModule } from 'angular-particle';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -144,7 +145,8 @@ export const firebaseConfig = {
     HttpClientModule,
     HttpClientJsonpModule,
     ShareButtonsModule.forRoot(),
-    ImageViewerModule
+    ImageViewerModule,
+    ParticlesModule
   ], 
   providers: [
     SignupService, 

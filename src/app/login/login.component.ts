@@ -17,6 +17,8 @@ import { Compiler } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';//
 
 import { PouchService } from '../services/pouch.service';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,6 +38,11 @@ export class LoginComponent implements OnInit {
 
   loadingimage:boolean = false;
 
+  mystyle1: any;
+	myparams1: any;
+	width: number = 100;
+	height: number = 100;
+
   constructor(
     public signup:SignupService,
     public http:Http,
@@ -53,7 +60,10 @@ export class LoginComponent implements OnInit {
 
     this.options = new RequestOptions({ headers: this.headers });
 
-    
+    // particlesJS.load('particles-js', 'assets/data/particlejs.json', function() {
+    //   console.log('callback - particles.js config loaded');
+    // });
+
   }
 
   ngOnInit() {
@@ -95,8 +105,36 @@ export class LoginComponent implements OnInit {
     
 
     this.callurls();//when router callback hits
-    
+    this.loadParts();
   }
+
+  loadParts(){
+    this.mystyle1 = {
+        'position': 'fixed',
+        'width': '100%',
+        'height': '100%',
+        'z-index': -1,
+        'top': 0,
+        'left': 0,
+        'right': 0,
+        'bottom': 0,
+    };
+
+    this.myparams1 = {
+          particles: {
+              number: {
+                  value: 100,
+              },
+              color: {
+                  value: '#2a3b71'
+              },
+              shape: {
+                  type: 'triangle',
+              },
+          }
+    };
+  }
+  
 
   callurls(){
     //let raw = this.route.snapshot.queryParams.why;

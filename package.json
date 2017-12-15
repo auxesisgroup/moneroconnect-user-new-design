@@ -23,6 +23,7 @@
     "@angular/router": "^5.0.0",
     "@hallysonh/ngx-imageviewer": "^1.0.3",
     "@techiediaries/ngx-qrcode": "0.0.5",
+    "angular-particle": "^1.0.4",
     "angularfire2": "^5.0.0-rc.4",
     "chart.js": "^2.7.1",
     "core-js": "^2.4.1",

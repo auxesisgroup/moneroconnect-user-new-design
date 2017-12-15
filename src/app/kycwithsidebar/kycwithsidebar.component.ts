@@ -625,4 +625,4 @@ export class KycwithsidebarComponent implements OnInit {
       delete this.link;
     }
   }
-  
+   
