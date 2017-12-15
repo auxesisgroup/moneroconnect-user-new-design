@@ -25,6 +25,9 @@ export class PageotpComponent implements OnInit {
 
   loadingimage:boolean = false;
 
+  mystyle1: any;
+	myparams1: any;
+
   constructor(
     public signup:SignupService,
     private route: ActivatedRoute,
@@ -55,6 +58,7 @@ export class PageotpComponent implements OnInit {
     );
 
     this.loadAlert();
+    this.loadParts();
   }
 
   loadAlert(){
@@ -67,6 +71,33 @@ export class PageotpComponent implements OnInit {
         this.signup.removeRouteMsgPass();
       },4000);
     }
+  }
+
+  loadParts(){
+    this.mystyle1 = {
+        'position': 'fixed',
+        'width': '100%',
+        'height': '100%',
+        'z-index': -1,
+        'top': 0,
+        'left': 0,
+        'right': 0,
+        'bottom': 0,
+    };
+
+    this.myparams1 = {
+          particles: {
+              number: {
+                  value: 100,
+              },
+              color: {
+                  value: '#2a3b71'
+              },
+              shape: {
+                  type: 'triangle',
+              },
+          }
+    };
   }
 
   printmsg(msg){

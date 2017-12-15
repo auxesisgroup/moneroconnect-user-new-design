@@ -522,7 +522,9 @@ export class UserhomeComponent implements OnInit {
                     if(value.currency == 'eth'){
                       let s = value.content;
                       let s1 = s.split(",");
+                      // console.log(s1)
                       let s1_2 = (s1[0].trim()).replace('eth','');
+                      // console.log(s1_2)
                       content2 = this.signup.calcsubstr(s1_2)+' ETH';
                     }
                   }

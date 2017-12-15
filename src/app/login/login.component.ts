@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
 
   mystyle1: any;
 	myparams1: any;
-	width: number = 100;
-	height: number = 100;
 
   constructor(
     public signup:SignupService,
