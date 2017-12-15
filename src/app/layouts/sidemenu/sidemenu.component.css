@@ -22,13 +22,18 @@ a.nopad.referral {
 }
 
 li.active a.asetting{
-    color: #5BC0DE;
+    /* color: #5BC0DE; */
+    color:#2a3b71 !important;
     text-decoration: none;
     /* border-bottom: 1px solid #222c3c; */
 }
 li.active a, li.settingactive a.settingclass{
-    color: #5BC0DE !important;
+    /* color: #5BC0DE !important; */
+    color:#2a3b71 !important;
     text-decoration: none;
     background-color: transparent !important;
     font-weight: 800;
+}
+a:hover{
+    color:#2a3b71 !important
 }

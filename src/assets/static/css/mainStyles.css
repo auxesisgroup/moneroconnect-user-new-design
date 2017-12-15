@@ -608,7 +608,9 @@ a:hover{
 
 .sidebar-nav li a:hover,
 .sidebar-nav li.active {
-  color: #5BC0DE !important;
+  /* color: #5BC0DE !important; */
+
+  color:#2a3b71 !important;
   text-decoration: none;
   background-color: transparent !important;
 }

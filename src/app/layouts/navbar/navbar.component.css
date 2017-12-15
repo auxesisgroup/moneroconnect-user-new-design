@@ -21,7 +21,8 @@ nav.navbar {
     box-shadow: 2px 8px 15px grey;
 } 
 .navbar-default {
-    background-color: #323232;
+    /* background-color: #323232; */
+    background-color: #2a3b71;
 }
 
 button.menubtn {

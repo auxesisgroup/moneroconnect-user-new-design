@@ -27,7 +27,7 @@ export class AppComponent {
  
     //main   -->Moneroconnect
     //staging "198.199.75.214:8000"
-    this.storage.store("MoneroAUXUserUrl","http://198.199.75.214:8000/");
+    this.storage.store("MoneroAUXUserUrl","http://198.199.75.214/");
   } 
 
   ngOnInit() {
