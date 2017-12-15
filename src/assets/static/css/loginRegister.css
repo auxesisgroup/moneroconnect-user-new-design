@@ -24,7 +24,7 @@
   background-color: #001F4B;
   height: auto;
   padding: 100px 10px 80px 10px;  
-  background: url('/assets/img/mainbg.jpg');
+  /* background: url('./assets/img/mainbg.jpg'); */
 }
 
 .termsx {

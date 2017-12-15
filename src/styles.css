@@ -288,3 +288,8 @@ ngx-imageviewer.imageviewer canvas {
     width: 100%;
   }
 }
+
+
+#loginForm{
+  background: url('assets/img/mainbg.jpg');
+}
