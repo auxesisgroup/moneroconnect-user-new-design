@@ -166,10 +166,13 @@ export class PageotpComponent implements OnInit {
                 // this.sucmsg = "Otp is verified but you did not uploaded documents for KYC detail. Submit in next section.";
                 // setTimeout(()=>{ 
                   // this.sucmsg = ""; 
-                  let msgToPass = "Otp is verified but you did not uploaded documents for KYC detail. Submit in next section.";
+                  let msgToPass = "Otp is verified";
                   this.signup.setRouteMsgPass(msgToPass);               
                   this.signup.saveToLocal("MoneroAUXTNCStatus","done"); 
-                  this.router.navigate(["/kyc"]); 
+                  this.storage.store("MoneroAUXAuthLogin",true);
+                  this.signup.saveToLocal("MoneroAUXKYCStatus","done"); 
+                  this.signup.setUserSession(email,res.token); 
+                  this.router.navigate(["/home"]); 
                 // },4000);
                 // /**FBAuth */
                 setTimeout(()=>{this.loggedInFBauth();},1000);
