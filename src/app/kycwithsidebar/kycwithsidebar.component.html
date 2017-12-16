@@ -98,7 +98,7 @@
                             <div class="col-sm-12">&nbsp;</div>
                             <div class="col-md-12 text-center">
                                 <img [src]="i.value" *ngIf="i.filetype == 'png' || i.filetype == 'jpeg'" class="kycimagemd" (click)="showme(i)" title="{{i.filename}}"><br>
-                                <img src="assets/img/pdf.png" *ngIf="i.filetype == 'pdf'" class="kycimagemdpdf" (click)="showme(i)" title="{{i.filename}}">
+                                <img src="assets/img/pdf.png" *ngIf="i.filetype == 'pdf'" class="kycimagemdpdf" (click)="showmepdf(i)" title="{{i.filename}}">
                             </div>
                             <br>
                         </div>
@@ -111,7 +111,8 @@
                         <div class="col-sm-12">&nbsp;</div>
                         <div class="col-md-12 text-center">
                             <img [src]="a.value" *ngIf="a.filetype == 'png' || a.filetype == 'jpeg'"  class="kycimagemd" (click)="showme(a)" title="{{a.filename}}"><br>
-                            <img src="assets/img/pdf.png"  *ngIf="a.filetype == 'pdf'" class="kycimagemdpdf" (click)="showme(a)" title="{{a.filename}}">
+                            <img src="assets/img/pdf.png"  *ngIf="a.filetype == 'pdf'" class="kycimagemdpdf" (click)="showmepdf(a)" title="{{a.filename}}">
+                            <!-- <a target="_self" href="{{a.value}}" download="{{a.filename}}">Click to do</a> -->
                         </div>
                         <br>
                         </div>

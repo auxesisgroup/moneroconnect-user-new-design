@@ -106,6 +106,8 @@ export class KycwithsidebarComponent implements OnInit {
       ignoreBackdropClick: false
     };
     kycimg:any = 'assets/img/kyc3.jpg';
+    kycimgext:any = 'png';
+    kycviewimg:any = 'assets/img/kyc3.jpg';
 
     imgavailable:number = 1;
 
@@ -192,18 +194,30 @@ export class KycwithsidebarComponent implements OnInit {
               if(proofaddress.length>0){
                 _.forEach(proofaddress,(value,key)=>{
                   let type = value.filetype;
-                  let imgpath = '';
+                  let imgpath = '';let viewpath = '';
+                  let extsplit = (value.filename).toString().split(".");
+
+                  let ext = extsplit[1];
+                  // console.log(extsplit[0],extsplit)
                   if(type == "png" || type == "image/png"){
                     type = "png";
-                    imgpath = 'data:image/png;base64,';
+                    imgpath = 'data:image/'+ext+';base64,';
+                    viewpath = 'data:image/png;base64,';
                   }
-                  if(type == "jpeg" || type=="jpg" || type == "image/jpeg" || type == "image/jpg"){
+                  if(type == "jpeg"  || type == "image/jpeg"){
                     type = "jpeg";
-                    imgpath = 'data:image/jpeg;base64,';
+                    imgpath = 'data:image/'+ext+';base64,';
+                    viewpath = 'data:image/png;base64,';
+                  }
+                  if(type == "image/jpg" || type=="jpg"){
+                    type = "jpg";
+                    imgpath = 'data:image/'+ext+';base64,';
+                    viewpath = 'data:image/png;base64,';
                   }
                   if(type == "pdf" || type == "application/pdf"){
                     type = "pdf";
-                    imgpath = 'data:application/pdf;base64,';
+                    imgpath = 'data:application/'+ext+';base64,';
+                    viewpath = '';
                   }
                   arr1.push({
                     rowid:(key+1),
@@ -212,7 +226,9 @@ export class KycwithsidebarComponent implements OnInit {
                     filetype:type,
                     name:value.name,
                     path:value.path,
-                    value:imgpath+value.value
+                    value:imgpath+value.value,
+                    ext:ext,
+                    viewpath:viewpath+value.value
                   });
                 });
                 this.kycdatapoi = arr1;
@@ -222,17 +238,29 @@ export class KycwithsidebarComponent implements OnInit {
               }
               let proofid = kyclist.kyc.pan_card_details;
               let type2 = proofid.filetype;
-              let imgpath2 = '';
+              let imgpath2 = '';let viewpath2 = '';
+              let extsplit = (proofid.filename).toString().split(".");
+              
+              let ext2 = extsplit[1];
               if(type2 == "png" || type2 == "image/png"){
                 type2 = "png";
-                imgpath2 = 'data:image/png;base64,';
+                imgpath2 = 'data:image/'+ext2+';base64,';
+                viewpath2 = 'data:image/png;base64,';
               }
-              if(type2 == "jpeg" || type2=="jpg" || type2 == "image/jpeg" || type2 == "image/jpg"){
+              if(type2 == "jpeg"  || type2 == "image/jpeg"){
                 type2 = "jpeg";
-                imgpath2 = 'data:image/jpeg;base64,';
+                imgpath2 = 'data:image/'+ext2+';base64,';
+                viewpath2 = 'data:image/png;base64,';
+              }
+              if(type2 == "image/jpg" || type2=="jpg"){
+                type2 = "jpg";
+                imgpath2 = 'data:image/'+ext2+';base64,';
+                viewpath2 = 'data:image/png;base64,';
               }
               if(type2 == "pdf" || type2 == "application/pdf"){
                 type2 = "pdf";
+                imgpath2 = 'data:application/'+ext2+';base64,';
+                viewpath2 = '';
               }
               this.kycdatapoa.push({
                 rowid:(1),
@@ -241,7 +269,9 @@ export class KycwithsidebarComponent implements OnInit {
                 filetype:type2,
                 name:proofid.name,
                 path:proofid.path,
-                value:imgpath2+proofid.value
+                value:imgpath2+proofid.value,
+                ext:ext2,
+                viewpath:viewpath2+proofid.value
               });
 
               // console.log(this.kycdatapoi,this.kycdatapoa)
@@ -427,7 +457,7 @@ export class KycwithsidebarComponent implements OnInit {
                 
                   reader.readAsDataURL(file1);
                   reader.onload = () => {
-                    console.log(file1.type);
+                    // console.log(file1.type);
                     putArray.push({
                         filename: file1.name,
                         filetype: file1.type,
@@ -448,7 +478,7 @@ export class KycwithsidebarComponent implements OnInit {
                         value: reader2.result.split(',')[1]
                     });
                   }
-                },1000);
+                },10);
                 }
               }
           //}
@@ -586,32 +616,44 @@ export class KycwithsidebarComponent implements OnInit {
     }
 
     showme(val){
-      if(val.filetype == "pdf"){
-        // location.href = val.value;
-        // console.log(val.value)
-        // var myWindow = window.open(val.value);//, "KYC Documents", "width=800,height=600,fullscreen=no,top=50,left=300,resizable=no");
-        // this.api.saveToLocal("MoneroAUXDOCImageAddressProof",val.value);
-        // this.router.navigate(["/updatekyc/view/",val.value]);
+      // console.log(val)
+      // if(val.filetype == "pdf"){
+      //   // location.href = val.value;
+      //   // console.log(val.value)
+      //   // var myWindow = window.open(val.value);//, "KYC Documents", "width=800,height=600,fullscreen=no,top=50,left=300,resizable=no");
+      //   // this.api.saveToLocal("AUXDOCImageAddressProof",val.value);
+      //   // this.router.navigate(["/updatekyc/view/",val.value]);
 
-        let name = this.signup.retrieveUsername("MoneroAUXMassUserName");
-        let email  = this.storage.retrieve("MoneroAUXUserEmail");
-        let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
-        this.downloadURI(val.value, filename+".pdf");
+      //   let name = this.signup.retrieveUsername("AUXMassUserName");
+      //   let email  = this.storage.retrieve("AUXUserEmail");
+      //   let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
+      //   this.downloadURI(val.value, filename+".pdf");
 
-      }else{
+      // }else{
         this.modalRef = this.modalService.show(
           this.imagemodal,
             Object.assign({}, this.config2, { class: 'gray modal-lg' })
         );
         this.kycimg = val.value;
-      }
+        this.kycviewimg = val.viewpath;
+        this.kycimgext = val.ext;
+      // }
     }
 
-    downloadFile(val){
-      let name = this.signup.retrieveUsername("MoneroAUXMassUserName");
-      let email  = this.storage.retrieve("MoneroAUXUserEmail");
+    showmepdf(val){
+      // console.log(val)
+      let name = this.signup.retrieveUsername("AUXMassUserName");
+      let email  = this.storage.retrieve("AUXUserEmail");
       let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
-      this.downloadURI(val, filename+".png");
+      this.downloadURI(val.value, filename+".pdf");
+    }
+
+
+    downloadFile(val,kycimgext){
+      let name = this.signup.retrieveUsername("AUXMassUserName");
+      let email  = this.storage.retrieve("AUXUserEmail");
+      let filename = name.toString().replace(" ","-")+"-"+email;//sha512(email);
+      this.downloadURI(val, filename+"."+kycimgext);
     }
 
     downloadURI(uri, name) {
