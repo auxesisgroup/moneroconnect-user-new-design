@@ -178,7 +178,8 @@ export class PouchService {
       var getImage = canvas.toDataURL(); // default is png 
       // console.log(getImage)
 
-      castDB.post({
+      castDB.put({
+        _id:id+'-'+issueid,
         email:id,
         key:issueid,
         issueid:issueid,
