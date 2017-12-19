@@ -56,6 +56,7 @@ export class AddreferralwithsidebarComponent implements OnInit {
   
     ngOnInit() {
       this.loadAddReferralAuth();
+      this.signup.checkActivity();
     }
   
     loadAddReferralAuth(){

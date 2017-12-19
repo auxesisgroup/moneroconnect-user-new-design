@@ -62,6 +62,7 @@ import { UsertermsdescriptionComponent } from './usertermsdescription/usertermsd
 import { AddreferralwithsidebarComponent } from './addreferralwithsidebar/addreferralwithsidebar.component';
 import { KycwithsidebarComponent } from './kycwithsidebar/kycwithsidebar.component';
 import { KycwithsidebarviewpdfComponent } from './kycwithsidebarviewpdf/kycwithsidebarviewpdf.component';
+import { HelpdeskComponent } from './helpdesk/helpdesk.component';
 
 // export const firebaseConfig = {
 //   "apiKey": "AIzaSyCdpzVX0tq6uLoEgBpwEXDH7wr4zDnkcHQ",
@@ -104,6 +105,7 @@ export const firebaseConfig = {
     AddreferralwithsidebarComponent,
     KycwithsidebarComponent,
     KycwithsidebarviewpdfComponent,
+    HelpdeskComponent,
     // CeiboShare
   ],
   imports: [

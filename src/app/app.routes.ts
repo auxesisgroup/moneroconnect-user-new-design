@@ -21,6 +21,7 @@ import { AddreferralComponent } from './addreferral/addreferral.component';
 import { AddreferralwithsidebarComponent } from './addreferralwithsidebar/addreferralwithsidebar.component';
 import { KycwithsidebarComponent } from './kycwithsidebar/kycwithsidebar.component';
 import { KycwithsidebarviewpdfComponent } from './kycwithsidebarviewpdf/kycwithsidebarviewpdf.component';
+import { HelpdeskComponent } from './helpdesk/helpdesk.component';
 
 
 const routes: Routes = [
@@ -110,6 +111,11 @@ const routes: Routes = [
         path: 'homedum',
         component: HomeComponent,
         data: { title: 'DUMHOME | Moneroconnect ICO' }
+    },
+    {
+        path: 'helpdesk',
+        component: HelpdeskComponent,
+        data: { title: 'Help | Moneroconnect ICO' }
     },
     { 
         path: '**', 

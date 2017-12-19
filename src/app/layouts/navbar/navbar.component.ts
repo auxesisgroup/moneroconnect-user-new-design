@@ -127,6 +127,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl("home");
   }
 
+  helpdesk(){
+    this.router.navigateByUrl("helpdesk");
+  }
+
   checkKYC(){
     this.mySidenav.nativeElement.style.width = "0";
     let status = this.signup.retrieveFromLocal("MoneroAUXKYCStatus"); 

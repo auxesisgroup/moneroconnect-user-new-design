@@ -39,6 +39,7 @@ export class SidemenuComponent implements OnInit {
   routeAddreferralActive:string = "";
   routeSettingActive:string = "";
   routeSettingin:string = "";
+  routeHelpDesk:string = "";
 
   constructor(
     public serv:ServiceapiService,
@@ -77,6 +78,7 @@ export class SidemenuComponent implements OnInit {
           this.routeAddreferralActive= "";
           this.routeSettingActive= "";
           this.routeSettingin= "";
+          this.routeHelpDesk = "";
         break;
       case "/referral":
       case "/referral/address":
@@ -86,6 +88,7 @@ export class SidemenuComponent implements OnInit {
         this.routeAddreferralActive= "";
         this.routeSettingActive= "";
         this.routeSettingin= "";
+        this.routeHelpDesk = "";
         break;
       case "/addreferral":
           this.routeHomeActive = "";
@@ -94,6 +97,7 @@ export class SidemenuComponent implements OnInit {
           this.routeAddreferralActive= "active";
           this.routeSettingActive= "settingactive";
           this.routeSettingin= "in";
+          this.routeHelpDesk = "";
           break;
       case "/updatekyc":
           this.routeHomeActive = "";
@@ -102,6 +106,16 @@ export class SidemenuComponent implements OnInit {
           this.routeAddreferralActive= "";
           this.routeSettingActive= "settingactive";
           this.routeSettingin= "in";
+          this.routeHelpDesk = "";
+          break;
+      case "/helpdesk":
+          this.routeHomeActive = "";
+          this.routeReferralActive = "";
+          this.routeKycActive= "";
+          this.routeAddreferralActive= "";
+          this.routeSettingActive= "";
+          this.routeSettingin= "";
+          this.routeHelpDesk = "active";
           break;
       default:
         this.routeHomeActive = "";
@@ -110,6 +124,7 @@ export class SidemenuComponent implements OnInit {
         this.routeAddreferralActive= "";
         this.routeSettingActive= "";
         this.routeSettingin= "";
+        this.routeHelpDesk = "";
         break;
     }
   }
@@ -147,6 +162,10 @@ export class SidemenuComponent implements OnInit {
 
   homeReload(){
     this.router.navigateByUrl("home");
+  }
+
+  helpdesk(){
+    this.router.navigateByUrl("helpdesk");
   }
  
   decline(): void {

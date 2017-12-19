@@ -144,9 +144,25 @@ export class KycwithsidebarComponent implements OnInit {
       //   this.router.navigate(["login"]);
       // }
   
-      this.loadAlert();
+      this.loadAddKYCAuth();
   
       this.signup.checkActivity();
+    }
+
+    loadAddKYCAuth(){
+      let isAuth = this.storage.retrieve("MoneroAUXAuthLogin");
+      let cookieExists = this.signup.checkUserActivity();
+      if(isAuth == null){
+        this.signup.UnAuthlogoutFromApp(); 
+      }
+      else if(cookieExists == false){
+        this.storage.store("MoneroAUXAuthLogin",false);
+        this.signup.UnAuthlogoutFromApp();
+      }
+      else{
+        // console.log("isAuthorized",isAuth,cookieExists);
+        this.loadAlert();
+      }
     }
   
     loadAlert(){

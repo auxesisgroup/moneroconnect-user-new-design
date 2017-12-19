@@ -1,0 +1,226 @@
+<app-navbar></app-navbar>
+<ngx-loading [show]="ngxloading"></ngx-loading>
+<section id="main-sec">  
+  <div class="container-fluid" id="main-container">
+      <div class="hidden-xs">
+          <div id="sidebar-wrapper">
+              <nav id="sidenav" #sidenav>
+                  <app-sidemenu></app-sidemenu>
+              </nav>
+          </div>
+      </div> 
+      <div class="col-sm-9 col-md-10 pull-right nopad">
+        <div id="topbar" class="topbar">
+          
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+
+                <!-- <div class="col-md-12">Help Desk:</div> -->
+
+                <div class="col-md-12 text-center">
+                  <div class="col-md-4">
+                    Support
+                  </div>
+                  <div class="col-md-4">
+                    Static
+                  </div>
+                  <div class="col-md-4">
+                    Message
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-md-12 text-center">
+                  <button type="button" class="btn raiseticket" (click)="raisemodal(helpmodal)">
+                      <i class="fa fa-ticket" aria-hidden="true">&nbsp;&nbsp;Raise a ticket</i>
+                  </button>
+                </div>
+
+              </div>
+          </div>
+
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 tablerow">
+                  
+                  <div style="overflow-x:auto;">
+                      <div class="table-responsive">           
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Ticket No.</th>
+                            <th>Category</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <!-- <tbody *ngIf="child_details_alert == true">
+                          <tr *ngFor="let c of child_details">
+                            <td>{{c.srno}}</td>
+                            <td><p class="namestd">{{c.name}}</p></td>
+                            <td>{{c.degree}}</td> 
+                          </tr>
+                        </tbody> -->
+                        <tbody >
+                          <tr>
+                            <td>T00132</td>
+                            <td>Payment</td>
+                            <td>This is subject</td>
+                            <td>
+                              <textarea class="form-control" rows="3" id="message" disabled>This is message</textarea>
+                            </td>
+                            <td>
+                              Pending
+                            </td>
+                            <td>
+                              <!-- <div class="form-group">
+                                <select class="form-control" id="action1" #selectAction (change)="actionchange($event,selectAction)">
+                                  <option [selected]="acvalue == acappendvalue" value="0">Select</option>
+                                  <option>Mark Close</option>
+                                  <option>Mark Reopen</option>
+                                </select>
+                              </div> -->
+                              <img src="assets/img/pics/closed.png" title="Closed" class="deskactionimg">
+                              <img src="assets/img/pics/reopen.png" title="Reopen" class="deskactionimg">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="6">
+                              <div class="alert alert-danger">
+                                  <strong>No Records!</strong> There is no detail in helpdesk panel.
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+
+            <!-- Help Modal -->
+            <ng-template #helpmodal>
+              <div class="modal-header">
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 id="myModalLabel" class="noMarg text-left issuemodallabel">
+                          <span class="pull-left padRightOnly" style="font-size:28px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                      <span id="modal-header-content">Provide following information to raise a ticket</span>
+                  </h4>
+                </div>
+                <div class="modal-body customModalHeight" id="normalModalBody">
+                  <div class="tab-content text-center">
+    
+                    <div class="tab-pane fade in active">
+                      <form [formGroup]="formHelp" (ngSubmit)="callhelpdesk()">
+                      <div class="container-fluid">
+                        <div class="col-sm-12">
+                          <div class="card">
+                              <div class="card-body">
+
+                                  <div class="row">
+                                    <div class="col-md-4 modalissuelabel">
+                                        <label for="issuecat">Issue Category:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            
+                                            <select class="form-control" id="issuecat" formControlName="category">
+                                              <option>1</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                            </select>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-4 modalissuelabel">
+                                        <label for="subject">Subject:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            
+                                            <input type="text" class="form-control" id="subject" formControlName="subject">
+                                          </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 modalissuelabel">
+                                      <label for="phone">Phone number:</label>
+                                    
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="phone" formControlName="phone">
+                                          </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 modalissuelabel">
+                                        <label for="message">Message (In Detail):</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            
+                                            <textarea class="form-control" rows="6" id="message" formControlName="message"></textarea>
+                                          </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4 modalissuelabel">
+                                        <label for="attach">Attachment:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            
+                                            <input type="file" class="form-control" id="attach"  formControlName="attachment" accept=".png, .jpg, .jpeg, application/pdf"  (change)="onFileChange2($event)" #fileInput2  multiple>
+                                          </div>
+                                    </div>
+
+                                  </div>
+                                
+                                  
+                                  
+                                  
+                                  
+                                  
+                                
+
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="container-fluid">
+                          <div class="col-sm-12 text-center">
+                              <br>
+                              <button type="submit" class="btn btn-primary btn-block btnhelpdesk">
+                                  Submit&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                              </button>
+                          </div>
+                      </div>
+                      </form> 
+                    </div>
+    
+                  </div>
+                </div>
+            </ng-template>
+            <!-- Help Modal -->
+
+            <!-- confirm modal -->
+            <ng-template #actiontemplate>
+                <div class="modal-body text-center">
+                    <p>Are you sure to do this action?</p>
+                    <button type="button" class="btn btn-success" (click)="confirmaction()" >Yes</button>
+                    <button type="button" class="btn btn-primary" (click)="declineaction()" >No</button>
+                </div>
+            </ng-template>
+            <!-- confirm modal -->
+
+
+          </div><!--topbar-->
+        </div>
+    </div>
+  </section> 
