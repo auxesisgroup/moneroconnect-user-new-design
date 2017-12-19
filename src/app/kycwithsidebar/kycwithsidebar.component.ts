@@ -307,7 +307,7 @@ export class KycwithsidebarComponent implements OnInit {
             this.imgavailable=1;
             this.nokycmessage = 'No kyc detail has been found';
             this.toastr.error('KYC documents not found', null,{timeOut:2500});
-            this.pouchserv.putErrorInPouch("findKYCs()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+            this.pouchserv.putErrorInPouch("findKYCs()","Response error in component "+"KycwithsidebarComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
             
         }
       );
@@ -601,17 +601,17 @@ export class KycwithsidebarComponent implements OnInit {
             this.loadingimage = false;
             // this.failmsg("Network interuptted to submit KYC detail try again.");
             //console.log(err);
-            this.pouchserv.putErrorInPouch("signup_v2()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),3);
-            
+            this.pouchserv.putErrorInPouch("signup_v2()","Response error in component "+"KycwithsidebarComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),3);
+              
             this.toastr.error('Network interuptted to submit KYC detail try again.',null,{timeOut:2500});         
-          }
-        )
+          } 
+        ) 
         .catch((err)=>{
           this.loadingimage = false;
           // this.failmsg("Network interuptted to submit KYC detail try again.");
           this.toastr.error('Network interuptted to submit KYC detail try again.',null,{timeOut:2500}); 
           //console.log(err);
-          this.pouchserv.putErrorInPouch("signup_v2()","Catch throws error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+          this.pouchserv.putErrorInPouch("signup_v2()","Catch throws error in component "+"KycwithsidebarComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
           
         });
       }

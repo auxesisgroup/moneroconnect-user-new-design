@@ -345,7 +345,7 @@ export class ReferralComponent implements OnInit {
       err=>{
           this.ngxloading = false; 
           // console.error(err);
-          this.putErrorInPouch("callApi()","Response error in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
+          this.putErrorInPouch("callApi()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
           
           this.toastr.error('Referral detail not retrieved', 'Not a valid response',{timeOut:2500});
           history.back();
@@ -500,7 +500,7 @@ export class ReferralComponent implements OnInit {
           this.loadingimage = false;
           // console.error(err);
           this.toastr.error('Unable to send mail', 'Abandoned!',{timeOut:2500});
-          this.putErrorInPouch("sendingToWithdrawOTP()","Response error in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
+          this.putErrorInPouch("sendingToWithdrawOTP()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
           
       }
     );
@@ -584,7 +584,7 @@ export class ReferralComponent implements OnInit {
             // // let txid = response.txid?response.txid:'none';
             // this.openSuccessModal(cap);
             this.toastr.error('Unable to verify OTP.', 'Abandoned!',{timeOut:2500});
-            this.putErrorInPouch("confirmWithdrawOTP()","Response error in component "+this.constructor.name,"'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
+            this.putErrorInPouch("confirmWithdrawOTP()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
             
         }
       );

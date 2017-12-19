@@ -392,7 +392,7 @@ export class UserkycComponent implements OnInit {
           this.loadingimage = false;
           this.failmsg("Network interuptted to submit KYC detail try again.");
           //console.log(err);
-          this.pouchserv.putErrorInPouch("signup_v2()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          this.pouchserv.putErrorInPouch("signup_v2()","Response error in component "+"UserkycComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
           
         }
       )
@@ -400,7 +400,7 @@ export class UserkycComponent implements OnInit {
         this.loadingimage = false;
         this.failmsg("Network interuptted to submit KYC detail try again.");
         //console.log(err);
-        this.pouchserv.putErrorInPouch("signup_v2()","Catch throws error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("signup_v2()","Catch throws error in component "+"UserkycComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       });
     }

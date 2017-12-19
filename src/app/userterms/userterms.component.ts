@@ -247,13 +247,13 @@ export class UsertermsComponent implements OnInit {
           this.loadingimage = false;
           //console.log(err);
           this.failmsg("Unable to verify terms and condition");
-          this.pouchserv.putErrorInPouch("token_verification()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          this.pouchserv.putErrorInPouch("token_verification()","Response error in component "+"UsertermsComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
           
         }
       ).catch(e=>{
         this.loadingimage = false;
         this.failmsg("Network unavailable");
-        this.pouchserv.putErrorInPouch("token_verification()","Catch throws error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(e),2);
+        this.pouchserv.putErrorInPouch("token_verification()","Catch throws error in component "+"UsertermsComponent","'Monerocryp' app the exception caught is "+JSON.stringify(e),2);
         
       });
     }

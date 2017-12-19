@@ -216,7 +216,7 @@ export class UserhomebtcmodalComponent implements OnInit {
           this.loadingimage = false;
           //console.error(err);
           this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
-          this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+"UserhomebtcmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
           
         }
       );
@@ -284,7 +284,7 @@ export class UserhomebtcmodalComponent implements OnInit {
         //console.error(err);
         this.loadingimage = false;
         this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
-        this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+"UserhomebtcmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
     );
@@ -391,7 +391,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       (err)=>{
         this.loadingimage = false;
         this.toastr.error('Please check and retry.', 'Invalid Bitcoin Address!');
-        this.pouchserv.putErrorInPouch("callingApiForBTCScreen2()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("callingApiForBTCScreen2()","Response error in component "+"UserhomebtcmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
     );
@@ -485,7 +485,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       (err)=>{
         this.loadingimage = false;
         this.toastr.error('Please check and retry.', 'Invalid Bitcoin Address!');
-        this.pouchserv.putErrorInPouch("callingApiForBTCScreen3()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("callingApiForBTCScreen3()","Response error in component "+"UserhomebtcmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
     );

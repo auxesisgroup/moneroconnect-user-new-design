@@ -172,7 +172,7 @@ export class AddreferralwithsidebarComponent implements OnInit {
         err=>{
             this.ngxloading = true; 
             // console.error(err);
-            this.pouchserv.putErrorInPouch("loadFromWeb()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+            this.pouchserv.putErrorInPouch("loadFromWeb()","Response error in component "+"AddreferralwithsidebarComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
             
         }
       );
@@ -248,7 +248,7 @@ export class AddreferralwithsidebarComponent implements OnInit {
             this.loadingimage = false;
             // console.error(err);
             this.printmsg("Addresses are failed to submit");
-            this.pouchserv.putErrorInPouch("sendToReferral()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
+            this.pouchserv.putErrorInPouch("sendToReferral()","Response error in component "+"AddreferralwithsidebarComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
             
         }
       );

@@ -202,7 +202,7 @@ export class UserhomeethmodalComponent implements OnInit {
           this.loadingimage = false;
           //console.error(err);
           this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
-          this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+          this.pouchserv.putErrorInPouch("open_receive_modal()","Response error in component "+"UserhomeethmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
           
         }
       );
@@ -263,7 +263,7 @@ export class UserhomeethmodalComponent implements OnInit {
         //console.error(err);
         this.loadingimage = false;
         this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
-        this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("callforpaywithcurrencyonmodaltoshow()","Response error in component "+"UserhomeethmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
     );
@@ -362,7 +362,7 @@ export class UserhomeethmodalComponent implements OnInit {
       (err)=>{
         this.loadingimage = false;
         this.toastr.error('Please check and retry.', 'Invalid Ether Address!');
-        this.pouchserv.putErrorInPouch("callingApiForETHScreen2()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("callingApiForETHScreen2()","Response error in component "+"UserhomeethmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
     );
@@ -450,7 +450,7 @@ export class UserhomeethmodalComponent implements OnInit {
       (err)=>{
         this.loadingimage = false;
         this.toastr.error('Please check and retry.', 'Invalid Ether Address!');
-        this.pouchserv.putErrorInPouch("callingApiForETHScreen3()","Response error in component "+this.constructor.name,"'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
+        this.pouchserv.putErrorInPouch("callingApiForETHScreen3()","Response error in component "+"UserhomeethmodalComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),2);
         
       }
     );

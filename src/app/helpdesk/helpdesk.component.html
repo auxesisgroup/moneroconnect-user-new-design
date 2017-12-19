@@ -53,27 +53,25 @@
                             <th>Category</th>
                             <th>Subject</th>
                             <th>Message</th>
+                            <th>Time</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <!-- <tbody *ngIf="child_details_alert == true">
-                          <tr *ngFor="let c of child_details">
-                            <td>{{c.srno}}</td>
-                            <td><p class="namestd">{{c.name}}</p></td>
-                            <td>{{c.degree}}</td> 
-                          </tr>
-                        </tbody> -->
-                        <tbody >
-                          <tr>
-                            <td>T00132</td>
-                            <td>Payment</td>
-                            <td>This is subject</td>
-                            <td>
-                              <textarea class="form-control" rows="3" id="message" disabled>This is message</textarea>
+                        <tbody *ngIf="user_tickets_listshow == 1">
+                          <tr *ngFor = "let t of user_tickets_list">
+                            <td>{{t.id}}</td>
+                            <td>{{t.category}}</td>
+                            <td>{{t.subject}}</td>
+                            <td title="{{t.description}}">
+                              <!-- <textarea class="form-control" rows="3" id="message" disabled> -->
+                                {{t.shortdesc}}
+                              <!-- </textarea> -->
                             </td>
+                            <td>{{t.timestamp}}</td>
                             <td>
-                              Pending
+                              <p *ngIf="t.status == 'open'"><b>Open</b></p>
+                              <p *ngIf="t.status == 'close'">Close</p>
                             </td>
                             <td>
                               <!-- <div class="form-group">
@@ -83,15 +81,24 @@
                                   <option>Mark Reopen</option>
                                 </select>
                               </div> -->
-                              <img src="assets/img/pics/closed.png" title="Closed" class="deskactionimg">
-                              <img src="assets/img/pics/reopen.png" title="Reopen" class="deskactionimg">
+                              <img *ngIf="t.status == 'open'" src="assets/img/pics/closed.png" title="Closed" class="deskactionimg" (click)="closedticket(t)">
+                              <img *ngIf="t.status == 'close'" src="assets/img/pics/reopen.png" title="Reopen" class="deskactionimg" (click)="reopenticket(t)">
                             </td>
                           </tr>
+                        </tbody>
+                        <tbody *ngIf="user_tickets_listshow == 0">
                           <tr>
                             <td colspan="6">
                               <div class="alert alert-danger">
-                                  <strong>No Records!</strong> There is no detail in helpdesk panel.
+                                  <strong>No Records!</strong> There is no raise ticket detail in helpdesk panel.
                               </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="user_tickets_listshow == 2">
+                          <tr>
+                            <td colspan="6">
+                              Loading...
                             </td>
                           </tr>
                         </tbody>
@@ -132,10 +139,7 @@
                                         <div class="form-group">
                                             
                                             <select class="form-control" id="issuecat" formControlName="category">
-                                              <option>1</option>
-                                              <option>2</option>
-                                              <option>3</option>
-                                              <option>4</option>
+                                              <option *ngFor="let c of categorylistoption" [value]="c.category">{{c.category}}</option>
                                             </select>
                                           </div>
                                     </div>
@@ -170,7 +174,7 @@
                                           </div>
                                     </div>
                                     
-                                    <div class="col-md-4 modalissuelabel">
+                                    <!-- <div class="col-md-4 modalissuelabel">
                                         <label for="attach">Attachment:</label>
                                     </div>
                                     <div class="col-md-8">
@@ -178,7 +182,7 @@
                                             
                                             <input type="file" class="form-control" id="attach"  formControlName="attachment" accept=".png, .jpg, .jpeg, application/pdf"  (change)="onFileChange2($event)" #fileInput2  multiple>
                                           </div>
-                                    </div>
+                                    </div> -->
 
                                   </div>
                                 
@@ -212,7 +216,7 @@
             <!-- confirm modal -->
             <ng-template #actiontemplate>
                 <div class="modal-body text-center">
-                    <p>Are you sure to do this action?</p>
+                    <p>{{ticketActionMessage}}</p>
                     <button type="button" class="btn btn-success" (click)="confirmaction()" >Yes</button>
                     <button type="button" class="btn btn-primary" (click)="declineaction()" >No</button>
                 </div>
