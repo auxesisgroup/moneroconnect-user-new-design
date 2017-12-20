@@ -11,10 +11,9 @@ import {ServiceapiService} from './serviceapi.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap'; //to fetch url params
 @Injectable()
-export class PouchService {
+export class ActivityService {
 
   pdb2:any;
-  checkAppArr:any;
 
   constructor(
     public http:Http,
@@ -22,28 +21,23 @@ export class PouchService {
     private route: ActivatedRoute,
     private router: Router,
   ) { 
-    this.pdb2 = new PouchDB("http://45.55.211.36:5984/moneroconnect-list/");
+    this.pdb2 = new PouchDB("http://45.55.211.36:5984/moneroconnect-listactivity/");
   }
 
-  storeIP(){
-    this.http.get("https://freegeoip.net/json/")
-    .subscribe(
-      d=>{
-        // console.info(d)
-        let dt = JSON.parse(JSON.stringify(d));
-        let dt2 = JSON.parse(dt._body);
-        // console.log(dt2,dt2.ip);
-        this.serviceapi.saveToLocal("MoneroAUXMassAppUserInfo",dt._body);
-        // console.log(this.datastoreServ.retrieveFromLocal("IssuerAppUserInfo"));
-      },
-      e=>{
-        // console.log(e);
-        // this.handleError(e)
-      }
-    )
+  putActivityInPouch(component,fun,desc,notes){
+    let id = this.serviceapi.retrieveFromLocal("MoneroAUXUserEmail");
+    if(id == null || id == "" || id == undefined || !id){
+      id = "Global-User";
+    }
+    let page = this.router.url;
+    let func = fun;
+    let description = desc;
+    // console.log(id,page,func,description)
+    this.letsDoActivity(component,id,page,func,description,notes);
   }
 
-  letsIssuing(id,page,func,description,notes,priority){
+  letsDoActivity(component,id,page,func,description,notes){
+    
     // this.http.get("https://freegeoip.net/json/")
     // .subscribe(
     //   d=>{
@@ -61,17 +55,17 @@ export class PouchService {
     //     this.updateIssue(id,page,func,description,notes,priority);
     //   }
     // )
-    this.updateIssue(id,page,func,description,notes,priority);
+    this.updateIssue(component,id,page,func,description,notes);
   }
-  updateIssue(id,page,func,description,notes,priority){
+  updateIssue(component,id,page,func,description,notes){
 
     let userinfo = JSON.parse(this.serviceapi.retrieveFromLocal("MoneroAUXMassAppUserInfo"));
 
     this.pdb2.get(id).then((arr) =>{
       // console.log("then1",arr);
 
-      var list = arr.issuelist;
-      var getcount = arr.issuescount;
+      var list = arr.activitylist;
+      var getcount = arr.activitycount;
       // console.log("issue",list);
       // if(list == null || list == undefined || list == ""){
       //   let d = [];
@@ -89,12 +83,12 @@ export class PouchService {
       //   return this.pdb.put(arr);  
       // }else{
         // console.log("else",list)
-        let d = list;
+        let d = list; 
         let c = getcount+1;
-        let issueid ='issue'+c; 
+        let aid ='activity'+c; 
         // d.push(list)
         d.push({
-          _id:issueid,
+          _id:aid,
           data:{
             tracker:notes,
             timestamp: new Date(),
@@ -107,13 +101,12 @@ export class PouchService {
             page:page,
             schema:func,
             description:description,
-            priority:priority
+            component:component
           },
           momento:moment().unix()
         });
-        arr.issuelist = d;
-        arr.issuescount = c;
-        this.saveinScreenCast(issueid,id);
+        arr.activitylist = d;
+        arr.activitycount = c;
         return this.pdb2.put(arr);
       // }
       
@@ -125,17 +118,17 @@ export class PouchService {
     .catch((err) =>{
       // console.log("catch",err)
       // handle any errors
-      this.insertAtFirstEntry(id,page,func,description,notes,priority);
+      this.insertAtFirstEntry(component,id,page,func,description,notes);
     });
   }
-  insertAtFirstEntry(id,page,func,description,notes,priority){   
+  insertAtFirstEntry(component,id,page,func,description,notes){   
     let userinfo = JSON.parse(this.serviceapi.retrieveFromLocal("MoneroAUXMassAppUserInfo"));
-    let issueid = 'issue'+1;
+    let aid = 'activity'+1;
     let doc = {
       _id:id,
-      issuescount:1,
-      issuelist:[{
-        _id:issueid,
+      activitycount:1,
+      activitylist:[{
+        _id:aid,
         data:{
           tracker:notes,
           timestamp: new Date(),
@@ -148,13 +141,12 @@ export class PouchService {
           page:page,
           schema:func,
           description:description,
-          priority:priority
+          component:component
         },
         momento:moment().unix()
       }]
     }
     this.saveFirstEntry(doc);
-    this.saveinScreenCast(issueid,id);
   }
   saveFirstEntry(doc){
     this.pdb2.put(doc).then(
@@ -169,44 +161,5 @@ export class PouchService {
         // console.error("error",e)
       }
     });
-  }
-
-  saveinScreenCast(issueid,id){
-    let castDB = new PouchDB("http://45.55.211.36:5984/moneroconnect-listissuesscreen/");
-    html2canvas(document.body,{logging:false}).then((canvas)=>{
-      // console.log(canvas);
-
-      var getImage = canvas.toDataURL(); // default is png 
-      // console.log(getImage)
-
-      castDB.put({
-        _id:id+'-'+issueid,
-        email:id,
-        key:issueid,
-        issueid:issueid,
-        screen:getImage
-      },(err,result)=>{
-        if(err){
-          // console.log("Screen not Captured")
-        }else{
-          // console.log("ScreenCaptured result:",result)
-        }
-      })
-      .then(d=>{
-        // console.log("ScreenCaptured:",d)
-      });
-    })
-  }
-
-  putErrorInPouch(fun,desc,notes,priority){
-    let id = this.serviceapi.retrieveFromLocal("MoneroAUXUserEmail");
-    if(id == null || id == "" || id == undefined || !id){
-      id = "Global-User";
-    }
-    let page = this.router.url;
-    let func = fun;
-    let description = desc;
-    // console.log(id,page,func,description)
-    this.letsIssuing(id,page,func,description,notes,priority);
   }
 }

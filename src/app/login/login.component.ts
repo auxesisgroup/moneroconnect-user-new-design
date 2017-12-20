@@ -18,12 +18,13 @@ import { CookieService } from 'ngx-cookie-service';//
 
 import { PouchService } from '../services/pouch.service';
 
+import { ActivityService } from '../services/activity.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers:[SignupService,FbapiService,PouchService]
+  providers:[SignupService,FbapiService,PouchService,ActivityService]
 })
 export class LoginComponent implements OnInit {
 
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public signup:SignupService,
+    public activityServ:ActivityService,
     public http:Http,
     private route: ActivatedRoute,
     public pouchserv:PouchService,
@@ -88,6 +90,7 @@ export class LoginComponent implements OnInit {
       },1000);
       //console.log("User logged out");
       this.signup.clearIntervalInLogin();
+      this.pouchserv.storeIP();
     }
 
     // let cookieExists = this.signup.checkUserActivity();
@@ -173,6 +176,9 @@ export class LoginComponent implements OnInit {
   }
 
   signup_v2(){
+
+    // this.activityServ.putActivityInPouch("LoginComponent","postAction()","Attempt to login in moneroconnect ICO platform","");
+    
     if(this.emailid == "" || this.emailid == null){
       this.printmsg("You Email ID Is Invalid");
     }else if(!this.validateEmail(this.emailid)){

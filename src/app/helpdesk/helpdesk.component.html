@@ -81,8 +81,8 @@
                                   <option>Mark Reopen</option>
                                 </select>
                               </div> -->
-                              <img *ngIf="t.status == 'open'" src="assets/img/pics/closed.png" title="Closed" class="deskactionimg" (click)="closedticket(t)">
-                              <img *ngIf="t.status == 'close'" src="assets/img/pics/reopen.png" title="Reopen" class="deskactionimg" (click)="reopenticket(t)">
+                              <img *ngIf="t.status == 'open'" src="assets/img/pics/closed.png" title="Close Ticket" class="deskactionimg" (click)="closedticket(t)">
+                              <img *ngIf="t.status == 'close'" src="assets/img/pics/reopen.png" title="Reopen Ticket" class="deskactionimg" (click)="reopenticket(t)">
                             </td>
                           </tr>
                         </tbody>
@@ -139,6 +139,7 @@
                                         <div class="form-group">
                                             
                                             <select class="form-control" id="issuecat" formControlName="category">
+                                              <option [selected]="true" [value]="0">Select Category</option>
                                               <option *ngFor="let c of categorylistoption" [value]="c.category">{{c.category}}</option>
                                             </select>
                                           </div>
@@ -165,7 +166,7 @@
                                     </div>
                                     
                                     <div class="col-md-4 modalissuelabel">
-                                        <label for="message">Message (In Detail):</label>
+                                        <label for="message">Message:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="form-group">

@@ -25,13 +25,14 @@ import * as Chart from 'chart.js';
 import { FbapiService } from '../services/fbapi.service';
 
 import { PouchService } from '../services/pouch.service';
+import { ActivityService } from '../services/activity.service';
 
 import { CookieService } from 'ngx-cookie-service';//
 @Component({
   selector: 'app-userhome',
   templateUrl: './userhome.component.html',
   styleUrls: ['./userhome.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
 })
 export class UserhomeComponent implements OnInit {
 
@@ -87,7 +88,8 @@ export class UserhomeComponent implements OnInit {
     private router: Router,
     private cookieService: CookieService,//
     private fbapi:FbapiService,
-    public pouchserv:PouchService
+    public pouchserv:PouchService,
+    public activityServ:ActivityService
   ) {
     this.qrvalue = "Its Demo For QR Angular";
     //this.signup.setUserSession(this.storage.retrieve("MoneroAUXUserEmail"),"7764611b-fdee-4804-8f2f-fab678e63526a704b8ef-5cb5-45b1-b367-98c89b91f1aeba1abd08-0b64-4f05-8d60-a049344a1a28");
@@ -133,6 +135,8 @@ export class UserhomeComponent implements OnInit {
       this.radioclick = 'btc';
     }
     this.signup.saveToLocal("MoneroAUXsavelocalpaytype",optradio);
+    this.activityServ.putActivityInPouch("UserhomeComponent","callToViewModalBtn()","Attempt to buy XMRC token for "+this.radioclick,"");
+    
     //console.log(optradio,this.radioclick,this.serv.retrieveFromLocal("MoneroAUXsavelocalpaytype"))
   }
   loggedInFBauth(){

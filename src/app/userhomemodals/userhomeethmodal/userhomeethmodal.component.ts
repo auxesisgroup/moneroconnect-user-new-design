@@ -22,11 +22,12 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { FbapiService } from '../../services/fbapi.service';
+import { ActivityService } from '../../services/activity.service';
 @Component({
   selector: 'app-userhomeethmodal',
   templateUrl: './userhomeethmodal.component.html',
   styleUrls: ['./userhomeethmodal.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
 })
 export class UserhomeethmodalComponent implements OnInit {
   modalRef: BsModalRef;
@@ -84,7 +85,8 @@ export class UserhomeethmodalComponent implements OnInit {
     public elRef:ElementRef,
     private modalService: BsModalService,
     private fbapi:FbapiService,
-    public pouchserv:PouchService
+    public pouchserv:PouchService,
+    public activityServ:ActivityService
   ) { 
     this.user = afAuth.authState;
     this.itemsRef = af.list('/transaction_details');
@@ -240,7 +242,9 @@ export class UserhomeethmodalComponent implements OnInit {
               modalETH,
               Object.assign({}, this.config, { class: 'gray modal-md' })
             );
-            this.loggedInFBauth();
+            this.loggedInFBauth();            
+            this.activityServ.putActivityInPouch("UserhomeethmodalComponent","callforpaywithcurrencyonmodaltoshow()","Modal open for eth transaction","");            
+            
             if(response.refund_address != null){
               this.ethrefundaddress = response.refund_address;
               let f =  response.amount_to_pay;
@@ -355,6 +359,8 @@ export class UserhomeethmodalComponent implements OnInit {
             this.ethrefundaddress = response.refund_address;
           }
            this.stepRecieveETH = 1;this.ethmodaltitle = "Pay through ETH";
+           this.activityServ.putActivityInPouch("UserhomeethmodalComponent","callingApiForETHScreen2()","Modal open for eth transaction with screen 1","");            
+           
         }else{
           this.toastr.error('Please check and retry.', 'Invalid Ether Address!');  
         }
@@ -440,6 +446,9 @@ export class UserhomeethmodalComponent implements OnInit {
           // this.amount_to_pay = response.amount_to_pay;
           this.qrvalue = this.generated_address;
           this.stepRecieveETH = 2;this.ethmodaltitle = "Pay through ETH";//next firebase
+
+          this.activityServ.putActivityInPouch("UserhomeethmodalComponent","callingApiForETHScreen3()","Screen 2 open","Start here firebase service");            
+          
           setTimeout(()=>{
             this.callfb();
           },5000);
@@ -584,6 +593,8 @@ export class UserhomeethmodalComponent implements OnInit {
       // this.toastr.info('Wait for admin mail that verify transaction.', 'Note:',{timeOut:8000});
       // this.toastr.info('You can make new transaction.', 'Make another transaction',{timeOut:3000});
       // setTimeout(()=>{location.reload();},3100);
+      this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","dothese()","Modal closed for btc transaction","");                
+      
     },5000);
   }
   /**
@@ -617,6 +628,8 @@ export class UserhomeethmodalComponent implements OnInit {
     if(this.stepRecieveETH == 1){
       location.reload();
     }
+    this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","clearERC()","Modal closed for btc transaction","");                
+    
   }
 
   roundUp(num, precision) {

@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { ServiceapiService } from '../services/serviceapi.service';
 import { SignupService } from '../services/signup.service';
+import { ActivityService } from '../services/activity.service';
 
 import { Observable } from 'rxjs/Observable';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
@@ -23,7 +24,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   selector: 'app-helpdesk',
   templateUrl: './helpdesk.component.html',
   styleUrls: ['./helpdesk.component.css'],
-  providers:[ServiceapiService,PouchService,SignupService]
+  providers:[ServiceapiService,PouchService,SignupService,ActivityService]
 })
 export class HelpdeskComponent implements OnInit {
 
@@ -69,6 +70,8 @@ export class HelpdeskComponent implements OnInit {
   ticketActionKey:any;
   ticketActionID:any;
 
+  initialcategory:boolean = false;
+
   constructor(
     public serv:ServiceapiService,
     public signup:SignupService,
@@ -79,15 +82,18 @@ export class HelpdeskComponent implements OnInit {
     private storage:LocalStorageService,
     private formBuilder:FormBuilder,
     private modalService: BsModalService,
+    public activityServ:ActivityService
   ) {
 
     this.formHelp = formBuilder.group({
       category:['',Validators.compose([Validators.required])],
       subject:['',Validators.compose([Validators.required])],
-      phone:['',Validators.compose([Validators.nullValidator])],
+      phone:[,Validators.compose([Validators.nullValidator])],
       message:['',Validators.compose([Validators.required])],
       // attachment:['',Validators.compose([Validators.nullValidator])]
     });
+
+    // this.pouchserv.storeIP();
   }
 
   ngOnInit() {
@@ -145,12 +151,20 @@ export class HelpdeskComponent implements OnInit {
             let list = response.categories_list;
             this.categorylistoption = [];
             _.forEach(list,(value,key)=>{
+              var c = value.category;
+              if(c == 'Payment'){
+                this.initialcategory = true;
+              }else{
+                this.initialcategory = false;
+              }
               this.categorylistoption.push({
                 rowid:(key+1),
                 category:value.category,
-                id:value._id
+                id:value._id,
+                initialcategory:this.initialcategory
               })
             });
+            // console.log(this.categorylistoption)
           }else if(response.code == 400){
             // this.toastr.error('Unable to find category', 'Abandoned!',{timeOut:2500});
           }else if(response.code == 401){
@@ -255,6 +269,7 @@ export class HelpdeskComponent implements OnInit {
       modal,
         Object.assign({}, this.config, { class: 'gray modal-md' })
     );
+    this.activityServ.putActivityInPouch("HelpdeskComponent","raisemodal()","Open the modal to raise help","");
   }
 
   hideme(){
@@ -330,14 +345,35 @@ export class HelpdeskComponent implements OnInit {
   callhelpdesk(){
     this.loadingimage = true;
     // console.log(this.formHelp.value)
+    this.formHelp.get('phone').setValue((this.formHelp.value.phone).toString());
     if(this.formHelp.valid){
       // setTimeout(()=>{
         this.loadingimage = false;
-        this.postTicket();
+        if(this.formHelp.value.category == 0){
+          this.toastr.warning("Please choose a category",null,{timeOut:2000});          
+        }else{
+          if(this.formHelp.value.phone == null || this.formHelp.value.phone == ""){
+            this.postTicket();
+          }else{
+            if((this.formHelp.value.phone).toString().length == 10){
+              this.postTicket();         
+            }else{
+              this.toastr.warning("Phone number will be 10 digit",null,{timeOut:2000}); 
+            }
+          }
+        }
         // this.toastr.info("Adding",null,{timeOut:2000});
       // },2000);
     }else{
-      this.toastr.error("Invalid details to raise a ticket",null,{timeOut:2000});
+      this.loadingimage = false;
+      // console.log((this.formHelp.value))
+      if(this.formHelp.value.category == 0 || this.formHelp.value.category == '' || this.formHelp.value.category == '0' || this.formHelp.value.category == null){
+        this.toastr.warning("Please choose a category",null,{timeOut:2000});          
+      }else if((this.formHelp.value.phone).toString().length != 10){
+        this.toastr.warning("Phone number will be 10 digit",null,{timeOut:2000});          
+      }else{
+        this.toastr.error("Invalid details to raise a ticket",null,{timeOut:2000});
+      }
     }
   }
   postTicket(){
@@ -361,7 +397,9 @@ export class HelpdeskComponent implements OnInit {
         'description':this.formHelp.value.message
       };
     }
-    console.info(d);
+   //  console.info(d);
+    this.activityServ.putActivityInPouch("HelpdeskComponent","postTicket()","Submitting the help details to raise ticket","Details are, "+JSON.stringify(this.formHelp.value));
+    
     this.serv.resolveApi("raise_ticket/",d)
     .subscribe(
       res=>{
@@ -374,6 +412,10 @@ export class HelpdeskComponent implements OnInit {
             this.hideme();
             this.toastr.success('Successful','Ticket no '+response.ticket_no+' is raised successfully',{timeOut:2000});
             this.findhelpdeskTickets();
+            this.formHelp.controls['category'].setValue('');
+            this.formHelp.controls['subject'].setValue('');
+            this.formHelp.controls['phone'].setValue('');
+            this.formHelp.controls['message'].setValue('');
           }else if(response.code == 400){
             this.toastr.error('Unable to raise ticket', 'Abandoned!',{timeOut:2500});
           }else if(response.code == 401){
@@ -390,7 +432,7 @@ export class HelpdeskComponent implements OnInit {
         this.ngxloading = false;  
           // console.error(err);
           this.toastr.error('Unable to raise ticket', 'Abandoned!',{timeOut:2500});
-          // this.pouchserv.putErrorInPouch("findhelpdesk()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
+          this.pouchserv.putErrorInPouch("findhelpdesk()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
           
       }
     );   
@@ -417,6 +459,8 @@ export class HelpdeskComponent implements OnInit {
     // this.selectAction.nativeElement.value = 'Select';
     // // console.log(this.selectAction.nativeElement.value)
     // this.acappendvalue = 0;
+    this.activityServ.putActivityInPouch("HelpdeskComponent","declineaction()","Attempt to "+this.ticketActionKey+" ticket with decline","");
+    
     this.ticketActionMessage = null;
     this.ticketActionKey = null;
     this.ticketActionID = null;
@@ -427,6 +471,8 @@ export class HelpdeskComponent implements OnInit {
     this.ngxloading = true;
     this.ngxloading = true; 
     let method = '';let d;
+    this.activityServ.putActivityInPouch("HelpdeskComponent","postAction()","Attempt to "+this.ticketActionKey+" ticket with confirm","");
+    
     if(this.ticketActionKey == 'close'){
       d = {
         'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
@@ -442,7 +488,7 @@ export class HelpdeskComponent implements OnInit {
       };
       method = 'reopen_ticket/';
     }
-    console.info(d,method);
+    // console.info(d,method);
     this.serv.resolveApi(method,d)
     .subscribe(
       res=>{

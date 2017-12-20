@@ -10,11 +10,12 @@ import CryptoJS from 'crypto-js';
 
 import { FbapiService } from '../services/fbapi.service';
 import { PouchService } from '../services/pouch.service';
+import { ActivityService } from '../services/activity.service';
 @Component({
   selector: 'app-pageotp',
   templateUrl: './pageotp.component.html',
   styleUrls: ['./pageotp.component.css'],
-  providers:[SignupService,FbapiService,PouchService]
+  providers:[SignupService,FbapiService,PouchService,ActivityService]
 })
 export class PageotpComponent implements OnInit {
 
@@ -35,7 +36,8 @@ export class PageotpComponent implements OnInit {
     private storage:LocalStorageService,
     private sessionStorage:SessionStorageService,
     private fbapi:FbapiService,
-    public pouchserv:PouchService
+    public pouchserv:PouchService,
+    public activityServ:ActivityService,
   ) {
     
    }

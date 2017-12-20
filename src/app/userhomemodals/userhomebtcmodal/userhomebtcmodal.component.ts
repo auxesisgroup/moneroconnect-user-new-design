@@ -28,11 +28,12 @@ import { UserhomeComponent } from '../../userhome/userhome.component';
 
 import { FbapiService } from '../../services/fbapi.service';
 import { PouchService } from '../../services/pouch.service';
+import { ActivityService } from '../../services/activity.service';
 @Component({
   selector: 'app-userhomebtcmodal',
   templateUrl: './userhomebtcmodal.component.html',
   styleUrls: ['./userhomebtcmodal.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
 })
 export class UserhomebtcmodalComponent implements OnInit {
   modalRef: BsModalRef;
@@ -96,7 +97,8 @@ export class UserhomebtcmodalComponent implements OnInit {
     private router: Router,
     private element:ElementRef,
     private fbapi:FbapiService,
-    public pouchserv:PouchService
+    public pouchserv:PouchService,
+    public activityServ:ActivityService
   ) { 
       this.user = afAuth.authState;
       this.itemsRef = af.list('/transaction_details');
@@ -259,6 +261,7 @@ export class UserhomebtcmodalComponent implements OnInit {
                 Object.assign({}, this.config, { class: 'gray modal-md' })
             );
             this.loggedInFBauth();
+            this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","callforpaywithcurrencyonmodaltoshow()","Modal open for btc transaction","");            
             if(response.refund_address != null){
               this.btcrefundaddress = response.refund_address;
               let f =  response.amount_to_pay;
@@ -378,7 +381,8 @@ export class UserhomebtcmodalComponent implements OnInit {
              this.amount_to_pay = response.amount_to_pay;
            }
            this.stepRecieveBTH = 1;this.btcmodaltitle = "Pay through BTC";
-
+           this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","callingApiForBTCScreen2()","Modal open for btc transaction with screen 1","");            
+           
            //test
           //  this.toastr.warning('Test', 'Test',{timeOut:5000});
           //  setTimeout(()=>{
@@ -475,6 +479,8 @@ export class UserhomebtcmodalComponent implements OnInit {
           //this.amount_to_pay = response.amount_to_pay;
           this.qrvalue = this.generated_address;
           this.stepRecieveBTH = 2;this.btcmodaltitle = "Pay through BTC";//next firebase
+          this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","callingApiForBTCScreen3()","Modal open for btc transaction with screen 2","Starts here firebase activity");            
+          
           setTimeout(()=>{
             this.callfb();
           },5000);
@@ -618,6 +624,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       this.initialCount = 0;
       // this.toastr.info('Wait for admin mail that verify transaction.', 'Note:',{timeOut:8000});
       // this.toastr.info('You can make new transaction.', 'Make another transaction',{timeOut:3000});
+      this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","dothese()","Modal closed for btc transaction","");                
       
     },5000);
   }
@@ -652,6 +659,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     if(this.stepRecieveBTH == 1){
       location.reload();
     }
+    this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","clearERC()","Modal closed for btc transaction","");                
   }
 
   roundUp(num, precision) {
