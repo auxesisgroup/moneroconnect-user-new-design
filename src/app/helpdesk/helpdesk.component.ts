@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PouchService } from '../services/pouch.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+window;
 @Component({
   selector: 'app-helpdesk',
   templateUrl: './helpdesk.component.html',
@@ -71,7 +72,12 @@ export class HelpdeskComponent implements OnInit {
   ticketActionID:any;
 
   initialcategory:boolean = false;
+  @ViewChild('panelScroll') private panelScroll:ElementRef;
 
+  @ViewChild('ticketmodal') ticketmodal:ElementRef;
+  modalTicketAction: BsModalRef;
+  ticketModalData:any = [];
+  
   constructor(
     public serv:ServiceapiService,
     public signup:SignupService,
@@ -345,7 +351,6 @@ export class HelpdeskComponent implements OnInit {
   callhelpdesk(){
     this.loadingimage = true;
     // console.log(this.formHelp.value)
-    this.formHelp.get('phone').setValue((this.formHelp.value.phone).toString());
     if(this.formHelp.valid){
       // setTimeout(()=>{
         this.loadingimage = false;
@@ -355,6 +360,8 @@ export class HelpdeskComponent implements OnInit {
           if(this.formHelp.value.phone == null || this.formHelp.value.phone == ""){
             this.postTicket();
           }else{
+            console.log(this.formHelp.value.phone)
+            this.formHelp.get('phone').setValue((this.formHelp.value.phone).toString());
             if((this.formHelp.value.phone).toString().length == 10){
               this.postTicket();         
             }else{
@@ -369,15 +376,32 @@ export class HelpdeskComponent implements OnInit {
       // console.log((this.formHelp.value))
       if(this.formHelp.value.category == 0 || this.formHelp.value.category == '' || this.formHelp.value.category == '0' || this.formHelp.value.category == null){
         this.toastr.warning("Please choose a category",null,{timeOut:2000});          
-      }else if((this.formHelp.value.phone).toString().length != 10){
-        this.toastr.warning("Phone number will be 10 digit",null,{timeOut:2000});          
+      }
+      else if(this.formHelp.value.subject == null || this.formHelp.value.subject == ""){
+        this.toastr.warning("Subject is required",null,{timeOut:2000});                  
+      }
+      else if(this.formHelp.value.message == null || this.formHelp.value.message == ""){
+        this.toastr.warning("Message is required",null,{timeOut:2000});                  
+      }
+      else if(this.formHelp.value.phone != null || this.formHelp.value.phone != ""){
+        if(this.formHelp.value.phone==null){
+          this.toastr.warning("Phone number will be 10 digit",null,{timeOut:2000});                    
+        }else{
+          if((this.formHelp.value.phone).toString().length != 10){
+            this.toastr.warning("Phone number will be 10 digit",null,{timeOut:2000});          
+          }else{
+            this.toastr.warning("Phone number will be 10 digit",null,{timeOut:2000});                  
+          }    
+        }
+      
+      console.log(this.formHelp.value.phone)
       }else{
         this.toastr.error("Invalid details to raise a ticket",null,{timeOut:2000});
       }
     }
   }
   postTicket(){
-    this.ngxloading = true; 
+    this.loadingimage = true; 
     let d;
     if(this.formHelp.value.phone == null || this.formHelp.value.phone == ""){
       d = {
@@ -403,7 +427,7 @@ export class HelpdeskComponent implements OnInit {
     this.serv.resolveApi("raise_ticket/",d)
     .subscribe(
       res=>{
-        this.ngxloading = false;  
+        this.loadingimage = false;  
         let response = JSON.parse(JSON.stringify(res));
         // console.log(response)
         if(response != null || response != ""){
@@ -429,7 +453,7 @@ export class HelpdeskComponent implements OnInit {
         }
       },
       err=>{
-        this.ngxloading = false;  
+        this.loadingimage = false;  
           // console.error(err);
           this.toastr.error('Unable to raise ticket', 'Abandoned!',{timeOut:2500});
           this.pouchserv.putErrorInPouch("findhelpdesk()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
@@ -468,7 +492,6 @@ export class HelpdeskComponent implements OnInit {
   }
 
   postAction(){
-    this.ngxloading = true;
     this.ngxloading = true; 
     let method = '';let d;
     this.activityServ.putActivityInPouch("HelpdeskComponent","postAction()","Attempt to "+this.ticketActionKey+" ticket with confirm","");
@@ -538,7 +561,7 @@ export class HelpdeskComponent implements OnInit {
     this.ticketActionID = t.id;
     this.modalRefAction = this.modalService.show(
       this.actiontemplate,
-        Object.assign({}, this.config, { class: 'gray modal-sm' })
+        Object.assign({}, this.configAction, { class: 'gray modal-sm' })
     );
   }
 
@@ -549,7 +572,32 @@ export class HelpdeskComponent implements OnInit {
     this.ticketActionID = t.id;
     this.modalRefAction = this.modalService.show(
       this.actiontemplate,
-        Object.assign({}, this.config, { class: 'gray modal-sm' })
+        Object.assign({}, this.configAction, { class: 'gray modal-sm' })
     );
   }
+
+  toscroll(){
+    // window.scrollTo(0,document.body.scrollHeight);
+    // this.scrollToBottom(); 
+  }
+  scrollToBottom(): void {
+      try {
+          this.panelScroll.nativeElement.scrollTop = this.panelScroll.nativeElement.scrollHeight;
+      } catch(err) { }                 
+  }
+
+
+  seedetail(t){
+    // console.log(t)
+    this.ticketModalData = t;
+    this.modalTicketAction = this.modalService.show(
+      this.ticketmodal,
+        Object.assign({}, this.config, { class: 'gray modal-md' })
+    );
+  }
+
+  hideme2(){
+    this.modalTicketAction.hide();
+  }
+
 }

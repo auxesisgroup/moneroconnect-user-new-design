@@ -37,3 +37,40 @@ img.yesreferral {
 img.social {
     cursor: pointer;
 }
+
+
+/* Referral Mobile View */
+@media(min-width:768px){
+    .input-group-btn {
+        position: relative;
+        /* font-size: 0; */
+        font-size: inherit;
+        white-space: nowrap;
+    }
+}
+@media(max-width:767px){
+    /* for referral copy btn */
+    .input-group-btn {
+        position: relative;
+        /* font-size: 0; */
+        font-size: inherit;
+        white-space: nowrap;
+    }
+    /* referral container */
+    div.container-fluid {
+        padding-right: 2.5%;
+        padding-left: 1px;
+    }
+
+    /* referral withdraw btn */
+    .card-body button {
+        float: right;
+        right: 0;
+    }
+    /* referral withdraw card */
+    .card {
+        padding-bottom: 20%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+}

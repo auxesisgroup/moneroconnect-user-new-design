@@ -21,12 +21,13 @@ import { PouchService } from '../services/pouch.service';
 
 import * as urlencode from 'urlencode';
 // import { CeiboShare } from 'ng2-social-share';
+import { ActivityService } from '../services/activity.service';
 window;
 @Component({
   selector: 'app-referral',
   templateUrl: './referral.component.html',
   styleUrls: ['./referral.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
 })
 export class ReferralComponent implements OnInit {
 
@@ -88,7 +89,8 @@ export class ReferralComponent implements OnInit {
     private modalService: BsModalService,
     private route: ActivatedRoute,
     private router: Router,
-    public pouchserv:PouchService
+    public pouchserv:PouchService,
+    public activityServ:ActivityService
   ) { }
 
   ngOnInit() { 
@@ -208,6 +210,7 @@ export class ReferralComponent implements OnInit {
     this.serv.resolveApi("init_withdraw",d)
     .subscribe(
       res=>{
+        this.activityServ.putActivityInPouch("ReferralComponent","callToOpenModal()","Open the modal to withdraw amount of "+type,"");        
         let response = JSON.parse(JSON.stringify(res));
         // console.log()
         if(response != null || response != ""){
@@ -524,6 +527,8 @@ export class ReferralComponent implements OnInit {
       this.serv.resolveApi("confirm_withdraw",d)
       .subscribe(
         res=>{
+          this.activityServ.putActivityInPouch("ReferralComponent","confirmWithdrawOTP()","Confirmed otp request in referral withdraw section.","");
+          
           this.loadingimage = false;
           let response = JSON.parse(JSON.stringify(res));
           // this.modalRef.hide();
@@ -639,19 +644,27 @@ export class ReferralComponent implements OnInit {
   socialshare(type){
     let url = urlencode(this.referraladdressvalue);
     // console.log(type,url)
+    let word = '';
     if(type=="fb"){
+      word = "Facebook";
       var myWindow = window.open("https://www.facebook.com/sharer.php?u="+url, "Facebook Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
       // var myWindow = window.open("https://web.skype.com/share?url=?u="+url, "Skype Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
       // var myWindow = window.open("whatsapp://send?text="+url, "Whatsapp Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="tw"){
+      word = "Twitter";
       var myWindow = window.open("https://twitter.com/intent/tweet?url="+url+"&text=Referral Share&via=Moneroconnect&hashtags='Moneroconnect,XMRC,ICO'", "Twitter Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="ln"){
+      word = "Linkedin";
       var myWindow = window.open("https://www.linkedin.com/shareArticle?url="+url+"&title=Referral Share", "Linkedin Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="tl"){
+      word = "Telegram";
       var myWindow = window.open("https://telegram.me/share/url?url="+url+"&text=Referral Share", "Telegram Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }else if(type=="gl"){
+      word = "Google Plus";
       var myWindow = window.open("https://plus.google.com/share?url="+url, "Google Share", "width=600,height=500,fullscreen=no,top=100,left=400,resizable=no");
     }
+    this.activityServ.putActivityInPouch("ReferralComponent","socialshare()","Sharing a referral with "+word,"");
+    
   }
 }
 

@@ -16,12 +16,13 @@ import CryptoJS from 'crypto-js';
 import { ToastrService } from 'ngx-toastr';
 
 import { PouchService } from '../services/pouch.service';
+import { ActivityService } from '../services/activity.service';
 
 @Component({
   selector: 'app-addreferralwithsidebar',
   templateUrl: './addreferralwithsidebar.component.html',
   styleUrls: ['./addreferralwithsidebar.component.css'],
-  providers:[ServiceapiService,PouchService,SignupService]
+  providers:[ServiceapiService,PouchService,SignupService,ActivityService]
 })
 export class AddreferralwithsidebarComponent implements OnInit {
   
@@ -45,8 +46,8 @@ export class AddreferralwithsidebarComponent implements OnInit {
       private router: Router,
       private toastr: ToastrService,
       private storage:LocalStorageService,
-      private formBuilder:FormBuilder
-  
+      private formBuilder:FormBuilder,
+      private activityServ:ActivityService
     ) {
       this.formReferral = formBuilder.group({
         'bitcoin':['',Validators.compose([Validators.required])],
@@ -187,19 +188,36 @@ export class AddreferralwithsidebarComponent implements OnInit {
   
     addreferral(){
       // console.log(this.formReferral)
+      let btc = this.formReferral.value.bitcoin;
+      let eth = this.formReferral.value.ether;
       if(this.formReferral.valid){
-        let btc = this.formReferral.value.bitcoin;
-        let eth = this.formReferral.value.ether;
         if(btc == null || btc == ""){
-          this.printmsg("Bitcoin address are invalid, try again.");
+          // this.printmsg("Bitcoin address are invalid, try again.");
+          this.toastr.error("Bitcoin address are invalid, try again.",null,{timeOut:2000});         
+        
         }else if(eth == null || eth == ""){
-          this.printmsg("Ether address are invalid, try again.");
+          // this.printmsg("Ether address are invalid, try again.");
+          this.toastr.error("Ether address are invalid, try again.",null,{timeOut:2000});                 
         }else{
           // console.log(this.formReferral);
           this.sendToReferral(btc,eth);
         }
       }else{
-        this.printmsg("Addresses are invalid, try again.");
+        if((btc == null || btc == "") && (eth == null || eth == "")){
+          // this.printmsg("Bitcoin address are invalid, try again.");
+          this.toastr.error("Both Bitcoin & Ether address is required.",null,{timeOut:2000});         
+        
+        }else if(btc == null || btc == ""){
+          // this.printmsg("Bitcoin address are invalid, try again.");
+          this.toastr.error("Bitcoin address required.",null,{timeOut:2000});         
+        
+        }else if(eth == null || eth == ""){
+          // this.printmsg("Ether address are invalid, try again.");
+          this.toastr.error("Ether address required.",null,{timeOut:2000});                 
+        }else{
+          // this.printmsg("Addresses are invalid, try again.");
+          this.toastr.error("Addresses are invalid, try again.",null,{timeOut:2000});         
+        }
       }
     }
   
@@ -215,6 +233,8 @@ export class AddreferralwithsidebarComponent implements OnInit {
       this.serv.resolveApi("set_btc_eth_refund_address",d)
       .subscribe(
         res=>{
+          this.activityServ.putActivityInPouch("AddreferralwithsidebarComponent","sendToReferral()","Modified referral addresses.","Details are, "+JSON.stringify(res));
+          
           this.loadingimage = false;
           let response = JSON.parse(JSON.stringify(res));
           if(response != null || response != ""){
@@ -227,11 +247,14 @@ export class AddreferralwithsidebarComponent implements OnInit {
               this.router.navigate(["/referral"]);
             }else if(response.code == 400){
               if(response.eth_address_validation == false){
-                this.printmsg("Ether address is invalid");
+                this.toastr.error("Ether address is invalid",null,{timeOut:2000});                 
+                // this.printmsg("Ether address is invalid");
               }else if(response.btc_address_validation == false){
-                this.printmsg("Bitcoin address is invalid");
+                this.toastr.error("Bitcoin address is invalid",null,{timeOut:2000});                     
+                // this.printmsg("Bitcoin address is invalid");
               }else{
-                this.printmsg("Addresses are invalid");
+                // this.printmsg("Addresses are invalid");
+                this.toastr.error("Address are invalid, try again.",null,{timeOut:2000});                     
               }
             }else if(response.code == 401){
               this.signup.UnAuthlogoutFromApp();
@@ -241,13 +264,17 @@ export class AddreferralwithsidebarComponent implements OnInit {
             }
           }else{
             // console.log(response);
-            this.printmsg("Addressess are unable to processed try again");
+            // this.printmsg("Addressess are unable to processed try again");
+            this.toastr.error("Addressess are unable to processed try again",null,{timeOut:2000});                 
+          
           }
         },
         err=>{
             this.loadingimage = false;
             // console.error(err);
-            this.printmsg("Addresses are failed to submit");
+            // this.printmsg("Addresses are failed to submit");
+            this.toastr.error("Addresses are failed to submit",null,{timeOut:2000});                 
+          
             this.pouchserv.putErrorInPouch("sendToReferral()","Response error in component "+"AddreferralwithsidebarComponent","'Monerocryp' app the exception caught is "+JSON.stringify(err),1);
             
         }

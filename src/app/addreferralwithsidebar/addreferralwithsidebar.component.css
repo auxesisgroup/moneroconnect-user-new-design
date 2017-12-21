@@ -4,3 +4,58 @@
 a.skip {
     cursor: pointer;
   }
+
+
+/* Addreferral Mobile View */
+@media(min-width:768px){
+    form.addreferrralform {
+        margin-top: 5%;
+    }
+    .col-sm-12.ethfield {
+        margin-top: 2.5%;
+    }
+    .col-sm-12.text-center.addrbtn {
+        margin-top: 5%;
+    }
+}
+@media(max-width:767px){
+    /* addreferral container */
+    div.container-fluid {
+        padding-right: 2.5%;
+        padding-left: 1px;
+    }
+    .col-sm-9.col-md-9.col-sm-offset-1.col-md-offset-1.form_wrap {
+        padding: 2px 5px 10px 5px;
+        text-align: center;
+    }
+    /* form */
+    form.addreferrralform {
+        margin-top: 2%;
+    }
+
+    /* form fields */
+    .col-sm-3.text-left, .col-sm-9 {
+        padding-left: 1px;
+        padding-right: 1px;
+        margin-top: 0px;
+    }
+    .form-group.labelfrmgrp {
+        padding: 1%;
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .col-sm-12.ethfield {
+        margin-top: 5.5%;
+    }
+
+    .col-sm-12.text-center.addrbtn {
+        margin-top: 10%;
+    }
+
+    .col-sm-12.adfformdiv {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+}

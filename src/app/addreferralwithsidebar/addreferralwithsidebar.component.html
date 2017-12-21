@@ -24,7 +24,7 @@
                         <hr>
                         <!--</br>-->
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 adfformdiv">
       
                         <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
                         style="display: block">
@@ -34,9 +34,11 @@
                         style="display: block">
                             <span class="text-center text-success">{{sucmsg}}</span>
                         </div>
-                        <br><div class="col-sm-12">&nbsp;</div><br>
+                        <!-- <br><div class="col-sm-12">&nbsp;</div><br> -->
                         
-                        <form [formGroup]="formReferral">
+                        <form class="addreferrralform" [formGroup]="formReferral">
+                          <div class="col-sm-12">
+                                
                           <div class="col-sm-3 text-left">
                               <div class="form-group labelfrmgrp">
                                   <label for="bitcoinaddress">BTC Address:</label>
@@ -48,8 +50,9 @@
                                         aria-describedby="bitcoinAddress" placeholder="Enter your BTC address..." required formControlName="bitcoin">
                               </div>
                           </div>
-                          
-                          <br><div class="col-sm-12">&nbsp;</div><br>
+                        </div>
+                          <!-- <br><div class="col-sm-12">&nbsp;</div><br> -->
+                          <div class="col-sm-12 ethfield">
                           <div class="col-sm-3 text-left">
                               <div class="form-group labelfrmgrp">
                                   <label for="etheraddress">ETH Address:</label>
@@ -61,12 +64,13 @@
                                         aria-describedby="etherAddress" placeholder="Enter your ETH address..." required formControlName="ether">
                               </div>
                           </div>
+                        </div>
                           
                           <!-- <button class="btn btn-link btn-sm pull-right">Recover Funds?</button>
                           <br> -->
-                          <br><div class="col-sm-12">&nbsp;</div><br>
-                          <br><div class="col-sm-12">&nbsp;</div><br>
-                          <div class="col-sm-12 text-center">
+                          <!-- <br><div class="col-sm-12">&nbsp;</div><br>
+                          <br><div class="col-sm-12">&nbsp;</div><br> -->
+                          <div class="col-sm-12 text-center addrbtn">
                               <button (click)="addreferral()" class="btn btn-primary custBtnAnchor referralbtnsubmit">
                                   <strong style="letter-spacing: 1px;">{{referralbtnTxt}}</strong>
                                   &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">

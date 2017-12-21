@@ -1,3 +1,4 @@
+
 <app-navbar></app-navbar>
 <ngx-loading [show]="ngxloading"></ngx-loading>
 <section id="main-sec">  
@@ -9,23 +10,29 @@
               </nav>
           </div>
       </div> 
-      <div class="col-sm-9 col-md-10 pull-right nopad">
-        <div id="topbar" class="topbar">
+      <div class="col-sm-9 col-md-10 col-xs-12 pull-right nopad">
+
+          
+
+        <div id="topbar">
           
           <div class="container-fluid">
               <div class="row">
-                <div class="col-md-12">&nbsp;</div>
+                <div class="col-sm-12">&nbsp;</div>
 
                 <!-- <div class="col-md-12">Help Desk:</div> -->
 
-                <div class="col-md-12 text-center">
-                  <div class="col-md-4">
+                <div class="col-sm-12 text-center">
+                  <div class="col-sm-4 col-xs-12">
+                    <i class="fa fa-life-ring" aria-hidden="true"></i><br>
                     Support
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-sm-4 col-xs-12">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i><br>
                     Static
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-sm-4 col-xs-12">
+                    <i class="fa fa-envelope" aria-hidden="true"></i><br>
                     Message
                   </div>
                 </div>
@@ -40,10 +47,23 @@
           </div>
 
 
-          <div class="container-fluid">
+          <!-- <div class="container-fluid">
             <div class="row">
-              <div class="col-md-12 tablerow">
-                  
+              <div class="col-md-12 tablerow"> -->
+
+
+
+          <div class="panel-group" #panelScroll>
+              
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapse1" (click)="toscroll()"><b>Help Desk Reviews</b></a>
+                </h4>
+              </div>      
+              <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+
                   <div style="overflow-x:auto;">
                       <div class="table-responsive">           
                       <table class="table">
@@ -60,7 +80,7 @@
                         </thead>
                         <tbody *ngIf="user_tickets_listshow == 1">
                           <tr *ngFor = "let t of user_tickets_list">
-                            <td>{{t.id}}</td>
+                            <td class="tids" title="See the detail for {{t.id}}" (click)="seedetail(t)">{{t.id}}</td>
                             <td>{{t.category}}</td>
                             <td>{{t.subject}}</td>
                             <td title="{{t.description}}">
@@ -88,7 +108,7 @@
                         </tbody>
                         <tbody *ngIf="user_tickets_listshow == 0">
                           <tr>
-                            <td colspan="6">
+                            <td colspan="7">
                               <div class="alert alert-danger">
                                   <strong>No Records!</strong> There is no raise ticket detail in helpdesk panel.
                               </div>
@@ -105,9 +125,13 @@
                       </table>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>
+              <!-- </div>
+            </div>
+          </div> -->
 
 
             <!-- Help Modal -->
@@ -126,9 +150,9 @@
     
                     <div class="tab-pane fade in active">
                       <form [formGroup]="formHelp" (ngSubmit)="callhelpdesk()">
-                      <div class="container-fluid">
+                      <div class="container-fluid helpcfdiv">
                         <div class="col-sm-12">
-                          <div class="card">
+                          <div class="card helpcarddiv">
                               <div class="card-body">
 
                                   <div class="row">
@@ -223,6 +247,83 @@
                 </div>
             </ng-template>
             <!-- confirm modal -->
+
+
+
+            <!-- Help Modal -->
+            <ng-template #ticketmodal>
+                <div class="modal-header">
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="hideme2()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 id="myModalLabel" class="noMarg text-left issuemodallabel">
+                            <span class="pull-left padRightOnly" style="font-size:28px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                        <span id="modal-header-content">Ticket No.: {{ticketModalData.id}}</span>
+                    </h4>
+                  </div>
+                  <div class="modal-body customModalHeight" id="normalModalBody">
+                    <div class="tab-content text-center">
+      
+                      <div class="tab-pane fade in active">
+                        <div class="container-fluid  tablecfhd">
+                          <div class="col-sm-12">
+                            <div class="card tablecardhd">
+                                <div class="card-body">
+  
+                                    <table class="table">
+                                        
+                                        <tbody>     
+                                          <tr class="success">
+                                            <th>Status</th>
+                                            <td class="tabletdtxt">
+                                              <p *ngIf="ticketModalData.status == 'open'"><b>Open</b></p>
+                                              <p *ngIf="ticketModalData.status == 'close'"><b>Close</b></p>
+                                            </td>
+                                          </tr>
+                                          <tr class="info">
+                                            <th>Time</th>
+                                            <td class="tabletdtxt">{{ticketModalData.timestamp}}</td>
+                                          </tr>
+                                          <tr class="warning">
+                                            <th>Category</th>
+                                            <td class="tabletdtxt">{{ticketModalData.category}}</td>
+                                          </tr> 
+                                          <tr class="danger">
+                                            <th>Subject</th>
+                                            <td class="tabletdtxt">{{ticketModalData.subject}}</td>
+                                          </tr>
+                                          <tr class="danger">
+                                            <th>Description</th>
+                                            <td class="tabletdtxt">{{ticketModalData.description}}</td>
+                                          </tr>
+                                          <tr class="info">
+                                            <th>Contact</th>
+                                            <td class="tabletdtxt">
+                                              <p *ngIf="ticketModalData.phone == 'NA' || ticketModalData.phone == '' || ticketModalData.phone == null">Not available</p>
+                                              <p *ngIf="ticketModalData.phone != 'NA'">{{ticketModalData.phone}}</p>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="col-sm-12 text-center">
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-block btnhelpdesk" (click)="hideme2()">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                      </div>
+      
+                    </div>
+                  </div>
+              </ng-template>
+              <!-- Help Modal -->
+
 
 
           </div><!--topbar-->

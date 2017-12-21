@@ -123,3 +123,16 @@ img.img-responsive.tblogo {
 a.nopad.referral {
     cursor: pointer;
 }
+
+/* Mobie View */
+@media(max-width:767px){
+    .sidenav a,.sidenav ul li a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 18px;
+        /* color: #818181; */
+        color: #fff;
+        display: block;
+        transition: 0.3s;
+    }
+}
