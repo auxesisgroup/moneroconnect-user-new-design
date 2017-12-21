@@ -135,4 +135,12 @@ a.nopad.referral {
         display: block;
         transition: 0.3s;
     }
+    #mySidenav{
+        display: block;
+    }
+}
+@media(min-width:768px){
+    #mySidenav{
+        display: none;
+    }
 }

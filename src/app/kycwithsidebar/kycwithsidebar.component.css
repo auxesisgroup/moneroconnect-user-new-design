@@ -40,3 +40,13 @@ img.kycimagemdpdf {
     margin-top: 0%;
 }
 
+/* Mobile View */
+@media(max-width:767px){
+    .container-fluid {
+        padding-left: 1px;
+        padding-right: 8px;
+    }
+    .form-group.submitbtn {
+        text-align: center;
+    }
+}
