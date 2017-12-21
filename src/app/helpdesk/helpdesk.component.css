@@ -109,3 +109,9 @@ td.tabletdtxt {
 .card.tablecardhd {
     padding: 0;
 }
+
+p.stmt {
+    font-size: 18px;
+    /* font-family: serif; */
+    font-weight: 600;
+}
