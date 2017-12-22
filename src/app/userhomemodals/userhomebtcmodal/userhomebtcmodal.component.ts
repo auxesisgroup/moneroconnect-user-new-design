@@ -241,7 +241,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     this.serv.resolveApi("pay_with_currency/",d)
     .subscribe(
       (res)=>{
-        console.log(res);
+        // console.log(res);
         let response = JSON.parse(JSON.stringify(res));
         if(response.code == 200){
           let to_address = response.to_address;
@@ -515,7 +515,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     //console.log(useraddress,useremail)
     let ar = [];
     return this.itemsRef.snapshotChanges().map(arr => {
-      console.log(arr)
+      // console.log(arr)
       if(arr.length>0){
         
         let key;let val;

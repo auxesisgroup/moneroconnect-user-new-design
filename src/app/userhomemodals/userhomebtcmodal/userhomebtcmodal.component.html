@@ -123,12 +123,27 @@
                             </h5>
                     </div>
                     <div class="container-fluid">
-                        <div class="col-sm-9">
+                        <!-- <div class="col-sm-9">
                             <input type="text" width="100%" class="form-control sendCustInput" id="TmpAddress" readonly="readonly" value="{{generated_address}}" #btcaddress>
                         </div>
                         <div class="col-sm-3">
                             <button class="btn btn-block btn-primary" id="copyBtn" [ngxClipboard]="btcaddress" (click)="copytext(btcaddress)">Copy
                             </button>
+                        </div> -->
+                        
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class = "input-group">
+                                  <input type = "text" class = "form-control"  readonly="readonly" value="{{generated_address}}" #btcaddress>
+                                  
+                                  <span class = "input-group-btn">
+                                     <button class = "btn btn-primary" type = "button" id="copyBtn" [ngxClipboard]="btcaddress" (click)="copytext(btcaddress)">
+                                        COPY
+                                     </button>
+                                  </span>
+                                  
+                                </div>
+                            </div>
                         </div>
 
                     </div>
