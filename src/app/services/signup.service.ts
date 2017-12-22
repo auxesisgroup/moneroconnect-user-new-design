@@ -140,10 +140,15 @@ export class SignupService {
   }
 
   saveReferralId(name,str){
-    let token = "Referral-Key-For-User";
-    let storeStr = (CryptoJS.AES.encrypt(str,token)).toString();
-    // this.storage.store(name,storeStr);
-    this.cookieService.set(name,storeStr);
+    if(str == null || str == "" || str == undefined){
+      // console.log('imnotstore')
+    }else{
+      let token = "Referral-Key-For-User";
+      let storeStr = (CryptoJS.AES.encrypt(str,token)).toString();
+      // this.storage.store(name,storeStr);
+      this.cookieService.set(name,storeStr);
+      // console.log(this.cookieService.get(name))
+    }
   }
 
   retrieveReferralId(name){
