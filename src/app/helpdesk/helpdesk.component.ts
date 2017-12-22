@@ -600,4 +600,7 @@ export class HelpdeskComponent implements OnInit {
     this.modalTicketAction.hide();
   }
 
+  exploreopen(t){
+    console.log(t)
+  }
 }

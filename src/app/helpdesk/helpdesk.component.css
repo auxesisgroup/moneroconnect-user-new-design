@@ -115,3 +115,26 @@ p.stmt {
     /* font-family: serif; */
     font-weight: 600;
 }
+
+img.explorechat {
+    width: 30px;
+    height: 30px;
+    box-shadow: 1px 2px 10px 1px #2a3b71;
+    border-radius: 50%;
+    border-color: #2a3b71;
+    cursor: pointer;
+    /* -webkit-transition: width 1s, height 1s; 
+    transition: width 1s, height 1s; */
+}
+img.explorechat:hover {
+    /* width: 35px;
+    height: 35px; */
+    box-shadow: 2px 4px 20px 2px #2a3b71;
+    border-radius: 50%;
+    border-color: #2a3b71;
+    cursor: pointer;
+}
+/* td img.explorechat {
+    margin-top: 5px;
+    margin-bottom: 5px;
+} */

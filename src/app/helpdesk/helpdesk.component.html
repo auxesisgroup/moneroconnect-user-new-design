@@ -75,6 +75,7 @@
                             <th>Time</th>
                             <th>Status</th>
                             <th>Action</th>
+                            <th>Explore</th>
                           </tr>
                         </thead>
                         <tbody *ngIf="user_tickets_listshow == 1">
@@ -102,6 +103,9 @@
                               </div> -->
                               <img *ngIf="t.status == 'open'" src="assets/img/pics/closed.png" title="Close Ticket" class="deskactionimg" (click)="closedticket(t)">
                               <img *ngIf="t.status == 'close'" src="assets/img/pics/reopen.png" title="Reopen Ticket" class="deskactionimg" (click)="reopenticket(t)">
+                            </td>
+                            <td>
+                              <img src="assets/img/pics/network.png" class="explorechat" (click)="exploreopen(t)"><br>
                             </td>
                           </tr>
                         </tbody>

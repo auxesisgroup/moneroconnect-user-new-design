@@ -167,7 +167,7 @@ export class LoginComponent implements OnInit {
     this.errmsg = msg;
     setTimeout(()=>{
       this.errmsg = "";
-    },2500);
+    },2500); 
   }
 
   validateEmail(email) {
