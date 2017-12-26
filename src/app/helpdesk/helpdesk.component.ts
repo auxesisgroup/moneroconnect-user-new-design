@@ -77,6 +77,16 @@ export class HelpdeskComponent implements OnInit {
   @ViewChild('ticketmodal') ticketmodal:ElementRef;
   modalTicketAction: BsModalRef;
   ticketModalData:any = [];
+
+
+
+  @ViewChild('chatview') public chatview:ElementRef;
+  username:string;
+  chatTicketPanel:number = 0;
+  chatTicketID:any;
+  chatTicketeMessages:any = [];
+  sendtext:any;
+  chatinterval;
   
   constructor(
     public serv:ServiceapiService,
@@ -105,6 +115,8 @@ export class HelpdeskComponent implements OnInit {
   ngOnInit() {
     this.loadHelpAuth();
     this.signup.checkActivity();
+    // this.chatview.nativeElement.style.width = "400px";    
+    this.chatview.nativeElement.style.display = "none"; 
   }
 
   loadHelpAuth(){
@@ -120,6 +132,10 @@ export class HelpdeskComponent implements OnInit {
     else{ 
       // // console.log("isAuthorized",isAuth,cookieExists);
       this.loadAlert();  
+      let name = this.signup.retrieveUsername("MoneroAUXMassUserName");
+      let splitname = name.split(" ");
+      // console.log(splitname)
+      this.username = splitname[0];
     } 
   }
 
@@ -212,6 +228,7 @@ export class HelpdeskComponent implements OnInit {
             let list = response.user_tickets_list;
             if(list.length>0){
               this.user_tickets_list = [];
+              let dd = [];
               _.forEach(list,(value,key)=>{
                 var desc = '';
                 var descl = (value.description).toString();
@@ -220,7 +237,7 @@ export class HelpdeskComponent implements OnInit {
                 }else{
                   desc = descl;
                 }
-                this.user_tickets_list.push({
+                dd.push({
                   rowid:(key+1),
                   category:value.category,
                   id:value._id,
@@ -233,7 +250,10 @@ export class HelpdeskComponent implements OnInit {
                   epoch:value.timestamp,
                   status:value.status
                 })
+
               });
+              dd = _.orderBy(dd,['epoch'],['desc']);
+              this.user_tickets_list = dd;
               this.user_tickets_listshow = 1;
             }else{
               this.user_tickets_listshow = 0;
@@ -602,5 +622,217 @@ export class HelpdeskComponent implements OnInit {
 
   exploreopen(t){
     console.log(t)
+    this.chatTicketID = t.id;
+    this.loadChat(t);
   }
+
+  loadChat(t){
+    this.ngxloading = true; 
+    let d = {
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
+      '_id':this.chatTicketID
+    };
+    // console.info(d);
+    this.serv.resolveApi("get_chat_details/",d)
+    .subscribe(
+      res=>{
+        this.ngxloading = false;  
+        let response = JSON.parse(JSON.stringify(res));
+        console.log(response)
+        if(response != null || response != ""){
+          // console.log(response);
+          let arr = [];
+          if(response.code == 200){
+            let chat_details = response.chat_details.messages;
+            if(chat_details == "" || chat_details == null){
+              arr.push({
+                'sendby':'user',
+                'message':t.description,
+                'time':t.timestamp
+              });
+            }else{
+              arr.push({
+                'sendby':'user',
+                'message':t.description,
+                'time':t.timestamp
+              });
+              let msg = chat_details;
+              _.forEach(msg,(value,key)=>{
+                arr.push({
+                  'sendby':value.sent_by,
+                  'message':value.message,
+                  'time':this.convertToDate(value.timestamp)
+                })
+              });
+            }
+            this.chatTicketeMessages = arr;
+            this.chatTicketPanel = 1;
+            this.openChat();
+            console.log(this.chatTicketeMessages)
+            this.chatinterval = setInterval(()=>{
+              this.loadChatIntreval(t);
+            },10000);
+          }else if(response.code == 400){
+            this.chatTicketPanel = 0;
+            this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+          }else if(response.code == 401){
+            this.signup.UnAuthlogoutFromApp();
+          }else{
+            this.chatTicketPanel = 0;
+            this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+          }
+        }else{
+          // // console.log(response);
+            this.chatTicketPanel = 0;
+          this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+        }
+      },
+      err=>{
+        this.loadingimage = false; 
+        this.ngxloading = false; 
+          // console.error(err);
+            this.chatTicketPanel = 0;
+          this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+          this.pouchserv.putErrorInPouch("loadChat()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
+          
+      }
+    );  
+  }
+
+  openChat(){
+    // let width = this.chatview.nativeElement.style.width;
+    // if(width == "400px"){
+    //   this.chatview.nativeElement.style.width = "0";
+    // }else{
+    //   this.chatview.nativeElement.style.width = "400px";
+    // }
+    this.chatview.nativeElement.style.display = "block";
+  }
+
+  closeChat(){
+    // this.chatview.nativeElement.style.width = "0";
+    clearInterval(this.chatinterval);
+    this.chatview.nativeElement.style.display = "none";   
+
+  }
+
+  sendChat(){
+    if(this.sendtext == "" || this.sendtext == null){
+      this.toastr.warning('Message is required', null,{timeOut:2500});      
+    }else{
+      console.log(this.sendtext);
+      let arr = this.chatTicketeMessages;
+      console.log("before",this.chatTicketeMessages);
+
+
+      let d = {
+        'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+        'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
+        '_id':this.chatTicketID,
+        'message':this.sendtext
+      };
+      // console.info(d);
+      this.serv.resolveApi("send_user_message/",d)
+      .subscribe(
+        res=>{
+          let response = JSON.parse(JSON.stringify(res));
+          // console.log(response)
+          if(response != null || response != ""){
+            // console.log(response);
+            let arr = [];
+            if(response.code == 200){
+              if(response.success == true){
+
+              }
+            }else if(response.code == 400){
+              this.toastr.error('Unable to send message', 'Abandoned!',{timeOut:2500});
+            }else if(response.code == 401){
+              this.signup.UnAuthlogoutFromApp();
+            }else{
+              this.toastr.error('Unable to send message', 'Abandoned!',{timeOut:2500});
+            }
+          }else{
+            this.toastr.error('Unable to send message', 'Abandoned!',{timeOut:2500});
+          }
+        },
+        err=>{
+            this.toastr.error('Unable to send message', 'Abandoned!',{timeOut:2500});
+            this.pouchserv.putErrorInPouch("sendChat()","Response error in component "+"ReferralComponent","'Moneroconnect' app the exception caught is "+JSON.stringify(err),1);
+            
+        }
+      );  
+
+      let t = moment().unix();
+      arr.push({
+        'sendby':'user',
+        'message':this.sendtext,
+        'time':moment.unix(t).fromNow()
+      })
+      this.chatTicketeMessages = arr;
+      this.sendtext = "";
+      console.log("after",this.chatTicketeMessages);
+    }
+  }
+
+  loadChatIntreval(t){
+    let d = {
+      'email':this.signup.retrieveFromLocal("MoneroAUXUserEmail"),
+      'token':this.signup.retrieveFromLocal("MoneroAUXHomeUserToken"),
+      '_id':this.chatTicketID
+    };
+    // console.info(d);
+    this.serv.resolveApi("get_chat_details/",d)
+    .subscribe(
+      res=>{ 
+        let response = JSON.parse(JSON.stringify(res));
+        console.log(response)
+        if(response != null || response != ""){
+          // console.log(response);
+          let arr = [];
+          if(response.code == 200){
+            let chat_details = response.chat_details.messages;
+            if(chat_details == "" || chat_details == null){
+              arr.push({
+                'sendby':'user',
+                'message':t.description,
+                'time':t.timestamp
+              });
+            }else{
+              arr.push({
+                'sendby':'user',
+                'message':t.description,
+                'time':t.timestamp
+              });
+              let msg = chat_details;
+              _.forEach(msg,(value,key)=>{
+                arr.push({
+                  'sendby':value.sent_by,
+                  'message':value.message,
+                  'time':this.convertToDate(value.timestamp)
+                })
+              });
+            }
+            this.chatTicketeMessages = arr;
+            console.log(this.chatTicketeMessages)
+          }else if(response.code == 400){
+            // this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+          }else if(response.code == 401){
+            this.signup.UnAuthlogoutFromApp();
+          }else{
+            // this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+          }
+        }else{
+          // // console.log(response);
+          //   this.chatTicketPanel = 0;
+          // this.toastr.error('Unable to find support messages', 'Abandoned!',{timeOut:2500});
+        }
+      },
+      err=>{
+        // this.ngxloading = false; 
+          // console.error(err);
+      }
+    );  
+  }
+
 }

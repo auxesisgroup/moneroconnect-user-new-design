@@ -101,8 +101,8 @@
                                   <option>Mark Reopen</option>
                                 </select>
                               </div> -->
-                              <img *ngIf="t.status == 'open'" src="assets/img/pics/closed.png" title="Close Ticket" class="deskactionimg" (click)="closedticket(t)">
-                              <img *ngIf="t.status == 'close'" src="assets/img/pics/reopen.png" title="Reopen Ticket" class="deskactionimg" (click)="reopenticket(t)">
+                              <img *ngIf="t.status == 'open'" src="assets/img/pics/reopen.png" title="Close Ticket" class="deskactionimg" (click)="closedticket(t)">
+                              <img *ngIf="t.status == 'close'" src="assets/img/pics/closed.png" title="Reopen Ticket" class="deskactionimg" (click)="reopenticket(t)">
                             </td>
                             <td>
                               <img src="assets/img/pics/network.png" class="explorechat" (click)="exploreopen(t)"><br>
@@ -324,10 +324,63 @@
       
                     </div>
                   </div>
-              </ng-template>
-              <!-- Help Modal -->
+            </ng-template>
+            <!-- Help Modal -->
 
 
+            <!-- chat view -->
+            <div id="chatview" class="chatview"  #chatview>
+              <div class="panel panel-success chatpanel">
+                <div class="panel-heading chatheader">
+                  Ask Our Support Team For Ticket<br>
+                  {{chatTicketID}}
+                  <i class="fa fa-times forchatclose" (click)="closeChat()" aria-hidden="true"></i>                  
+                </div>
+                <div class="panel-body chatbody">
+                  <div class="nochats" *ngIf="chatTicketPanel == 0">
+                    <h5 class="nomsgs">Message to our Monero support team to resolve your issues...</h5>
+                    <img src="assets/img/pics/service.png" class="noimg" alt="service">
+                    <p class="notxt">Your issues are replied when our support team is available</p>
+                  </div>
+                  <div class="chats" *ngIf="chatTicketPanel == 1">
+                    <div *ngFor="let m of chatTicketeMessages">
+                      <div class="support" *ngIf="m.sendby == 'admin'">
+                        <div class="col1">
+                            <img src="assets/img/pics/admin.png" class="imgsupport" alt="support">                          
+                        </div>
+                        <div class="col2">
+                            <div class="supportview">
+                                <p class="supportmsg">{{m.message}}</p>
+                                <p class="supportp"><i class="supporti">{{m.time}}</i></p>
+                            </div>    
+                        </div>
+                      </div>
+
+                      <div class="user" *ngIf="m.sendby == 'user'">
+                        <div class="colu1">
+                            <div class="userview">
+                                <p class="usermsg">{{m.message}}</p>
+                                <p class="userp"><i class="useri">{{m.time}}</i></p>
+                            </div>
+                        </div>
+                        <div class="colu2">
+                            <img src="assets/img/pics/man.png" class="imguser" alt="{{username}}">                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer chatfooter">
+                  <div class="form-group">
+                    <!-- <input type="text" class="form-control" id="message" placeholder="Your Message..." [(ngModel)]="sendtext"> -->
+                    <textarea class="form-control" rows="1" id="message" placeholder="Your Message..." [(ngModel)]="sendtext"></textarea>
+                  </div>
+                  <!-- <button type="button" class="btn btn-default sendbutton"></button> -->
+                  <img src="assets/img/pics/right-arrow.png" class="sendbtnicon" (click)="sendChat()">
+                </div>
+              </div>  
+            </div>              
+            <!-- chat -->
 
           </div><!--topbar-->
         </div>
