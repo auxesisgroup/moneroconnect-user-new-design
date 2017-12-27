@@ -1,5 +1,5 @@
-<div class="col-sm-12 nopad">
-        <button class="btn btn-default btn-block" id="openmodal" [disabled]="starterDisableButton" data-toggle="modal" (click)="open_recieve_modal(ethmodal)">
+<div class="col-sm-12 nopad nomodeltr">
+        <button class="btn btn-primary  btnmodaltr" id="openmodal" [disabled]="starterDisableButton" data-toggle="modal" (click)="open_recieve_modal(ethmodal)">
             <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
         </button>
     </div>
@@ -23,11 +23,11 @@
               <span id="modal-header-content">{{ethmodaltitle}}</span>
           </h3> -->
           <div class="tab-content">
-            <!-- <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveETH == 0">
+            <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveETH == 0">
 
-                <div class="container-fluid">
+                <!-- <div class="container-fluid">
                     <h4 class="pull-left">Provide detail:</h4>
-                </div>
+                </div> -->
                 <div class="container-fluid">
                     <div class="col-sm-3 text-center">
                             <h5>Select Wallet</h5>
@@ -64,7 +64,7 @@
                             <button type="button" class="btn btn-primary btn-block" (click)="nexteth1_1()">
                                 Submit & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
                             </button>
-                            <p class="text-center">Skip this for now</p>
+                            <!-- <p class="text-center">Skip this for now</p> -->
                         </div>
                         <button type="button" class="btn btn-primary btn-block" *ngIf="toETH == 1" (click)="nexteth1_2()">
                             Review & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
@@ -74,7 +74,7 @@
                         </button>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="tab-content">
             <div class="tab-pane fade in active" id="step1RecieveBTH" #step1RecieveBTH *ngIf="stepRecieveETH == 1">

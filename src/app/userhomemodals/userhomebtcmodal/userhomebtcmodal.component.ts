@@ -193,7 +193,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       this.serv.resolveApi("validate_token_amount",d)
       .subscribe(
         res=>{
-          //console.log(res,d);
+          // console.log("validate_token_amnt",res,d);
           
           let response = JSON.parse(JSON.stringify(res));
           if(response != null || response != ""){
@@ -238,10 +238,10 @@ export class UserhomebtcmodalComponent implements OnInit {
     //     modalBTC,
     //     Object.assign({}, this.config, { class: 'gray modal-md' })
     // );
-    this.serv.resolveApi("pay_with_currency/",d)
+    this.serv.resolveApi("pay_with_currency/",d) 
     .subscribe(
       (res)=>{
-        // console.log(res);
+        // console.log("pay_with_curr",res);
         let response = JSON.parse(JSON.stringify(res));
         if(response.code == 200){
           let to_address = response.to_address;
@@ -255,6 +255,11 @@ export class UserhomebtcmodalComponent implements OnInit {
             if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
               this.serv.saveToLocal("MoneroAUXBTCTransactionWN",erc_wallet);
               this.serv.saveToLocal("MoneroAUXBTCTransactionWA",erc_address);
+              this.toBTC = 1;//show review and submit btn
+              this.btcwalletname = erc_wallet;
+              this.btcwalletaddress = erc_address;
+            }else{
+              this.toBTC = 0;
             }
             this.modalRef = this.modalService.show(
                 modalBTC,
@@ -271,7 +276,7 @@ export class UserhomebtcmodalComponent implements OnInit {
               let f =  response.amount_to_pay;
               this.amount_to_pay = this.roundUp(f, 1000000);// response.amount_to_pay;
             }
-            this.stepRecieveBTH = 1;this.btcmodaltitle = "Pay through BTC";
+            this.stepRecieveBTH = 0;this.btcmodaltitle = "Pay through BTC";
  
 
             //this.childModal.show();
@@ -298,7 +303,7 @@ export class UserhomebtcmodalComponent implements OnInit {
   /****
    * BTC Payment
    */
-  //Screen1 Not required for XMRCcryp
+  //Screen1 required for XMRCcryp
   doTheseIfChangeDetectInBTC(val){
     //console.log(this.btcwalletaddress,this.btcwalletname);//console.log(val.target.value);
     if(this.toBTC == 1 || this.toBTC == 2){
@@ -320,9 +325,9 @@ export class UserhomebtcmodalComponent implements OnInit {
   }
   nextbtc1_1(){//if not store wallet name and wallet address
     if(this.btcwalletname == "" || this.btcwalletname == null || this.btcwalletname == undefined){
-      this.toastr.warning('Wallet name is required', 'Form is empty!');
+      this.toastr.warning('Wallet name is required', null);
     }else if(this.btcwalletaddress == "" || this.btcwalletaddress == null || this.btcwalletaddress == undefined){
-      this.toastr.warning('Wallet address is required', 'Form is empty!');
+      this.toastr.warning('Wallet address is required', null);
     }else{
       this.serv.saveToLocal("MoneroAUXBTCTransactionWN",this.btcwalletname);
       this.serv.saveToLocal("MoneroAUXBTCTransactionWA",this.btcwalletaddress);
@@ -348,9 +353,9 @@ export class UserhomebtcmodalComponent implements OnInit {
   } 
   nextbtc1_3(){//if updated wallet name & address then to 2nd refund address modal
     if(this.btcwalletname == "" || this.btcwalletname == null || this.btcwalletname == undefined){
-      this.toastr.warning('Wallet name is required', 'Form is empty!');
+      this.toastr.warning('Wallet name is required', null);
     }else if(this.btcwalletaddress == "" || this.btcwalletaddress == null || this.btcwalletaddress == undefined){
-      this.toastr.warning('Wallet address is required', 'Form is empty!');
+      this.toastr.warning('Wallet address is required', null);
     }else{
       this.serv.saveToLocal("MoneroAUXBTCTransactionWN",this.btcwalletname);
       this.serv.saveToLocal("MoneroAUXBTCTransactionWA",this.btcwalletaddress);

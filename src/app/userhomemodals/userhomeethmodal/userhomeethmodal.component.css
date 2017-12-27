@@ -5,3 +5,13 @@ select.walletselect {
     border: 0px solid;
     height: 40px;
 }
+
+
+.tab-content {
+    padding: 0px;
+}
+button.btnmodaltr {
+    width: 25%;
+    margin-left: -15px;
+    margin-bottom: 10px;
+}

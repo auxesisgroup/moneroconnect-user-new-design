@@ -1,8 +1,8 @@
- <div class="col-sm-12 nopad">
+ <div class="col-sm-12 nopad nomodeltr">
         <!-- <button class="btn btn-default btn-block" id="openmodal" data-toggle="modal" *ngIf="starterDisableButton" (click)="open_recieve_modal(btcmodal)">
             <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
         </button> -->
-        <button class="btn btn-default btn-block" id="openmodal" data-toggle="modal" [disabled]="starterDisableButton" (click)="open_recieve_modal(btcmodal)">
+        <button class="btn btn-primary btnmodaltr " id="openmodal" data-toggle="modal" [disabled]="starterDisableButton" (click)="open_recieve_modal(btcmodal)">
             <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
         </button>
     </div>
@@ -26,15 +26,15 @@
               <span id="modal-header-content">{{btcmodaltitle}}</span>
           </h3> -->
           <div class="tab-content">
-            <!-- <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveBTH == 0">
+            <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveBTH == 0">
 
-                <div class="container-fluid">
+                <!-- <div class="container-fluid">
                     <h4 class="pull-left">Provide detail:</h4>
-                </div>
+                </div> -->
                 <div class="container-fluid">
                     <div class="col-sm-3 text-center">
                         <h5>Select Wallet</h5>
-                        </div>
+                        </div> 
                     <div class="col-sm-9 text-center">
                         <select class="walletselect" id="btcwalletname" name="btcwalletname" [(ngModel)]="btcwalletname" (change)="btcwalletnamechange($event)">
                             <option selected="selected" value="Mist">Mist
@@ -67,7 +67,7 @@
                             <button type="button" class="btn btn-primary btn-block" (click)="nextbtc1_1()">
                                 Submit & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
                             </button>
-                            <p class="text-center">Skip this for now</p>
+                            <!-- <p class="text-center">Skip this for now</p> -->
                         </div>
                         <button type="button" class="btn btn-primary btn-block" *ngIf="toBTC == 1" (click)="nextbtc1_2()">
                             Review & Next&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
@@ -77,7 +77,7 @@
                         </button>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="tab-content">
             <div class="tab-pane fade in active" id="step1RecieveBTH" #step1RecieveBTH *ngIf="stepRecieveBTH == 1">

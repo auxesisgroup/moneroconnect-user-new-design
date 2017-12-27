@@ -64,6 +64,9 @@ import { AddreferralwithsidebarComponent } from './addreferralwithsidebar/addref
 import { KycwithsidebarComponent } from './kycwithsidebar/kycwithsidebar.component';
 import { KycwithsidebarviewpdfComponent } from './kycwithsidebarviewpdf/kycwithsidebarviewpdf.component';
 import { HelpdeskComponent } from './helpdesk/helpdesk.component';
+import { NavbarnewComponent } from './layouts/navbarnew/navbarnew.component';
+import { SidebarnewComponent } from './layouts/sidebarnew/sidebarnew.component';
+import { FooterpageComponent } from './layouts/footerpage/footerpage.component';
 
 // export const firebaseConfig = {
 //   "apiKey": "AIzaSyCdpzVX0tq6uLoEgBpwEXDH7wr4zDnkcHQ",
@@ -107,6 +110,9 @@ export const firebaseConfig = {
     KycwithsidebarComponent,
     KycwithsidebarviewpdfComponent,
     HelpdeskComponent,
+    NavbarnewComponent,
+    SidebarnewComponent,
+    FooterpageComponent,
     // CeiboShare
   ],
   imports: [

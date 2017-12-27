@@ -119,6 +119,9 @@ export class LoginComponent implements OnInit {
         'left': 0,
         'right': 0,
         'bottom': 0,
+        'background':"url('assets/img/mainbg.jpg')"
+        // '#000f36'
+        // 'background-color':'#000f36'
     };
 
     this.myparams1 = {

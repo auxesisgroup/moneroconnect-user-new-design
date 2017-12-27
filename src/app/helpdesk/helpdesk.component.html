@@ -1,388 +1,375 @@
-
-<app-navbar></app-navbar>
+<app-navbarnew></app-navbarnew> 
 <ngx-loading [show]="ngxloading"></ngx-loading>
-<section id="main-sec">  
-  <div class="container-fluid" id="main-container">
-      <div class="hidden-xs">
-          <div id="sidebar-wrapper">
-              <nav id="sidenav" #sidenav>
-                  <app-sidemenu></app-sidemenu>
-              </nav>
-          </div>
-      </div> 
-      <div class="col-sm-9 col-md-10 col-xs-12 pull-right nopad">
-
-          
-
-        <div id="topbar">
-          
-          <div class="container-fluid">
-              <div class="row">
-                <div class="col-sm-12">&nbsp;</div>
-
-                <!-- <div class="col-md-12">Help Desk:</div> -->
-
-                <div class="col-sm-12 text-center">
-                  <div class="col-sm-12 col-xs-12">
-                    <h2 class="h2stmt"><i class="fa fa-life-ring" aria-hidden="true"></i>
-                    Facing any issue?</h2>
-                  </div>
-                  <div class="col-sm-12 col-xs-12">
-                    <p class="stmt">Please raise a ticket and our support team will reach back to you under 24 hours or less. </p>
-                  </div>
-                  <!-- <div class="col-sm-4 col-xs-12">
-                    <i class="fa fa-envelope" aria-hidden="true"></i><br>
-                    Message
-                  </div> -->
-                </div>
-
-                <div class="col-sm-12 col-md-12 text-center">
-                  <button type="button" class="btn raiseticket" (click)="raisemodal(helpmodal)">
-                      <i class="fa fa-ticket" aria-hidden="true">&nbsp;&nbsp;Raise a ticket</i>
-                  </button>
-                </div>
-
-              </div>
-          </div>
-
-
-          <!-- <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12 tablerow"> -->
-
-
-
-          <div class="panel-group" #panelScroll>
-              
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" href="#collapse1" (click)="toscroll()"><b>Help Desk Reviews</b></a>
-                </h4>
-              </div>      
-              <div id="collapse1" class="panel-collapse collapse in">
-                <div class="panel-body">
-
-                  <div style="overflow-x:auto;">
-                      <div class="table-responsive">           
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Ticket No.</th>
-                            <th>Category</th>
-                            <th>Subject</th>
-                            <th>Message</th>
-                            <th>Time</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                            <th>Explore</th>
-                          </tr>
-                        </thead>
-                        <tbody *ngIf="user_tickets_listshow == 1">
-                          <tr *ngFor = "let t of user_tickets_list">
-                            <td class="tids" title="See the detail for {{t.id}}" (click)="seedetail(t)">{{t.id}}</td>
-                            <td>{{t.category}}</td>
-                            <td>{{t.subject}}</td>
-                            <td title="{{t.description}}">
-                              <!-- <textarea class="form-control" rows="3" id="message" disabled> -->
-                                {{t.shortdesc}}
-                              <!-- </textarea> -->
-                            </td>
-                            <td>{{t.timestamp}}</td>
-                            <td>
-                              <p *ngIf="t.status == 'open'"><b>Open</b></p>
-                              <p *ngIf="t.status == 'close'">Close</p>
-                            </td>
-                            <td>
-                              <!-- <div class="form-group">
-                                <select class="form-control" id="action1" #selectAction (change)="actionchange($event,selectAction)">
-                                  <option [selected]="acvalue == acappendvalue" value="0">Select</option>
-                                  <option>Mark Close</option>
-                                  <option>Mark Reopen</option>
-                                </select>
-                              </div> -->
-                              <img *ngIf="t.status == 'open'" src="assets/img/pics/reopen.png" title="Close Ticket" class="deskactionimg" (click)="closedticket(t)">
-                              <img *ngIf="t.status == 'close'" src="assets/img/pics/closed.png" title="Reopen Ticket" class="deskactionimg" (click)="reopenticket(t)">
-                            </td>
-                            <td>
-                              <img src="assets/img/pics/network.png" class="explorechat" (click)="exploreopen(t)"><br>
-                            </td>
-                          </tr>
-                        </tbody>
-                        <tbody *ngIf="user_tickets_listshow == 0">
-                          <tr>
-                            <td colspan="7">
-                              <div class="alert alert-danger">
-                                  <strong>No Records!</strong> There is no raise ticket detail in helpdesk panel.
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                        <tbody *ngIf="user_tickets_listshow == 2">
-                          <tr>
-                            <td colspan="6">
-                              Loading...
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-              <!-- </div>
-            </div>
-          </div> -->
-
-
-            <!-- Help Modal -->
-            <ng-template #helpmodal>
-              <div class="modal-header">
-                  <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h4 id="myModalLabel" class="noMarg text-left issuemodallabel">
-                          <span class="pull-left padRightOnly" style="font-size:28px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                      <span id="modal-header-content">Provide following information to raise a ticket</span>
-                  </h4>
-                </div>
-                <div class="modal-body customModalHeight" id="normalModalBody">
-                  <div class="tab-content text-center">
-    
-                    <div class="tab-pane fade in active">
-                      <form [formGroup]="formHelp" (ngSubmit)="callhelpdesk()">
-                      <div class="container-fluid helpcfdiv">
-                        <div class="col-sm-12">
-                          <div class="card helpcarddiv">
-                              <div class="card-body">
-
-                                  <div class="row">
-                                    <div class="col-md-4 modalissuelabel">
-                                        <label for="issuecat">Issue Category:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            
-                                            <select class="form-control" id="issuecat" formControlName="category">
-                                              <option [selected]="true" [value]="0">Select Category</option>
-                                              <option *ngFor="let c of categorylistoption" [value]="c.category">{{c.category}}</option>
-                                            </select>
-                                          </div>
-                                    </div>
-
-                                    <div class="col-md-4 modalissuelabel">
-                                        <label for="subject">Subject:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            
-                                            <input type="text" class="form-control" id="subject" formControlName="subject">
-                                          </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4 modalissuelabel">
-                                      <label for="phone">Phone number:</label>
-                                    
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <input type="number" class="form-control" id="phone" formControlName="phone">
-                                          </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4 modalissuelabel">
-                                        <label for="message">Message:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            
-                                            <textarea class="form-control" rows="6" id="message" formControlName="message"></textarea>
-                                          </div>
-                                    </div>
-                                    
-                                    <!-- <div class="col-md-4 modalissuelabel">
-                                        <label for="attach">Attachment:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            
-                                            <input type="file" class="form-control" id="attach"  formControlName="attachment" accept=".png, .jpg, .jpeg, application/pdf"  (change)="onFileChange2($event)" #fileInput2  multiple>
-                                          </div>
-                                    </div> -->
-
-                                  </div>
-                                
-                                  
-                                  
-                                  
-                                  
-                                  
-                                
-
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="container-fluid">
-                          <div class="col-sm-12 text-center">
-                              <br>
-                              <button type="submit" class="btn btn-primary btn-block btnhelpdesk">
-                                  Submit&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
-                              </button>
-                          </div>
-                      </div>
-                      </form> 
-                    </div>
-    
-                  </div>
-                </div>
-            </ng-template>
-            <!-- Help Modal -->
-
-            <!-- confirm modal -->
-            <ng-template #actiontemplate>
-                <div class="modal-body text-center">
-                    <p>{{ticketActionMessage}}</p>
-                    <button type="button" class="btn btn-success" (click)="confirmaction()" >Yes</button>
-                    <button type="button" class="btn btn-primary" (click)="declineaction()" >No</button>
-                </div>
-            </ng-template>
-            <!-- confirm modal -->
-
-
-
-            <!-- Help Modal -->
-            <ng-template #ticketmodal>
-                <div class="modal-header">
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="hideme2()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 id="myModalLabel" class="noMarg text-left issuemodallabel">
-                            <span class="pull-left padRightOnly" style="font-size:28px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
-                        <span id="modal-header-content">Ticket No.: {{ticketModalData.id}}</span>
-                    </h4>
-                  </div>
-                  <div class="modal-body customModalHeight" id="normalModalBody">
-                    <div class="tab-content text-center">
-      
-                      <div class="tab-pane fade in active">
-                        <div class="container-fluid  tablecfhd">
-                          <div class="col-sm-12">
-                            <div class="card tablecardhd">
-                                <div class="card-body">
-  
-                                    <table class="table">
-                                        
-                                        <tbody>     
-                                          <tr class="success">
-                                            <th>Status</th>
-                                            <td class="tabletdtxt">
-                                              <p *ngIf="ticketModalData.status == 'open'"><b>Open</b></p>
-                                              <p *ngIf="ticketModalData.status == 'close'"><b>Close</b></p>
-                                            </td>
-                                          </tr>
-                                          <tr class="info">
-                                            <th>Time</th>
-                                            <td class="tabletdtxt">{{ticketModalData.timestamp}}</td>
-                                          </tr>
-                                          <tr class="warning">
-                                            <th>Category</th>
-                                            <td class="tabletdtxt">{{ticketModalData.category}}</td>
-                                          </tr> 
-                                          <tr class="danger">
-                                            <th>Subject</th>
-                                            <td class="tabletdtxt">{{ticketModalData.subject}}</td>
-                                          </tr>
-                                          <tr class="danger">
-                                            <th>Description</th>
-                                            <td class="tabletdtxt">{{ticketModalData.description}}</td>
-                                          </tr>
-                                          <tr class="info">
-                                            <th>Contact</th>
-                                            <td class="tabletdtxt">
-                                              <p *ngIf="ticketModalData.phone == 'NA' || ticketModalData.phone == '' || ticketModalData.phone == null">Not available</p>
-                                              <p *ngIf="ticketModalData.phone != 'NA'">{{ticketModalData.phone}}</p>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="container-fluid">
-                            <div class="col-sm-12 text-center">
-                                <br>
-                                <button type="submit" class="btn btn-primary btn-block btnhelpdesk" (click)="hideme2()">
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                      </div>
-      
-                    </div>
-                  </div>
-            </ng-template>
-            <!-- Help Modal -->
-
-
-            <!-- chat view -->
-            <div id="chatview" class="chatview"  #chatview>
-              <div class="panel panel-success chatpanel">
-                <div class="panel-heading chatheader">
-                  Ask Our Support Team For Ticket<br>
-                  {{chatTicketID}}
-                  <i class="fa fa-times forchatclose" (click)="closeChat()" aria-hidden="true"></i>                  
-                </div>
-                <div class="panel-body chatbody">
-                  <div class="nochats" *ngIf="chatTicketPanel == 0">
-                    <h5 class="nomsgs">Message to our Monero support team to resolve your issues...</h5>
-                    <img src="assets/img/pics/service.png" class="noimg" alt="service">
-                    <p class="notxt">Your issues are replied when our support team is available</p>
-                  </div>
-                  <div class="chats" *ngIf="chatTicketPanel == 1">
-                    <div *ngFor="let m of chatTicketeMessages">
-                      <div class="support" *ngIf="m.sendby == 'admin'">
-                        <div class="col1">
-                            <img src="assets/img/pics/admin.png" class="imgsupport" alt="support">                          
-                        </div>
-                        <div class="col2">
-                            <div class="supportview">
-                                <p class="supportmsg">{{m.message}}</p>
-                                <p class="supportp"><i class="supporti">{{m.time}}</i></p>
-                            </div>    
-                        </div>
-                      </div>
-
-                      <div class="user" *ngIf="m.sendby == 'user'">
-                        <div class="colu1">
-                            <div class="userview">
-                                <p class="usermsg">{{m.message}}</p>
-                                <p class="userp"><i class="useri">{{m.time}}</i></p>
-                            </div>
-                        </div>
-                        <div class="colu2">
-                            <img src="assets/img/pics/man.png" class="imguser" alt="{{username}}">                          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="panel-footer chatfooter">
-                  <div class="form-group">
-                    <!-- <input type="text" class="form-control" id="message" placeholder="Your Message..." [(ngModel)]="sendtext"> -->
-                    <textarea class="form-control" rows="1" id="message" placeholder="Your Message..." [(ngModel)]="sendtext"></textarea>
-                  </div>
-                  <!-- <button type="button" class="btn btn-default sendbutton"></button> -->
-                  <img src="assets/img/pics/right-arrow.png" class="sendbtnicon" (click)="sendChat()">
-                </div>
-              </div>  
-            </div>              
-            <!-- chat -->
-
-          </div><!--topbar-->
-        </div>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li class="active"><a href="#/helpdesk">
+				<em class="fa fa-bar-chart"></em>
+			</a></li>
+			<li>Help Desk</li>
+		</ol> 
     </div>
-  </section> 
+
+  <div class="row">
+      <div class="col-sm-12 text-center">
+          <div class="col-sm-12 col-xs-12">
+            <h2 class="h2stmt"><i class="fa fa-life-ring" aria-hidden="true"></i>
+            Facing any issue?</h2>
+          </div>
+          <div class="col-sm-12 col-xs-12">
+            <p class="stmt">Please raise a ticket and our support team will reach back to you under 24 hours or less. </p>
+          </div>
+          <!-- <div class="col-sm-4 col-xs-12">
+            <i class="fa fa-envelope" aria-hidden="true"></i><br>
+            Message
+          </div> -->
+        </div>
+
+        <div class="col-sm-12 col-md-12 text-center">
+          <button type="button" class="btn raiseticket" (click)="raisemodal(helpmodal)">
+              <i class="fa fa-ticket" aria-hidden="true">&nbsp;&nbsp;Raise a ticket</i>
+          </button>
+        </div>
+  </div><!--/.row-->
+  
+	<div class="row">
+      <div class="col-md-12">
+          <div class="panel panel-default"  #panelScroll>
+            <div class="panel-heading">
+              Help Desk Reviews
+              
+              <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+            <div class="panel-body">
+            
+          
+            
+              
+              <div class="row">
+                <div class="col-xs-12">
+                <div class="table-responsive">
+                  <table summary="This table shows how to create responsive tables using Bootstrap's default functionality" class="table table-bordered table-hover">
+                  
+                  <thead>
+                    <tr>
+                        <th>Ticket No.</th>
+                        <th>Category</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        <th>Explore</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="user_tickets_listshow == 1">
+                    <tr *ngFor = "let t of user_tickets_list">
+                      <td class="tids" title="See the detail for {{t.id}}" (click)="seedetail(t)">{{t.id}}</td>
+                      <td>{{t.category}}</td>
+                      <td>{{t.subject}}</td>
+                      <td title="{{t.description}}">
+                        <!-- <textarea class="form-control" rows="3" id="message" disabled> -->
+                          {{t.shortdesc}}
+                        <!-- </textarea> -->
+                      </td>
+                      <td>{{t.timestamp}}</td>
+                      <td>
+                        <p *ngIf="t.status == 'open'"><b>Open</b></p>
+                        <p *ngIf="t.status == 'close'">Close</p>
+                      </td>
+                      <td>
+                        <!-- <div class="form-group">
+                          <select class="form-control" id="action1" #selectAction (change)="actionchange($event,selectAction)">
+                            <option [selected]="acvalue == acappendvalue" value="0">Select</option>
+                            <option>Mark Close</option>
+                            <option>Mark Reopen</option>
+                          </select>
+                        </div> -->
+                        <img *ngIf="t.status == 'open'" src="assets/img/pics/reopen.png" title="Close Ticket" class="deskactionimg" (click)="closedticket(t)">
+                        <img *ngIf="t.status == 'close'" src="assets/img/pics/closed.png" title="Reopen Ticket" class="deskactionimg" (click)="reopenticket(t)">
+                      </td>
+                      <td>
+                        <img src="assets/img/pics/network.png" class="explorechat" (click)="exploreopen(t)"><br>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="user_tickets_listshow == 0">
+                    <tr>
+                      <td colspan="8">
+                          <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> No Records! There is no raise ticket detail in helpdesk panel.<a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+                          
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="user_tickets_listshow == 2">
+                    <tr>
+                      <td colspan="6">
+                        Loading...
+                      </td>
+                    </tr>
+                  </tbody>
+                  
+                  </table>
+                </div><!--end of .table-responsive-->
+                
+                
+                </div>
+              </div>
+            </div>
+  
+  
+  
+          </div>
+  
+      </div><!--/.col-->
+        
+  </div>
+
+
+  <!-- Help Modal -->
+  <ng-template #helpmodal>
+    <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideme()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 id="myModalLabel" class="noMarg text-left issuemodallabel">
+                <span class="pull-left padRightOnly" style="font-size:28px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            <span id="modal-header-content">Provide following information to raise a ticket</span>
+        </h4>
+      </div>
+      <div class="modal-body customModalHeight" id="normalModalBody">
+        <div class="tab-content text-center">
+
+          <div class="tab-pane fade in active">
+            <form [formGroup]="formHelp" (ngSubmit)="callhelpdesk()">
+            <div class="container-fluid helpcfdiv">
+              <div class="col-sm-12">
+                <div class="card helpcarddiv">
+                    <div class="card-body">
+
+                        <div class="row">
+                          <div class="col-md-4 modalissuelabel">
+                              <label for="issuecat">Issue Category:</label>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                  
+                                  <select class="form-control" id="issuecat" formControlName="category">
+                                    <option [selected]="true" [value]="0">Select Category</option>
+                                    <option *ngFor="let c of categorylistoption" [value]="c.category">{{c.category}}</option>
+                                  </select>
+                                </div>
+                          </div>
+
+                          <div class="col-md-4 modalissuelabel">
+                              <label for="subject">Subject:</label>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                  
+                                  <input type="text" class="form-control" id="subject" formControlName="subject">
+                                </div>
+                          </div>
+                          
+                          <div class="col-md-4 modalissuelabel">
+                            <label for="phone">Phone number:</label>
+                          
+                          </div>
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                  <input type="number" class="form-control" id="phone" formControlName="phone">
+                                </div>
+                          </div>
+                          
+                          <div class="col-md-4 modalissuelabel">
+                              <label for="message">Message:</label>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                  
+                                  <textarea class="form-control" rows="6" id="message" formControlName="message"></textarea>
+                                </div>
+                          </div>
+                          
+                          <!-- <div class="col-md-4 modalissuelabel">
+                              <label for="attach">Attachment:</label>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                  
+                                  <input type="file" class="form-control" id="attach"  formControlName="attachment" accept=".png, .jpg, .jpeg, application/pdf"  (change)="onFileChange2($event)" #fileInput2  multiple>
+                                </div>
+                          </div> -->
+
+                        </div>
+                      
+                        
+                        
+                        
+                        
+                        
+                      
+
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid">
+                <div class="col-sm-12 text-center">
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block btnhelpdesk">
+                        Submit&nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
+                    </button>
+                </div>
+            </div>
+            </form> 
+          </div>
+
+        </div>
+      </div>
+  </ng-template>
+  <!-- Help Modal -->
+
+  <!-- confirm modal -->
+  <ng-template #actiontemplate>
+      <div class="modal-body text-center">
+          <p>{{ticketActionMessage}}</p>
+          <button type="button" class="btn btn-primary" (click)="confirmaction()" >Yes</button>
+          <button type="button" class="btn btn-danger" (click)="declineaction()" >No</button>
+      </div>
+  </ng-template>
+  <!-- confirm modal -->
+
+
+
+  <!-- Help Modal -->
+  <ng-template #ticketmodal>
+      <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="hideme2()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 id="myModalLabel" class="noMarg text-left issuemodallabel">
+                  <span class="pull-left padRightOnly" style="font-size:28px;"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+              <span id="modal-header-content">Ticket No.: {{ticketModalData.id}}</span>
+          </h4>
+        </div>
+        <div class="modal-body customModalHeight" id="normalModalBody">
+          <div class="tab-content text-center">
+
+            <div class="tab-pane fade in active">
+              <div class="container-fluid  tablecfhd">
+                <div class="col-sm-12">
+                  <div class="card tablecardhd">
+                      <div class="card-body">
+
+                          <table class="table">
+                              
+                              <tbody>     
+                                <tr class="success">
+                                  <th>Status</th>
+                                  <td class="tabletdtxt">
+                                    <p *ngIf="ticketModalData.status == 'open'"><b>Open</b></p>
+                                    <p *ngIf="ticketModalData.status == 'close'"><b>Close</b></p>
+                                  </td>
+                                </tr>
+                                <tr class="info">
+                                  <th>Time</th>
+                                  <td class="tabletdtxt">{{ticketModalData.timestamp}}</td>
+                                </tr>
+                                <tr class="warning">
+                                  <th>Category</th>
+                                  <td class="tabletdtxt">{{ticketModalData.category}}</td>
+                                </tr> 
+                                <tr class="danger">
+                                  <th>Subject</th>
+                                  <td class="tabletdtxt">{{ticketModalData.subject}}</td>
+                                </tr>
+                                <tr class="danger">
+                                  <th>Description</th>
+                                  <td class="tabletdtxt">{{ticketModalData.description}}</td>
+                                </tr>
+                                <tr class="info">
+                                  <th>Contact</th>
+                                  <td class="tabletdtxt">
+                                    <p *ngIf="ticketModalData.phone == 'NA' || ticketModalData.phone == '' || ticketModalData.phone == null">Not available</p>
+                                    <p *ngIf="ticketModalData.phone != 'NA'">{{ticketModalData.phone}}</p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container-fluid">
+                  <div class="col-sm-12 text-center">
+                      <br>
+                      <button type="submit" class="btn btn-primary btn-block btnhelpdesk" (click)="hideme2()">
+                          Close
+                      </button>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+  </ng-template>
+  <!-- Help Modal -->
+
+
+  <!-- chat view -->
+  <div id="chatview" class="chatview"  #chatview>
+    <div class="panel panel-default chatpanel">
+      <div class="panel-heading chatheader">
+        <p>Ask Our Support Team For Ticket<br>
+        {{chatTicketID}}</p>
+        <i class="fa fa-times forchatclose" (click)="closeChat()" aria-hidden="true"></i>                  
+      </div>
+      <div class="panel-body chatbody">
+        <div class="nochats" *ngIf="chatTicketPanel == 0">
+          <h5 class="nomsgs">Message to our Monero support team to resolve your issues...</h5>
+          <img src="assets/img/pics/service.png" class="noimg" alt="service">
+          <p class="notxt">Your issues are replied when our support team is available</p>
+        </div>
+        <div class="chats" *ngIf="chatTicketPanel == 1">
+          <div *ngFor="let m of chatTicketeMessages">
+            <div class="support" *ngIf="m.sendby == 'admin'">
+              <div class="col1">
+                  <img src="assets/img/pics/admin.png" class="imgsupport" alt="support">                          
+              </div>
+              <div class="col2">
+                  <div class="supportview">
+                      <p class="supportmsg">{{m.message}}</p>
+                      <p class="supportp"><i class="supporti">{{m.time}}</i></p>
+                  </div>    
+              </div>
+            </div>
+
+            <div class="user" *ngIf="m.sendby == 'user'">
+              <div class="colu1">
+                  <div class="userview">
+                      <p class="usermsg">{{m.message}}</p>
+                      <p class="userp"><i class="useri">{{m.time}}</i></p>
+                  </div>
+              </div>
+              <div class="colu2">
+                  <img src="assets/img/pics/man.png" class="imguser" alt="{{username}}">                          
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer chatfooter">
+        <div class="form-group">
+          <!-- <input type="text" class="form-control" id="message" placeholder="Your Message..." [(ngModel)]="sendtext"> -->
+          <textarea class="form-control" rows="1" id="message" placeholder="Your Message..." [(ngModel)]="sendtext"></textarea>
+        </div>
+        <!-- <button type="button" class="btn btn-default sendbutton"></button> -->
+        <img src="assets/img/pics/right-arrow.png" class="sendbtnicon" (click)="sendChat()">
+      </div>
+    </div>  
+  </div>              
+  <!-- chat -->
+
+
+  <app-footerpage></app-footerpage>
+</div>	<!--/.main-->

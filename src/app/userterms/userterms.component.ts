@@ -82,6 +82,7 @@ export class UsertermsComponent implements OnInit {
         'left': 0,
         'right': 0,
         'bottom': 0,
+        'background':"url('assets/img/mainbg.jpg')"
     };
 
     this.myparams1 = {

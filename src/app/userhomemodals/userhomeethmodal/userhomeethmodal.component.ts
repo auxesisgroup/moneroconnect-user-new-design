@@ -237,6 +237,11 @@ export class UserhomeethmodalComponent implements OnInit {
             if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
               this.serv.saveToLocal("MoneroAUXETHTransactionWN",erc_wallet);
               this.serv.saveToLocal("MoneroAUXETHTransactionWA",erc_address);
+              this.toETH = 1;//show review and submit btn
+              this.ethwalletname = erc_wallet;
+              this.ethwalletaddress = erc_address;
+            }else{
+              this.toETH = 0;
             }
             this.modalRef = this.modalService.show(
               modalETH,
@@ -254,7 +259,7 @@ export class UserhomeethmodalComponent implements OnInit {
               let f =  response.amount_to_pay;
               this.amount_to_pay = this.roundUp(f, 1000000);// response.amount_to_pay;
             }
-             this.stepRecieveETH = 1;this.ethmodaltitle = "Pay through ETH";
+             this.stepRecieveETH = 0;this.ethmodaltitle = "Pay through ETH";
           }else{
             this.toastr.error('Minimum $20 worth of XMRC Coin can be bought. Please enter a higher amount.', null,{timeOut:2500});
           }
@@ -278,7 +283,7 @@ export class UserhomeethmodalComponent implements OnInit {
   /****
    * ETH Payment
    */
-  //Screen1 Not required for XMRCcryp
+  //Screen1 required for XMRCcryp
   doTheseIfChangeDetectInETH(val){
     //console.log(this.ethwalletaddress,this.ethwalletname);//console.log(val.target.value);
     if(this.toETH == 1 || this.toETH == 2){
@@ -300,9 +305,9 @@ export class UserhomeethmodalComponent implements OnInit {
   }
   nexteth1_1(){//if not store wallet name and wallet address
     if(this.ethwalletname == "" || this.ethwalletname == null || this.ethwalletname == undefined){
-      this.toastr.warning('Wallet name is required', 'Form is empty!');
+      this.toastr.warning('Wallet name is required', null);
     }else if(this.ethwalletaddress == "" || this.ethwalletaddress == null || this.ethwalletaddress == undefined){
-      this.toastr.warning('Wallet address is required', 'Form is empty!');
+      this.toastr.warning('Wallet address is required', null);
     }else{
       this.serv.saveToLocal("MoneroAUXETHTransactionWN",this.ethwalletname);
       this.serv.saveToLocal("MoneroAUXETHTransactionWA",this.ethwalletaddress);
@@ -328,9 +333,9 @@ export class UserhomeethmodalComponent implements OnInit {
   } 
   nexteth1_3(){//if updated wallet name & address then to 2nd refund address modal
     if(this.ethwalletname == "" || this.ethwalletname == null || this.ethwalletname == undefined){
-      this.toastr.warning('Wallet name is required', 'Form is empty!');
+      this.toastr.warning('Wallet name is required', null);
     }else if(this.ethwalletaddress == "" || this.ethwalletaddress == null || this.ethwalletaddress == undefined){
-      this.toastr.warning('Wallet address is required', 'Form is empty!');
+      this.toastr.warning('Wallet address is required', null);
     }else{
       this.serv.saveToLocal("MoneroAUXETHTransactionWN",this.ethwalletname);
       this.serv.saveToLocal("MoneroAUXETHTransactionWA",this.ethwalletaddress);

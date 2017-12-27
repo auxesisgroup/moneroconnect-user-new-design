@@ -1,416 +1,400 @@
-<app-navbar></app-navbar>
+<app-navbarnew></app-navbarnew> 
 <ngx-loading [show]="ngxloading"></ngx-loading>
-<section id="main-sec">  
-    <div class="container-fluid home" id="main-container">
-        <div class="col-sm-3 col-md-2 hidden-xs">
-            <div id="sidebar-wrapper">
-                <nav id="sidenav" #sidenav>
-                    <app-sidemenu></app-sidemenu>
-                </nav>
-            </div>
-        </div> 
-        <div class="col-sm-9 col-md-10 nopad">
-                <div id="topbar">
-                      <div class="container-fluid">
-                          <div class="col-sm-7 col-md-6 pull-left welcome_wrap">
-                              <!-- <div class="col-sm-12">
-                                  <h3 class="montBold">
-                                      Be Your Own Bank. <span style="font-size: 10px;position: absolute;"><i class="fa fa-registered" aria-hidden="true"></i></span>
-                                  </h3>
-                              </div>    -->
-                              <!-- <div class="col-sm-10 nopad">
-                                  <div class="col-sm-4">
-                                      <a class="btn btn-default btn-block" data-toggle="modal" (click)="open_send_modal('mrjaoRX9yhKxMteUEna9zYcbXBNeAxB7C7')">
-                                          <span class="pull-left"><i class="fa fa-chevron-up" aria-hidden="true"></i></span> Withdraw
-                                      </a>
-                                  </div>
-                              </div> -->
-                          </div>
-                          <div class="col-sm-4 col-md-6 col-xs-12 pull-right welcome_wrap">
-                              <div class="col-sm-12 col-xs-11 text-right">
-                                  <div class="col-sm-12 col-xs-12 nopad">
-                                      <h3 class="montBold">
-                                          <span id="balance">{{tokens}}</span> XMRC
-                                      </h3> 
-                                  </div>
-                                  <!--<div class="col-sm-12 col-xs-12 nopad">-->
-                                      <!--<h3 class="noMarg">-->
-                                          <!--INR <span id="balanceDollar">0.0</span>-->
-                                      <!--</h3>-->
-                                  <!--</div>-->
-              
-              
-                              </div>
-                          </div>
-                      </div>
-                      <hr>
-                      <!-- <div *ngIf="kycalertpanel  == 0 && kycalertpanelview == true">
-                        <div class="container-fluid">
-                            <div class="col-sm-6 col-sm-offset-3 alert alert-danger" id="email_sent" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    
-                                </button>
-                                <span>Please complete your KYC by <button class="btn btn-link" [routerLink]="['/updatekyc']">clicking here.</button> You must submit your KYC details by 31st December 2017.</span>
-                            </div>
-                        </div>
-                        <hr>
-                      </div>
-                      <div *ngIf="kycalertpanel  == 1 && kycalertpanelview == true">
-                            <div class="container-fluid">
-                                <div class="col-sm-6 col-sm-offset-3  alert alert-success" id="email_sent" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        
-                                    </button>
-                                    <span>KYC detail has been successfully approved</span>
-                                </div>
-                            </div>
-                            <hr>
-                      </div>
-                      <div *ngIf="kycalertpanel  == 2 && kycalertpanelview == true">
-                            <div class="container-fluid">
-                                <div class="col-sm-6 col-sm-offset-3  alert alert-warning" id="email_sent" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        
-                                    </button>
-                                    <span>KYC Details submitted successfully, waiting for administrator approval. You can continue buying XMRC Coins.</span>
-                                </div>
-                            </div>
-                            <hr>
-                      </div>
-                      <div *ngIf="kycalertpanel  == 3 && kycalertpanelview == true">
-                            <div class="container-fluid">
-                                <div class="col-sm-6 col-sm-offset-3  alert alert-danger" id="email_sent" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        
-                                    </button>
-                                    <span>Your KYC detail has been rejected. Report it.</span>
-                                </div>
-                            </div>
-                            <hr>
-                      </div> -->
-                          
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#/home">
+				<em class="fa fa-home"></em>
+			</a></li>
+			<li class="active">Dashboard</li>
+		</ol> 
+	</div><!--/.row-->
+	
+	<!-- <div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Dashboard</h1>
+		</div>
+	</div> -->
+	<!--/.row-->
+	
+	<!-- <div class="panel panel-container">
+		<div class="row">
+			<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="panel panel-teal panel-widget border-right">
+					<div class="row no-padding"><em class="fa fa-xl fa-users color-blue"></em>
+						<div class="large">10002</div>
+						<div class="text-muted">TOTAL MEMBERS</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="panel panel-blue panel-widget border-right">
+					<div class="row no-padding"><em class="fa fa-xl fa fa-usd color-orange"></em>
+						<div class="large">65005</div>
+						<div class="text-muted">TOTAL USD</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="panel panel-orange panel-widget border-right">
+					<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
+						<div class="large">101.09</div>
+						<div class="text-muted">ETHEREUM RAISED</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="panel panel-red panel-widget ">
+					<div class="row no-padding"><em class="fa fa-xl fa fa-btc color-red"></em>
+						<div class="large">25.22k</div>
+						<div class="text-muted">BTC RAISED</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
 
-                      <!-- <div>
-                        <div class="container-fluid">
-                            <div class="col-sm-10 col-sm-offset-1  alert alert-success" id="email_sent" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    
-                                </button>
-                                <span>Green messag</span>
-                            </div>
-                        </div>
-                        <hr>
-                    </div> -->
-                    
-                       <!--  <div class="col-sm-3 col-sm-offset-4" id="invalid_address_div" role="alert" style="display: none">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                
-                            </button>
-                            <span class="text-center text-danger">Invalid address entered. Please try again!</span>
-                        </div>
-                        <div class="col-sm-6 col-sm-offset-3 alert alert-success" id="email_sent" role="alert" style="display: none">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                
-                            </button>
-                            <span>Please click on the link provided in your mail to activate your account.</span>
-                        </div>
-                      </div>
-                      <hr> -->
-                      <div class="container-fluid " >
-                  
-                          <div id="main-content">
-                              <div class="container-fluid">
+	
+	<!-- <div class="row">
+		<div class="col-xs-6 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body easypiechart-panel">
+					<h4>Total Member</h4>
+					<div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body easypiechart-panel">
+					<h4>Total USD</h4>
+					<div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body easypiechart-panel">
+					<h4>Ethereum Raised</h4>
+					<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-body easypiechart-panel">
+					<h4>BTC Raised</h4>
+					<div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span></div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!--/.row-->
+	
+	<div class="row">
+		
+		<!-- <div class="col-sm-12 col-md-12 col-sm-pull-12" *ngIf="user_timeline_listShow == true">
+				
+					
+			<div class="col-md-12" *ngIf="showChart == true">
+				<div style="display: block;">
+				<canvas baseChart width="400" height="400"
+							[datasets]="lineChartData"
+							[labels]="lineChartLabels"
+							[options]="lineChartOptions"
+							[colors]="lineChartColors"
+							[legend]="lineChartLegend"
+							[chartType]="lineChartType"
+							(chartHover)="chartHovered($event)"
+							(chartClick)="chartClicked($event)"></canvas>
+				</div>
+			</div>
+		</div> -->
+		<div class="col-md-6" *ngIf="homeStatusDone">
+			<div class="panel panel-default ">
+				<div class="panel-heading">
+					Payment Methods
+					<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+				</div>
+				<div class="panel-body" style="background-color: #00113C;">
+				
+					<div class="input-group">
+						<input id="btn-input" type="text" class="form-control input-md" placeholder="0" [(ngModel)]="cas"  (keypress)="keyevent($event)" (keyup)="keyup($event)" />
+						<span class="input-group-btn">
+								<button class="btn btn-primary btn-md" id="btn-chat">XMRC</button>
+						</span>
+					</div>
+						
+					<div class="form-group">
+									
+						<div class="radio" style="margin-top:20px;">
+							<label style="color:#FFF;">
+								<input type="radio" id="Pay_with_BTC" name="optradio" [(ngModel)]="optradio" (click)="callToViewModalBtn('btc')" value="BTC" >Pay with BTC
+							</label>
+						</div>
+						<div class="radio">
+							<label style="color:#FFF;">
+								<input type="radio" id="Pay_with_ETH" name="optradio" [(ngModel)]="optradio" (click)="callToViewModalBtn('eth')" value="ETH">Pay with ETH
+							</label>
+						</div>
+							
+						<!-- <button type="submit" class="btn btn-primary">Pay</button> -->
+						<div class="popmodalview" *ngIf="radioclick=='btc'">
+							<app-userhomebtcmodal (click)="callme()"></app-userhomebtcmodal>
+						</div>
+						<div class="popmodalview" *ngIf="radioclick=='eth'">
+							<app-userhomeethmodal (click)="callme()"></app-userhomeethmodal>
+						</div>
+					</div>
+									<br>
+					<p style="color:#FFF;margin-top:2%">Current Rate* : $ 0.1</p>
+					<span style="color:#FFF;">* Token rate varies upon number of sold tokens.</span>
+				
+				</div>
+				
+			</div>
+			
+			<!-- <div class="panel panel-default articles">
+				<div class="panel-heading">
+					Latest News
+					<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+				<div class="panel-body articles-container">
+					<div class="article border-bottom">
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-2 col-md-2 date">
+									<div class="large">23</div>
+									<div class="text-muted">Dec</div>
+								</div>
+								<div class="col-xs-10 col-md-10">
+									<h4><a href="#">Moneroconnect</a></h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="article border-bottom">
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-2 col-md-2 date">
+									<div class="large">24</div>
+									<div class="text-muted">Dec</div>
+								</div>
+								<div class="col-xs-10 col-md-10">
+									<h4><a href="#">Moneroconnect</a></h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="article">
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-2 col-md-2 date">
+									<div class="large">26</div>
+									<div class="text-muted">Dec</div>
+								</div>
+								<div class="col-xs-10 col-md-10">
+									<h4><a href="#">Moneroconnect</a></h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div> -->
+			<!--End .articles--> 
+		
+			
+		</div><!--/.col-->
+			
 
-                                        <div class="col-sm-6 col-md-6 col-sm-push-6">
-                                            <!-- <div class="new"> -->
-                                                <div class="col-sm-12 col-md-10" *ngIf="homeStatusYet">
-                                                        <div class="alert alert-warning" *ngIf="homeStatusYetText == 'pending'">
-                                                            <strong>Note!</strong> KYC detail has been in pending stage.
-                                                        </div>
-                                                        
-                                                        <div class="alert alert-danger" *ngIf="homeStatusYetText == 'rejected'">
-                                                            <strong>Ooops!</strong> KYC detail has been rejected administrator.
-                                                        </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-10 boxshadowdiv" *ngIf="homeStatusDone">
-                                                    
-                                                    <div class="popmodaldiv">
-                                                        <h3 class="montBold">
-                                                        Payment Methods <span style="font-size: 10px;position: absolute;"><i class="fa fa-registered"  aria-hidden="true"></i></span>
-                                                        </h3>
-                                
-                                
-                                                        <div class="input-group col-sm-10">
-                                                            <input  type="text"  class="form-control" placeholder="0" [(ngModel)]="cas" aria-describedby="basic-addon2" (keypress)="keyevent($event)" (keyup)="keyup($event)">
-                                                            <!--  (keyup)="keyevent($event)"   ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"-->
-                                                            <span class="input-group-addon" id="basic-addon2">XMRC</span>
-                                                        </div>
-                                                    </div>
-                            
-                                                    <div class="col-sm-12 nopad popmodalradio">
-                            
-                                                        <div class="radio">
-                                                            <label><input type="radio" id="Pay_with_BTC" name="optradio" [(ngModel)]="optradio" (click)="callToViewModalBtn('btc')"  class="btc" value="BTC">Pay with BTC</label>
-                                                        </div>
-                            
-                            
-                                                        <div class="radio">
-                                                            <label><input type="radio" id="Pay_with_ETH" name="optradio" [(ngModel)]="optradio" (click)="callToViewModalBtn('eth')"  class="btc" value="ETH">Pay with ETH</label>
-                                                        </div>
-                            
-                            
-                            
-                                                        <!-- <div class="radio">
-                                                            <label><input type="radio" id="Pay_with_Bank" name="optradio" [(ngModel)]="optradio" (click)="callToViewModalBtn('bnk')"  class="btc" value="BNK">Pay with Bank</label>
-                                                        </div> -->
-                            
-                            
-                                                    </div>
-    
-                                                    <div class="popmodalview" *ngIf="radioclick=='btc'">
-                                                        <app-userhomebtcmodal (click)="callme()"></app-userhomebtcmodal>
-                                                    </div>
-                                                    <div class="popmodalview" *ngIf="radioclick=='eth'">
-                                                        <app-userhomeethmodal (click)="callme()"></app-userhomeethmodal>
-                                                    </div>
+		<div class="col-md-6 " *ngIf="user_timeline_listShow == false">
+				<div class="panel panel-default " >
+					<div class="panel-heading">
+						Most Recent Activity
+					
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+					</div>
+					<div class="panel-body timeline-container" style="background-color: #00113C;">
+						<ul class="timeline">
+							<li>
+								<div class="timeline-badge primary"><em class="glyphicon glyphicon-pushpin"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">You logged into Moneroconnect ICO Platform</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge"><em class="glyphicon glyphicon-link"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge"><em class="glyphicon glyphicon-camera"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge"><em class="glyphicon glyphicon-paperclip"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div><!--/.col-->
 
-                                                    <!-- <div class="p due">
-                                                        ICO Platform start on 9 AM UTC +0.00.
-                                                    </div> -->
-                                                    <div class="currentrate">
-                                                        Current Rate* : $ {{current_rate?current_rate:0}}
-                                                    </div>
-                                                    <div class="divsolddescription">
-                                                        * Token rate varies upon number of sold tokens.
-                                                    </div>
-                                                    <!-- <div *ngIf="radioclick=='bnk'">
-                                                        <app-userhomebnkmodal></app-userhomebnkmodal>
-                                                    </div> -->
-    
-                                                    <!-- {{ok}}  -->
-    
-                                                    <!-- <div class="col-sm-12 nopad">
-                                                        <a class="btn btn-default btn-block" id="openmodal" data-toggle="modal" (click)="open_recieve_modal(btcmodal,ethmodal,bankmodal)">
-                                                            <span class="pull-left"></span> Pay &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimgdone">
-                                                        </a>
-                                                    </div> -->
-                            
-    
-                                                    <!-- Modal Starts -->
-                                                    <!-- Modal BTH -->
-                                                    <!-- <div id="btcmodal">
-                                                    <ng-template #btcmodal>
-                                                        <app-userhomebtcmodal></app-userhomebtcmodal>
-                                                    </ng-template>
-                                                    </div>
-    
-                                                    <ng-template #ethmodal>
-                                                    <app-userhomeethmodal></app-userhomeethmodal>
-                                                    </ng-template>
-                                                    <ng-template #bankmodal>
-                                                        <app-userhomebnkmodal></app-userhomebnkmodal>
-                                                    </ng-template> -->
-                                                    <!-- Modal Ends -->
-                            
-                                                </div>
-                                            <!-- </div> -->
-                                        </div>
+		<div class="col-md-6 " *ngIf="user_timeline_listShow == true">
+			<div class="panel panel-default " >
+				<div class="panel-heading">
+					Most Recent Activity
+				
+					<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+				</div>
+				<div class="panel-body timeline-container" style="background-color: #00113C;">
+					<ul class="timeline">
+						<li *ngFor="let t of user_timeline_list | orderBy: timestamp: reverse">
 
-                                    <!-- <div class="col-sm-6 col-md-6 col-sm-pull-6" *ngIf="user_timeline_listShow == true">
-                                      
-                                        
-                                        <div class="col-md-12" *ngIf="showChart == true">
-                                            <div style="display: block;">
-                                            <canvas baseChart width="400" height="400"
-                                                        [datasets]="lineChartData"
-                                                        [labels]="lineChartLabels"
-                                                        [options]="lineChartOptions"
-                                                        [colors]="lineChartColors"
-                                                        [legend]="lineChartLegend"
-                                                        [chartType]="lineChartType"
-                                                        (chartHover)="chartHovered($event)"
-                                                        (chartClick)="chartClicked($event)"></canvas>
-                                            </div>
-                                        </div>
-                                    </div> -->
+							<ng-container *ngIf="t.type == 'btc_transaction'">
+								<div class="timeline-badge primary"><em class="fa fa-btc"></em></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<!-- <h4 class="timeline-title" style="color:#FFF;">Transaction</h4> -->
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">Purchase of {{t.mass}} XMRC Coin successful with {{t.amount}} BTC </p>
+										<div class="col-md-12 text-right">
+												<i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
+										</div>
+									</div>
+								</div>
+							</ng-container>
 
-                                    <div class="col-sm-6 col-md-6 col-sm-pull-6 myactivitypanel" *ngIf="user_timeline_listShow == true">
-                                        <h5 class="montBold">
-                                          Most Recent Activity
-                                      </h5>
-                  
-                                      <div class="timeline">
-                  
-                                          <!-- Line component -->
-                                          <div class="line text-muted"></div>
-                    
-                                          <!-- <article class="panel panel-default" *ngFor="let t of user_timeline_list | orderBy: timestamp: reverse">
-                                              <div class="panel-heading icon">
-                                                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                              </div>
-                                              <div class="panel-body"> 
-                                                  <div class="col-md-6 col-sm-6">
-                                                        Transaction
-                                                  </div>
-                                                  <div class="col-md-6 col-sm-6 text-right">
-                                                        <i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
-                                                  </div>
-                                                  <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'btc_transaction'">
-                                                    <span class="recieve done">BTC done with amount </span>     
-                                                        <i class="fa fa-btc" aria-hidden="true"></i> {{t.content}}
-                                                  </div>
-                                                  <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'eth_transaction'">
-                                                        <span class="recieve done">ETH done with amount </span>   
-                                                        <img class="ethereum home" src="assets/img/ethereum.png"> {{t.content}}
-                                                  </div>
-                                                  <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'payment_initiation'">
-                                                        <span class="recieve" >Payment initiated of </span> 
-                                                        <i class="fa fa-btc" aria-hidden="true" *ngIf="t.currency == 'btc'"></i>
-                                                        <img class="ethereum home" src="assets/img/ethereum.png" *ngIf="t.currency == 'eth'"> {{t.content}}
+							<ng-container *ngIf="t.type == 'eth_transaction'">
+								<div class="timeline-badge primary"><img class="ethereumico home" src="assets/img/ethereumico.png"></div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<!-- <h4 class="timeline-title" style="color:#FFF;">Transaction</h4> -->
+									</div> 
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">Purchase of {{t.mass}} XMRC Coin successful with {{t.amount}} ETH</p>
+										<div class="col-md-12 text-right">
+												<i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
+										</div>
+									</div>
+								</div>
+							</ng-container>
 
-                                                  </div>
-                  
-                                              </div>
-                                          </article> -->
-                  
-                                                <article class="panel panel-default"  *ngFor="let t of user_timeline_list | orderBy: timestamp: reverse">
-                                                    <div class="panel-heading icon"  *ngIf="t.type == 'btc_transaction'">
-                                                            <i class="fa fa-btc" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="panel-heading icon"  *ngIf="t.type == 'eth_transaction'">
-                                                            <img class="ethereumico home" src="assets/img/ethereumico.png">
-                                                    </div>
-                                                    <div class="panel-heading icon"  *ngIf="t.type == 'text'">
-                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="panel-heading icon"  *ngIf="t.type == 'payment_initiation'">
-                                                        <i class="fa fa-btc" aria-hidden="true" *ngIf="t.currency == 'btc'"></i>
-                                                        <img class="ethereumico home" src="assets/img/ethereumico.png"  *ngIf="t.currency == 'eth'">
-                                                    </div>
+							<ng-container *ngIf="t.type == 'text'">
+								<div class="timeline-badge primary" *ngIf="t.content == 'signup'"><em class="glyphicon glyphicon-pushpin"></em></div>
+								<div class="timeline-badge primary" *ngIf="t.content == 'kyc_submitted'"><em class="glyphicon glyphicon-link"></em></div>								
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title" *ngIf="t.content == 'signup'" style="color:#FFF;">Sign In</h4>
+										<h4 class="timeline-title" *ngIf="t.content == 'kyc_submitted'" style="color:#FFF;">KYC</h4>										
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;"  *ngIf="t.content == 'signup'">You logged into Moneroconnect ICO Platform</p>
+										<p style="color:#d5d5d5;"  *ngIf="t.content == 'kyc_submitted'">You updated kyc documents</p>										
+										<div class="col-md-12 text-right">
+												<i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
+										</div>
+									</div>
+								</div>
+							</ng-container>
 
-                                                    <div class="panel-body" *ngIf="t.type != 'text'"> 
-                                                        <div class="col-md-6 col-sm-6">
-                                                                Transaction
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-6 text-right">
-                                                                <i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
-                                                        </div>
-                                                        <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'btc_transaction'">
-                                                            <span class="recieve done">Purchase of {{t.mass}} XMRC Coin successful with 
-                                                                <!-- <i class="fa fa-btc" aria-hidden="true"></i>  -->
-                                                                {{t.amount}} BTC </span>     
-                                                                 <!-- {{t.content}} -->
-                                                        </div>
-                                                        <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'eth_transaction'">
-                                                                <span class="recieve done">Purchase of {{t.mass}} XMRC Coin successful with 
-                                                                    <!-- <img class="ethereum home" src="assets/img/ethereum.png">  -->
-                                                                    {{t.amount}} ETH </span>   
-                                                                 <!-- {{t.content}} -->
-                                                        </div>
-                                                        <div class="col-md-12 col-sm-12 text-left"  *ngIf="t.type == 'payment_initiation'">
-                                                                <span class="recieve" >Payment initiated of </span> 
-                                                                <!-- <i class="fa fa-btc" aria-hidden="true" *ngIf="t.currency == 'btc'"></i>
-                                                                <img class="ethereum home" src="assets/img/ethereum.png" *ngIf="t.currency == 'eth'">  -->
-                                                                {{t.content2}}
-        
-                                                        </div>
-                        
-                                                    </div>
 
-                                                    <div class="panel-body" *ngIf="t.type == 'text'"> 
-                                                        <div class="col-md-6 col-sm-6" *ngIf="t.content == 'signup'">
-                                                                Sign In
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-6" *ngIf="t.content == 'kyc_submitted'">
-                                                            KYC 
-                                                        </div>
-                                                        <div class="col-md-6 col-sm-6 text-right">
-                                                                <i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
-                                                        </div>
-                                                        <div class="col-md-12 col-sm-12 text-left">
-                                                            <span class="recieve done" *ngIf="t.content == 'signup'">You logged into Moneroconnect ICO Platform</span>     
-                                                            <span class="recieve done" *ngIf="t.content == 'kyc_submitted'">You updated kyc documents</span>     
-                                                        </div>
-                        
-                                                    </div>
-                                                </article>
-                  
-                                      </div>
-                  
-                                    </div>
+							<ng-container *ngIf="t.type == 'payment_initiation'">
+								<div class="timeline-badge primary" *ngIf="t.currency == 'btc'"><em class="fa fa-btc"></em></div>
+								<div class="timeline-badge primary" *ngIf="t.currency == 'eth'"><img class="ethereumico home" src="assets/img/ethereumico.png"></div>								
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title" style="color:#FFF;">Transaction</h4>
+									</div>
+									<div class="timeline-body">
+										<p style="color:#d5d5d5;">Payment initiated of {{t.content2}}</p>
+										<div class="col-md-12 text-right">
+												<i class="fa fa-clock-o" aria-hidden="true"></i> {{convertToDate(t.timestamp)}}
+										</div>
+									</div>
+								</div>
+							</ng-container>
 
-                                    <div class="splitterdiv"></div>
-                                    <div class="col-sm-6 col-md-6 col-sm-pull-6" *ngIf="user_timeline_listShow == false">
-                                        <h5 class="montBold">
-                                            Most Recent Activity.
-                                        </h5>
-                            
-                                        <div class="timeline">
-                            
-                                            <!-- Line component -->
-                                            <div class="line text-muted"></div>
-                            
-                                            <!-- Panel -->
-                                            <!-- /Panel -->
-                                            <!-- Panel -->
-                                            
-                                            <!-- /Panel -->
-                                            <!-- Panel -->
-                                            <article class="panel panel-default">
-                                                <!-- Icon -->
-                                                <div class="panel-heading icon">
-                                                    <i class="fa fa-address-book-o" aria-hidden="true"></i>
-                                                </div>
-                                                <!-- /Icon ->
-                                                <!-- Body -->
-                                                <div class="panel-body">
-                                                    <div class="col-sm-3">Addresses</div>
-                                                    <div class="col-sm-6 text-right pull-right">Created My Bitcoin Wallet</div>
-                                                </div>
-                                                <!-- /Body -->
-                                            </article>
-                                            <!-- /Panel -->
-                                            <!-- Panel -->
-                                            <article class="panel panel-default">
-                                                <!-- Icon -->
-                                                <div class="panel-heading icon">
-                                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                                </div>
-                                                <!-- /Icon ->
-                                                <!-- Body -->
-                                                <div class="panel-body">
-                                                    <div class="col-sm-3">Settings</div>
-                                                    <div class="col-sm-6 text-right pull-right">Set Password</div>
-                                                </div>
-                                                <!-- /Body -->
-                                            </article>
-                                            <!-- /Panel -->
-                                            <!-- Panel -->
-                                            <article class="panel panel-default">
-                                                <!-- Icon -->
-                                                <div class="panel-heading icon">
-                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                </div>
-                                                <!-- /Icon ->
-                                                <!-- Body -->
-                                                <div class="panel-body">
-                                                    <div class="col-sm-3">Settings</div>
-                                                    <div class="col-sm-6 text-right pull-right">Created Wallet!</div>
-                                                </div>
-                                                <!-- /Body -->
-                                            </article>
-                                            <!-- /Panel -->
-                            
-                                        </div>
-                                        <!-- /Timeline -->
-                                    </div>
-                  
-                                    
-                              </div>
-                  
-                          </div>
-                      </div>
-                </div>
-        </div>
-    </div>
-</section>
+						</li>
+						<!-- <li>
+							<div class="timeline-badge"><em class="glyphicon glyphicon-link"></em></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+								</div>
+								<div class="timeline-body">
+									<p style="color:#d5d5d5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="timeline-badge"><em class="fa fa-btc"></em></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+								</div>
+								<div class="timeline-body">
+									<p style="color:#d5d5d5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="timeline-badge"><em class="glyphicon glyphicon-paperclip"></em></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h4 class="timeline-title" style="color:#FFF;">Sign In</h4>
+								</div>
+								<div class="timeline-body">
+									<p style="color:#d5d5d5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								</div>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div><!--/.col-->
+
+
+		
+		
+		
+		
+			
+			
+			
+	</div><!--/.row-->
+	<app-footerpage></app-footerpage>
+</div>	<!--/.main-->

@@ -1,92 +1,58 @@
-<app-navbar></app-navbar>
+<app-navbarnew></app-navbarnew> 
 <ngx-loading [show]="ngxloading"></ngx-loading>
-<section id="main-sec">  
-  <div class="container-fluid" id="main-container">
-      <div class="hidden-xs">
-          <div id="sidebar-wrapper">
-              <nav id="sidenav" #sidenav>
-                  <app-sidemenu></app-sidemenu>
-              </nav>
-          </div>
-      </div> 
-      <div class="col-sm-9 col-md-10 pull-right nopad">
-        <div id="topbar">
-          
-          <div class="container-fluid">
-              <div class="row">
-                <div class="col-sm-12">&nbsp;</div>
-                
-                <div class="col-sm-9 col-md-9 col-sm-offset-1 col-md-offset-1 form_wrap">
-                    <div class="col-sm-12 form_head text-center">
-                        <h4 style="margin-bottom: 0px;">
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li class="active"><a href="#/addreferral">
+				<em class="fa fa-address-card-o"></em>
+			</a></li>
+			<li>Address</li>
+		</ol> 
+    </div>
+  
+	<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-heading">
                             Please enter BTC & ETH addresses to access referral section.
-                        </h4>
-                        <hr>
-                        <!--</br>-->
-                    </div>
-                    <div class="col-sm-12 adfformdiv">
-      
-                        <!-- <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
-                        style="display: block">
-                            <span class="text-center text-danger">{{errmsg}}</span>
-                        </div>
-                        <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
-                        style="display: block">
-                            <span class="text-center text-success">{{sucmsg}}</span>
-                        </div> -->
-                        <!-- <br><div class="col-sm-12">&nbsp;</div><br> -->
-                        
-                        <form class="addreferrralform" [formGroup]="formReferral">
-                          <div class="col-sm-12">
-                                
-                          <div class="col-sm-3 text-left">
-                              <div class="form-group labelfrmgrp">
-                                  <label for="bitcoinaddress">BTC Address:</label>
-                              </div>
-                          </div>
-                          <div class="col-sm-9">
-                              <div class="form-group">
-                                  <input type="text" class="form-control custInput" id="bitcoinaddress" [(ngModel)]="bitcoinaddress" name="bitcoinaddress"
-                                        aria-describedby="bitcoinAddress" placeholder="Enter your BTC address..." required formControlName="bitcoin">
-                              </div>
-                          </div>
-                        </div>
-                          <!-- <br><div class="col-sm-12">&nbsp;</div><br> -->
-                          <div class="col-sm-12 ethfield">
-                          <div class="col-sm-3 text-left">
-                              <div class="form-group labelfrmgrp">
-                                  <label for="etheraddress">ETH Address:</label>
-                              </div>
-                          </div>
-                          <div class="col-sm-9">
-                              <div class="form-group">
-                                  <input type="text" class="form-control custInput" id="etheraddress" [(ngModel)]="etheraddress" name="etheraddress"
-                                        aria-describedby="etherAddress" placeholder="Enter your ETH address..." required formControlName="ether">
-                              </div>
-                          </div>
-                        </div>
-                          
-                          <!-- <button class="btn btn-link btn-sm pull-right">Recover Funds?</button>
-                          <br> -->
-                          <!-- <br><div class="col-sm-12">&nbsp;</div><br>
-                          <br><div class="col-sm-12">&nbsp;</div><br> -->
-                          <div class="col-sm-12 text-center addrbtn">
-                              <button (click)="addreferral()" class="btn btn-primary custBtnAnchor referralbtnsubmit">
-                                  <strong style="letter-spacing: 1px;">{{referralbtnTxt}}</strong>
-                                  &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
-                                  <!-- <div class="ngloader">Loading...</div> -->
-                              </button>
-                          </div>
-                        </form>
-                        <!-- <div class="col-sm-12">
-                          <div class="skipdiv text-center" style="margin-top:2%"><a (click)="notnow()"  class="skip">Not now</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="gohome()"  class="skip">Go Home</a> </div>
-                        </div> -->
-                    </div>
-                </div>
+						
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+					<div class="panel-body" style="background-color: #30A5FF;">
+						<form class="form-horizontal"  [formGroup]="formReferral">
+							<fieldset>
+								<!-- Name input-->
+								<div class="form-group">
+									<label style="color:#FFF;" class="col-md-3 control-label" for="name">BTC Address</label>
+									<div class="col-md-9">
+                                            <input type="text" class="form-control custInput" id="bitcoinaddress" [(ngModel)]="bitcoinaddress" name="bitcoinaddress"
+                                            aria-describedby="bitcoinAddress" placeholder="Enter your BTC address..." required formControlName="bitcoin">
+									</div>
+								</div>
+							
+								<!-- Email input-->
+								<div class="form-group">
+									<label style="color:#FFF;" class="col-md-3 control-label" for="email">ETH Address</label>
+									<div class="col-md-9">
+                                            <input type="text" class="form-control custInput" id="etheraddress" [(ngModel)]="etheraddress" name="etheraddress"
+                                            aria-describedby="etherAddress" placeholder="Enter your ETH address..." required formControlName="ether">
+									</div>
+								</div>
+								
+								<!-- Form actions -->
+								<div class="form-group">
+									<div class="col-md-12 widget-right">
+										<button type="button"  (click)="addreferral()" class="btn btn-default btn-md pull-right">
+                                            {{referralbtnTxt}}
+                                            &nbsp;  <img src="assets/img/loading.gif" *ngIf="loadingimage" class="loadingimglogin">
+                                        </button>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
 
-              </div>
-          </div>
-        </div><!--topbar-->
-      </div>
-  </div>
-</section> 
+			</div><!--/.col-->
+    </div>
+    <app-footerpage></app-footerpage>
+</div>	<!--/.main-->

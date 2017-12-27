@@ -216,43 +216,6 @@ img.explorechat:hover {
 }
 
 
-@media(max-width:767px){ /*mobile*/
-    .chatview {
-        height: 98%;
-        width: 98%;
-        position: fixed;
-        z-index: 99999;
-        top: 0;
-        right: 0;
-        background-color: #2a3f71;
-        overflow-x: hidden;
-        transition: 0.5s;
-        /* box-shadow: 6px 5px 20px 10px dimgrey; */
-        /* margin-top: 2%;
-        margin-right: 2%; */
-        margin: 5px;
-        border-radius: 10px;
-        overflow-y: hidden;
-    }
-    i.fa.fa-times.forchatclose {
-        position: absolute;
-        right: 0;
-        padding: 2%;
-        top: 0;
-        font-size: 25px;
-        color: #2a3f71;
-        margin: 1%;
-        cursor: pointer;
-    }
-    .panel-footer.chatfooter {
-        /* position: absolute; */
-        width: 100%;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        height: 8%;
-    }
-}
 
 .panel-body.chatbody {
     padding: 0px;
@@ -386,6 +349,12 @@ p.usermsg {
     padding-left: 5px;
     padding-top: 2px;
 }
+.panel-heading.chatheader {
+    line-height: 18px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
 
 
 /* nochats */
@@ -406,3 +375,58 @@ h5.nomsgs {
 p.notxt {
     color: #fff;
 } 
+img.sendbtnicon {
+    background-color: #fff;
+}
+
+
+@media(max-width:767px){ /*mobile*/
+    .chatview {
+        height: 98%;
+        width: 98%;
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        right: 0;
+        background-color: #2a3f71;
+        overflow-x: hidden;
+        transition: 0.5s;
+        /* box-shadow: 6px 5px 20px 10px dimgrey; */
+        /* margin-top: 2%;
+        margin-right: 2%; */
+        margin: 5px;
+        border-radius: 10px;
+        overflow-y: hidden;
+    }
+    i.fa.fa-times.forchatclose {
+        position: absolute;
+        right: 0;
+        padding: 2%;
+        top: 0;
+        font-size: 25px;
+        color: #2a3f71;
+        margin: 1%;
+        cursor: pointer;
+    }
+    .panel-footer.chatfooter {
+        /* position: absolute; */
+        width: 100%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 8%;
+    }
+    .panel-body.chatbody {
+        padding: 0px;
+        height: 490px;
+    }
+    .supportview {
+        background-color: cornsilk;
+        border-radius: 5px;
+        margin-left: 2px;
+        padding: 2px;
+    }
+    img.sendbtnicon {
+        margin-bottom: 8%;
+    }
+}
