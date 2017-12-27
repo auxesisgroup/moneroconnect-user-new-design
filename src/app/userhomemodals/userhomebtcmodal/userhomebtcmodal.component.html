@@ -37,7 +37,7 @@
                         </div> 
                     <div class="col-sm-9 text-center">
                         <select class="walletselect" id="btcwalletname" name="btcwalletname" [(ngModel)]="btcwalletname" (change)="btcwalletnamechange($event)">
-                            <option selected="selected" value="Mist">Mist
+                            <!-- <option selected="selected" value="Mist">Mist
                             </option>
                             <option value="Parity">Parity</option>
                             <option value="MyEtherWallet">MyEtherWallet</option>
@@ -50,7 +50,28 @@
                             <option value="Bittrex">Bittrex</option>
                             <option value="Jaxx">Jaxx</option>
                             <option value="Coinomi">Coinomi</option>
-                            <option value="Parity">Parity</option>
+                            <option value="Parity">Parity</option> -->
+                            <option value="">Select your Ethereum Wallet</option> 
+                            <optgroup label="Compatible Wallets"> 
+                                <option value="1">MetaMask</option> 
+                                <option value="2">Parity</option> 
+                                <option value="3">Mist</option> 
+                                <option value="4">MyEtherWallet</option> 
+                                <option value="5">imToken</option> 
+                                <option value="6">I hold my Ethereum private keys</option> 
+                            </optgroup> 
+                            <optgroup label="Incompatible Wallets"> 
+                                <option value="7">Coinbase</option> 
+                                <option value="8">Globitex</option> 
+                                <option value="9">Kraken</option> 
+                                <option value="10">Poloniex</option> 
+                                <option value="11">Bittrex</option> 
+                                <option value="12">Jaxx</option> 
+                                <option value="13">Coinomi</option> 
+                                <option value="14">Exchange (any other cryptocurrency exchange)</option> 
+                                <option value="15">Wallet (other)</option> 
+                                <option value="16">I don't know what wallet I am using</option> 
+                            </optgroup>
                         </select>
                     </div>
                 </div>

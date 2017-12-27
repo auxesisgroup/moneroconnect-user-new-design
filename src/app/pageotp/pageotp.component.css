@@ -23,3 +23,12 @@ section div.container div.row {
     -ms-flex-pack: justify;
     justify-content: flex-start;
 }
+input.form-control.custInput {
+    text-align: center;
+}
+p.clickresend {
+    color: #30a5ff;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+}

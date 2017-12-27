@@ -66,13 +66,16 @@
     <div class="row">
         <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 form_wrap clearfix">
             <div class="col-sm-12 form_head">
-                <h3 style="margin-bottom: 0px;color:#fff">
+                    <h2 class="text-center">
+                        <img src="assets/img/moneroico.png" class="img-responsive mllogo" alt="Moneroconnect">                            
+                    </h2><br>
+                <h3 style="margin-bottom: 0px;color:#fff" class="text-center">
                     Enter OTP
                 </h3>
                 <hr>
             </div>
             <div class="col-sm-12">
-                                        <form action="" id="registerForm">
+                                        <!-- <form action="" id="registerForm"> -->
                 <div class="col-sm-12 text-center" id="password_not_entered" role="alert"
                         style="display: block">
                     <span class="text-center text-danger">{{errmsg?errmsg:""}}</span>
@@ -84,11 +87,15 @@
 
 
                 <div class="form-group">
-                                                    <label for="regPassword">Enter OTP</label>
+                                                    <!-- <label for="regPassword" style="color:#fff">Enter OTP</label> -->
                     <input type="password" class="form-control custInput" id="password"
                             placeholder="Enter OTP.." name="otpno" [(ngModel)]="otpno" required></div>
                 <div class="form-group">
                 </div>
+                <div class="col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2 text-center">
+                    <p class="clickresend">Click Here to Resend OTP</p>
+                </div>
+
                 <div class="col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2">
                     <button (click)="signup_new_user()" value="CONTINUE" id="regFormSubmit"
                             class="btn btn-primary btn-block custBtnAnchor" accesskey="">
@@ -97,9 +104,9 @@
                     </button>
                 </div>
 
-                                    </form>
+                                    <!-- </form>
                 <form method="get" action="/home/" id="home">
-                </form>
+                </form> -->
             </div>
         </div>
     </div>

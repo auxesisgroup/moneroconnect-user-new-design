@@ -17,3 +17,10 @@ p.tncinfo {
     color: brown;
     font-weight: 600;
 }
+h3 {
+    margin-top: 1px;
+}
+
+button.btn.btn-primary.btn-block.col-sm-offset-6.custBtnAnchor {
+    margin-bottom: 5%;
+}

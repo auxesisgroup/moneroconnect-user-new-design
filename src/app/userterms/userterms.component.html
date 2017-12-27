@@ -1,46 +1,16 @@
-<header>
-  <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-              <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                      data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button> -->
-              <a class="navbar-brand" routerLink="">
-                <img src="assets/img/moneroico.png" class="img-responsive tblogo" alt="moneroico">                
-              </a>
-              <p class="titlemasscryp">Moneroconnect ICO</p>
-          </div>
-
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                  <!--<li class="active"><a href="#">Wallet <span class="sr-only">(current)</span></a></li>-->
-                  <!--<li><a href="#">Charts</a></li>-->
-                  <!--<li class="#"><a href="#">Stats</a></li>-->
-                  <!--<li><a href="#">Markets</a></li>-->
-              </ul>
-          </div>
-          <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-  </nav>
-</header>
-<!-- <toaster-container></toaster-container> -->
-<section id="loginForm" class="">
-        <particles class="particleview" [style]="mystyle1" [params]="myparams1"></particles>
-  <div class="container">
+<particles class="particleview" [style]="mystyle1" style="background:url('assets/img/mainbg.jpg');" [params]="myparams1"></particles>
+<div class="container">
       <div class="row">
           <div class="col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 form_wrap clearfix">
               <div class="col-sm-12 form_head">
-                  <h3 style="margin-bottom: 0px;">
+                    <h2 class="text-center">
+                        <img src="assets/img/moneroico.png" class="img-responsive mllogo" alt="Moneroconnect">                            
+                    </h2><br>
+                  <h3 style="margin-bottom: 0px;color:#fff" class="text-center">
                       Terms Of Service
-                  </h3>
+                  </h3> 
                   <hr>
-                  <p class="tncinfo">Please scroll through our terms and enter your full name accepting T & C to continue.</p>
+                  <p class="tncinfo text-center" >Please scroll through our terms and enter your full name accepting T & C to continue.</p>
               </div>
               <div class="col-sm-12">
 
@@ -54,13 +24,13 @@
                   </div>
 
                       <div class="termsx">
-                          <h4 style="margin-bottom: 0px;">
+                          <h4 style="margin-bottom: 0px;color: wheat;" class="text-center">
                                 Moneroconnect Token Terms and Conditions
                           </h4>
 
                           <app-usertermsdescription></app-usertermsdescription>
 
-                          <div class="form-single-column" data-component="checkbox">
+                          <div class="form-single-column" data-component="checkbox" style="color:#fff">
                             <span class="form-checkbox-item" style="clear:left;">
                               <span class="dragger-item">
                               </span>
@@ -68,8 +38,8 @@
                                  
                                         <input type="checkbox" class="form-checkbox validate[required]" id="input_7_0" name="q7_terms" [(ngModel)]="terms" required="">
                                     I  
-                                  <input type="text" class="pass name" [(ngModel)]="name" placeholder=" My name ">, 
-                                  referred by referral ID  <input type="text" class="pass refid" [(ngModel)]="referral" placeholder=" Referral id ">, 
+                                  <input type="text" class="pass name" [(ngModel)]="name" placeholder=" My name " style="color:#000">, 
+                                  referred by referral ID  <input type="text" class="pass refid" [(ngModel)]="referral"  style="color:#000" placeholder=" Referral id ">, 
                                 agree to the terms and agreement.  </label>
                             </span>
                             <div class="col-sm-6">
@@ -86,4 +56,3 @@
           </div>
       </div>
   </div>
-</section>
