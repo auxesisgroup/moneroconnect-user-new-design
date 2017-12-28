@@ -23,11 +23,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { FbapiService } from '../../services/fbapi.service';
 import { ActivityService } from '../../services/activity.service';
+import { WalletsService } from '../../services/wallets.service';
 @Component({
   selector: 'app-userhomeethmodal',
   templateUrl: './userhomeethmodal.component.html',
   styleUrls: ['./userhomeethmodal.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService,WalletsService]
 })
 export class UserhomeethmodalComponent implements OnInit {
   modalRef: BsModalRef;
@@ -42,7 +43,7 @@ export class UserhomeethmodalComponent implements OnInit {
   stepRecieveETH:number;//0 for first erc20 form ,1 for refund address, 2 for calc submit ,3 for firebase confirm,4 for congtrats
   //param for eth payment
   ethmodaltitle:string = "Pay through ETH";
-  ethwalletname:string;
+  ethwalletname:string = "0";
   ethwalletaddress:any;
   ethrefundaddress:any;
   toETH:number=0;//0 for submitnextskip, 1 for reviewnext, 2 for updatenext in 1 screen
@@ -75,6 +76,9 @@ export class UserhomeethmodalComponent implements OnInit {
   
   starterDisableButton:boolean = false;
 
+  walletbinder:any = [];
+  selectWalletError:boolean = false;
+
   constructor(
     public afAuth: AngularFireAuth, 
     public af: AngularFireDatabase,
@@ -86,7 +90,8 @@ export class UserhomeethmodalComponent implements OnInit {
     private modalService: BsModalService,
     private fbapi:FbapiService,
     public pouchserv:PouchService,
-    public activityServ:ActivityService
+    public activityServ:ActivityService,
+    public ws:WalletsService
   ) { 
     this.user = afAuth.authState;
     this.itemsRef = af.list('/transaction_details');
@@ -98,6 +103,7 @@ export class UserhomeethmodalComponent implements OnInit {
     // let dis = this.storage.retrieve("MoneroAUXstarterSecretButton");
     // if(dis == "yes")
       this.starterDisableButton = false;
+      this.loadWLTf();
     // else 
     //   this.starterDisableButton = false;
   }
@@ -143,6 +149,12 @@ export class UserhomeethmodalComponent implements OnInit {
     // }else if(ethdone == true || ethdone == "done"){
     //   this.toETHConfirm = 1;//show waiting btn
     // }
+  }
+
+  loadWLTf(){
+    let wlt = this.ws.loadWallets();
+    // console.log(wlt)
+    this.walletbinder = wlt;
   }
 
   loadPaymentOptions(){
@@ -240,6 +252,13 @@ export class UserhomeethmodalComponent implements OnInit {
               this.toETH = 1;//show review and submit btn
               this.ethwalletname = erc_wallet;
               this.ethwalletaddress = erc_address;
+              let wvalue = this.ethwalletname;
+              let wbindr = this.ws.loadWalletFilter(wvalue);
+              if(wbindr == "incompatible"){
+                this.selectWalletError = true;
+              }else{
+                this.selectWalletError = false;
+              }
             }else{
               this.toETH = 0;
             }
@@ -285,6 +304,15 @@ export class UserhomeethmodalComponent implements OnInit {
    */
   //Screen1 required for XMRCcryp
   doTheseIfChangeDetectInETH(val){
+    let wvalue = this.ethwalletname;
+    
+    let wbindr = this.ws.loadWalletFilter(wvalue);
+    // console.log(wbindr)
+    if(wbindr == "incompatible"){
+      this.selectWalletError = true;
+    }else{
+      this.selectWalletError = false;
+    }
     //console.log(this.ethwalletaddress,this.ethwalletname);//console.log(val.target.value);
     if(this.toETH == 1 || this.toETH == 2){
       let ethwn = this.serv.retrieveFromLocal("MoneroAUXETHTransactionWN");//wallet name

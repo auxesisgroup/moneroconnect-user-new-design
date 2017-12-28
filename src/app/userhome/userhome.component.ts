@@ -28,11 +28,12 @@ import { PouchService } from '../services/pouch.service';
 import { ActivityService } from '../services/activity.service';
 
 import { CookieService } from 'ngx-cookie-service';//
+import { WalletsService } from '../services/wallets.service';
 @Component({
   selector: 'app-userhome',
   templateUrl: './userhome.component.html',
   styleUrls: ['./userhome.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService,WalletsService]
 })
 export class UserhomeComponent implements OnInit {
 
@@ -77,6 +78,10 @@ export class UserhomeComponent implements OnInit {
   csvFiles:File;
   csvData:any;
 
+  ethwalletname:any = "0";
+  walletbinder:any = [];
+  walletselected:any = true;
+   
   constructor(
     public serv:ServiceapiService,
     private storage:LocalStorageService,
@@ -89,15 +94,37 @@ export class UserhomeComponent implements OnInit {
     private cookieService: CookieService,//
     private fbapi:FbapiService,
     public pouchserv:PouchService,
-    public activityServ:ActivityService
+    public activityServ:ActivityService,
+    public ws:WalletsService
   ) {
     this.qrvalue = "Its Demo For QR Angular";
     //this.signup.setUserSession(this.storage.retrieve("MoneroAUXUserEmail"),"7764611b-fdee-4804-8f2f-fab678e63526a704b8ef-5cb5-45b1-b367-98c89b91f1aeba1abd08-0b64-4f05-8d60-a049344a1a28");
 
     this.serv.callCSV();
-  }
 
-  
+    // this.loadWLTf();
+  }
+ 
+  loadWLTf(){
+    let wlt = this.ws.loadWallets();
+    console.log(wlt)
+    this.walletbinder = wlt;
+  }  
+
+  ethwalletnamechange(val){//change wallet name from screen 1
+    // console.log(this.ethwalletname,val)
+    let wvalue = this.ethwalletname;
+    
+    let wbindr = this.ws.loadWalletFilter(wvalue);
+    // console.log(wbindr)
+    if(wbindr == "incompatible"){
+
+    }else{
+
+    }
+
+    
+  }
 
   keyevent(evt){
        var charCode = (evt.which) ? evt.which : evt.keyCode;

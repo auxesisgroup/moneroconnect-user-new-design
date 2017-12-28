@@ -29,11 +29,12 @@ import { UserhomeComponent } from '../../userhome/userhome.component';
 import { FbapiService } from '../../services/fbapi.service';
 import { PouchService } from '../../services/pouch.service';
 import { ActivityService } from '../../services/activity.service';
+import { WalletsService } from '../../services/wallets.service';
 @Component({
   selector: 'app-userhomebtcmodal',
   templateUrl: './userhomebtcmodal.component.html',
   styleUrls: ['./userhomebtcmodal.component.css'],
-  providers:[ServiceapiService,SignupService,PouchService,ActivityService]
+  providers:[ServiceapiService,SignupService,PouchService,ActivityService,WalletsService]
 })
 export class UserhomebtcmodalComponent implements OnInit {
   modalRef: BsModalRef;
@@ -50,7 +51,7 @@ export class UserhomebtcmodalComponent implements OnInit {
   stepRecieveBTH:number;//0 for first erc20 form ,1 for refund address, 2 for calc submit ,3 for firebase confirm,4 for congtrats
   //param for btc payment
   btcmodaltitle:string = "Pay through BTC";
-  btcwalletname:string;
+  btcwalletname:string = "0";
   btcwalletaddress:any;
   btcrefundaddress:any;
   toBTC:number=0;//0 for submitnextskip, 1 for reviewnext, 2 for updatenext in 1 screen
@@ -85,6 +86,9 @@ export class UserhomebtcmodalComponent implements OnInit {
  
   starterDisableButton:boolean = false;
 
+  walletbinder:any = [];
+  selectWalletError:boolean = false;
+
   constructor(
     public afAuth: AngularFireAuth, 
     public af: AngularFireDatabase,
@@ -98,7 +102,8 @@ export class UserhomebtcmodalComponent implements OnInit {
     private element:ElementRef,
     private fbapi:FbapiService,
     public pouchserv:PouchService,
-    public activityServ:ActivityService
+    public activityServ:ActivityService,
+    public ws:WalletsService
   ) { 
       this.user = afAuth.authState;
       this.itemsRef = af.list('/transaction_details');
@@ -111,6 +116,7 @@ export class UserhomebtcmodalComponent implements OnInit {
       // let dis = this.storage.retrieve("MoneroAUXstarterSecretButton");
       // if(dis == "yes")
         this.starterDisableButton = false;
+        this.loadWLTf();
       // else 
       //   this.starterDisableButton = false;
   }
@@ -148,6 +154,12 @@ export class UserhomebtcmodalComponent implements OnInit {
     // }else if(btcdone == true || btcdone == "done"){
     //   this.toBTCConfirm = 1;//show waiting btn
     // }
+  }
+
+  loadWLTf(){
+    let wlt = this.ws.loadWallets();
+    // console.log(wlt)
+    this.walletbinder = wlt;
   }
 
   loggedInFBauth(){
@@ -258,6 +270,13 @@ export class UserhomebtcmodalComponent implements OnInit {
               this.toBTC = 1;//show review and submit btn
               this.btcwalletname = erc_wallet;
               this.btcwalletaddress = erc_address;
+              let wvalue = this.btcwalletname;
+              let wbindr = this.ws.loadWalletFilter(wvalue);
+              if(wbindr == "incompatible"){
+                this.selectWalletError = true;
+              }else{
+                this.selectWalletError = false;
+              }
             }else{
               this.toBTC = 0;
             }
@@ -305,6 +324,15 @@ export class UserhomebtcmodalComponent implements OnInit {
    */
   //Screen1 required for XMRCcryp
   doTheseIfChangeDetectInBTC(val){
+    let wvalue = this.btcwalletname;
+    
+    let wbindr = this.ws.loadWalletFilter(wvalue);
+    // console.log(wbindr)
+    if(wbindr == "incompatible"){
+      this.selectWalletError = true;
+    }else{
+      this.selectWalletError = false;
+    }
     //console.log(this.btcwalletaddress,this.btcwalletname);//console.log(val.target.value);
     if(this.toBTC == 1 || this.toBTC == 2){
       let btcwn = this.serv.retrieveFromLocal("MoneroAUXBTCTransactionWN");//wallet name

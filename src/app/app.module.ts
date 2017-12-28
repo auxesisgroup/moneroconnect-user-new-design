@@ -41,6 +41,7 @@ import { FbapiService } from './services/fbapi.service';
 import { ServiceapiService } from './services/serviceapi.service';
 import { PouchService } from './services/pouch.service';
 import { ActivityService } from './services/activity.service';
+import { WalletsService } from './services/wallets.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -164,6 +165,7 @@ export const firebaseConfig = {
     ActivityService,
     FbapiService,
     CookieService,
+    WalletsService,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     // {provide: CeiboShare, useFactory: CeiboShare, deps: [CeiboShare], multi: true }
     // CeiboShare

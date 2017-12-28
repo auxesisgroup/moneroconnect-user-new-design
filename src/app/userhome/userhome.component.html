@@ -92,7 +92,13 @@
 	<!--/.row-->
 	
 	<div class="row">
-		
+		<!-- <select class="walletselect" id="ethwalletname" name="ethwalletname" [(ngModel)]="ethwalletname" (change)="ethwalletnamechange($event)">
+			
+			<option value="0">Select your Ethereum Wallet</option> 
+			<optgroup *ngFor="let w of walletbinder" label="{{w.text}}">
+				<option *ngFor="let wl of w.wallet" value="{{wl.value}}">{{wl.text}}</option>
+			</optgroup>
+		</select> -->
 		<!-- <div class="col-sm-12 col-md-12 col-sm-pull-12" *ngIf="user_timeline_listShow == true">
 				
 					

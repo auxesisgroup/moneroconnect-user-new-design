@@ -25,51 +25,44 @@
           <div class="tab-content">
             <div class="tab-pane fade in active" id="step0RecieveBTH" #step0RecieveBTH *ngIf="stepRecieveETH == 0">
 
-                <!-- <div class="container-fluid">
-                    <h4 class="pull-left">Provide detail:</h4>
-                </div> -->
+                <div class="container-fluid">
+                    <h5 class="text-center headwlad">Enter ethereum address where you want to receive ERC-20 tokens</h5>
+                </div>
                 <div class="container-fluid">
                     <div class="col-sm-3 text-center">
                             <h5>Select Wallet</h5>
                     </div>
                     <div class="col-sm-9 text-center">
-                            <select class="walletselect" id="ethwalletname" name="ethwalletname" [(ngModel)]="ethwalletname" (change)="ethwalletnamechange($event)">
-                            <!-- <option selected value="Mist">Mist
-                            </option>
-                            <option value="Parity">Parity</option>
-                            <option value="MyEtherWallet">MyEtherWallet</option>
-                            <option value="MetaMask">MetaMask</option>
-                            <option value="imToken">imToken</option>
-                            <option value="Coinbase">Coinbase</option>
-                            <option value="Globitex">Globitex</option>
-                            <option value="Kraken">Kraken</option>
-                            <option value="Poloniex">Poloniex</option>
-                            <option value="Bittrex">Bittrex</option>
-                            <option value="Jaxx">Jaxx</option>
-                            <option value="Coinomi">Coinomi</option>
-                            <option value="Parity">Parity</option> -->
-                            <option value="">Select your Ethereum Wallet</option> 
+                        <select class="walletselect" id="ethwalletname" name="ethwalletname" [(ngModel)]="ethwalletname" (change)="ethwalletnamechange($event)">
+                            <option value="0">Select your Ethereum Wallet</option> 
+                            <optgroup *ngFor="let w of walletbinder" label="{{w.text}}">
+                                <option *ngFor="let wl of w.wallet" value="{{wl.value}}">{{wl.text}}</option>
+                            </optgroup>
+                            <!-- <option value="0" selected>Select your Ethereum Wallet</option> 
                             <optgroup label="Compatible Wallets"> 
-                                <option value="1">MetaMask</option> 
-                                <option value="2">Parity</option> 
-                                <option value="3">Mist</option> 
-                                <option value="4">MyEtherWallet</option> 
-                                <option value="5">imToken</option> 
-                                <option value="6">I hold my Ethereum private keys</option> 
+                                <option value="MetaMask">MetaMask</option> 
+                                <option value="Parity">Parity</option> 
+                                <option value="Mist">Mist</option> 
+                                <option value="MyEtherWallet">MyEtherWallet</option> 
+                                <option value="imToken">imToken</option> 
+                                <option value="I-hold-my-Ethereum-private-keys">I hold my Ethereum private keys</option> 
                             </optgroup> 
                             <optgroup label="Incompatible Wallets"> 
-                                <option value="7">Coinbase</option> 
-                                <option value="8">Globitex</option> 
-                                <option value="9">Kraken</option> 
-                                <option value="10">Poloniex</option> 
-                                <option value="11">Bittrex</option> 
-                                <option value="12">Jaxx</option> 
-                                <option value="13">Coinomi</option> 
-                                <option value="14">Exchange (any other cryptocurrency exchange)</option> 
-                                <option value="15">Wallet (other)</option> 
-                                <option value="16">I don't know what wallet I am using</option> 
-                            </optgroup>
+                                <option value="Coinbase">Coinbase</option> 
+                                <option value="Globitex">Globitex</option> 
+                                <option value="Kraken">Kraken</option> 
+                                <option value="Poloniex">Poloniex</option> 
+                                <option value="Bittrex">Bittrex</option> 
+                                <option value="Jaxx">Jaxx</option> 
+                                <option value="Coinomi">Coinomi</option> 
+                                <option value="Exchange">Exchange (any other cryptocurrency exchange)</option> 
+                                <option value="Wallet">Wallet (other)</option> 
+                                <option value="I-dont-know">I don't know what wallet I am using</option> 
+                            </optgroup> -->
                         </select>
+                    </div>
+                    <div class="col-sm-12 text-center" *ngIf="selectWalletError">
+                        <p class="selectWalletError">You might face trouble while receiving ERC-20 tokens, please select a compatible wallet to ensure on time token delivery.</p>
                     </div>
                 </div>
                 <hr>
