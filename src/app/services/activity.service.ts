@@ -103,6 +103,7 @@ export class ActivityService {
             description:description,
             component:component
           },
+          active:1,
           momento:moment().unix()
         });
         arr.activitylist = d;
@@ -143,6 +144,7 @@ export class ActivityService {
           description:description,
           component:component
         },
+        active:1,
         momento:moment().unix()
       }]
     }

@@ -109,6 +109,7 @@ export class PouchService {
             description:description,
             priority:priority
           },
+          active:1,
           momento:moment().unix()
         });
         arr.issuelist = d;
@@ -150,6 +151,7 @@ export class PouchService {
           description:description,
           priority:priority
         },
+        active:1,
         momento:moment().unix()
       }]
     }
@@ -184,7 +186,8 @@ export class PouchService {
         email:id,
         key:issueid,
         issueid:issueid,
-        screen:getImage
+        screen:getImage,
+        active:1,
       },(err,result)=>{
         if(err){
           // console.log("Screen not Captured")
