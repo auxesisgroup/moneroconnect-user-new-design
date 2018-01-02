@@ -147,7 +147,7 @@ export class ActivityService {
         active:1,
         momento:moment().unix()
       }]
-    }
+    } 
     this.saveFirstEntry(doc);
   }
   saveFirstEntry(doc){

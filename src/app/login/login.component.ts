@@ -202,6 +202,7 @@ export class LoginComponent implements OnInit {
         
         let r = JSON.parse(JSON.stringify(res));
         //console.log(r);
+        // this.pouchserv.putErrorInPouch("signup_v2()","Response in component "+"LoginComponent","'Monerocryp' app the exception caught is "+JSON.stringify(res),3);
         
         if(r.code == 200){
           // this.sucmsg = "Email has been sent to your inbox. Get otp and paste it in next otp section.";
