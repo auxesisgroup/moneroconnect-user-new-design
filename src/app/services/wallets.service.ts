@@ -52,7 +52,9 @@ export class WalletsService {
   loadWalletFilter(str){
     this.bindr = [];
     let i = 0;
-    _.forEach(this.wallet,(value,key)=>{
+    let a  = this.loadWallets();
+    // console.log(a,str)
+    _.forEach(a,(value,key)=>{
       // console.log(value,key)
       _.forEach(value.wallet,(v,k)=>{
         i = i+1;
@@ -67,12 +69,15 @@ export class WalletsService {
       })
     })
     // console.log(this.bindr);
-    let find = _.find(this.bindr,(o)=>{
+    let bindr = this.bindr;
+    let find = _.find(bindr,(o)=>{
       if(o.value == str){
         return o;
       }
     });
-    return find.for;
+    // console.log(find)
+    let ff = find.for;
+    return ff;
   }
 
 }

@@ -272,6 +272,7 @@ export class UserhomebtcmodalComponent implements OnInit {
               this.btcwalletaddress = erc_address;
               let wvalue = this.btcwalletname;
               let wbindr = this.ws.loadWalletFilter(wvalue);
+              // console.log("inmodlshow",wbindr,wvalue)
               if(wbindr == "incompatible"){
                 this.selectWalletError = true;
               }else{
@@ -327,7 +328,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     let wvalue = this.btcwalletname;
     
     let wbindr = this.ws.loadWalletFilter(wvalue);
-    // console.log(wbindr)
+    // console.log(wbindr,wvalue)
     if(wbindr == "incompatible"){
       this.selectWalletError = true;
     }else{
