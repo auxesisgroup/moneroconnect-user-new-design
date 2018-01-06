@@ -50,33 +50,38 @@ export class WalletsService {
   }
 
   loadWalletFilter(str){
-    this.bindr = [];
-    let i = 0;
-    let a  = this.loadWallets();
-    // console.log(a,str)
-    _.forEach(a,(value,key)=>{
-      // console.log(value,key)
-      _.forEach(value.wallet,(v,k)=>{
-        i = i+1;
-        this.bindr.push({
-          rowid:i,
-          childid:v.id,
-          value:v.value,
-          for:value.type,
-          text:v.text,
-          title:value.text
+    let ff;
+    if(str == "0" || str == 0 || str == null){
+      ff = "0";
+    }else{
+      this.bindr = [];
+      let i = 0;
+      let a  = this.loadWallets();
+      // console.log(a,str)
+      _.forEach(a,(value,key)=>{
+        // console.log(value,key)
+        _.forEach(value.wallet,(v,k)=>{
+          i = i+1;
+          this.bindr.push({
+            rowid:i,
+            childid:v.id,
+            value:v.value,
+            for:value.type,
+            text:v.text,
+            title:value.text
+          })
         })
       })
-    })
-    // console.log(this.bindr);
-    let bindr = this.bindr;
-    let find = _.find(bindr,(o)=>{
-      if(o.value == str){
-        return o;
-      }
-    });
-    // console.log(find)
-    let ff = find.for;
+      // console.log(this.bindr);
+      let bindr = this.bindr;
+      let find = _.find(bindr,(o)=>{
+        if(o.value == str){
+          return o;
+        }
+      });
+      // console.log(find)
+      ff = find.for;
+    }
     return ff;
   }
 

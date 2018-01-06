@@ -134,6 +134,8 @@ export class UserhomebtcmodalComponent implements OnInit {
     //console.log(btcwa,btcwn)
     if((btcwa == "" || btcwa == null || btcwa == undefined || !btcwa) && (btcwn == "" || btcwn == undefined || btcwn == null || !btcwn)){
       this.toBTC = 0;//show submitnextskip btn
+      this.btcwalletname = "0";
+      this.btcwalletaddress = "";
     }else{
       this.toBTC = 1;//show review and submit btn
       this.btcwalletname = btcwn;
@@ -251,7 +253,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     //     Object.assign({}, this.config, { class: 'gray modal-md' })
     // );
     this.serv.resolveApi("pay_with_currency/",d) 
-    .subscribe(
+    .subscribe( 
       (res)=>{
         // console.log("pay_with_curr",res);
         let response = JSON.parse(JSON.stringify(res));
@@ -264,7 +266,19 @@ export class UserhomebtcmodalComponent implements OnInit {
           if(type == "btc"){
             this.serv.saveToLocal("MoneroAUXBTCTransaction_id",_id);
             this.serv.saveToLocal("MoneroAUXBTCTransaction_to_address",to_address);
-            if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
+            // console.log("btcwallet",erc_address,erc_wallet)
+            if(erc_address == "" || erc_address == null || erc_wallet == "" || erc_wallet == null){
+              // console.log("in if")
+              this.toBTC = 0;
+              this.btcwalletname = "0";
+              this.btcwalletaddress = "";
+              // let wbindr = this.ws.loadWalletFilter("0");
+              // if(wbindr == 0 || wbindr == "0"){
+              //   console.log("0 val",wbindr);
+              // }else{
+              //   console.log("val exists",wbindr);
+              // }
+            }else{
               this.serv.saveToLocal("MoneroAUXBTCTransactionWN",erc_wallet);
               this.serv.saveToLocal("MoneroAUXBTCTransactionWA",erc_address);
               this.toBTC = 1;//show review and submit btn
@@ -272,14 +286,13 @@ export class UserhomebtcmodalComponent implements OnInit {
               this.btcwalletaddress = erc_address;
               let wvalue = this.btcwalletname;
               let wbindr = this.ws.loadWalletFilter(wvalue);
-              // console.log("inmodlshow",wbindr,wvalue)
+              
               if(wbindr == "incompatible"){
                 this.selectWalletError = true;
               }else{
                 this.selectWalletError = false;
               }
-            }else{
-              this.toBTC = 0;
+              // console.log("inmodlshow in else",wbindr,wvalue,this.selectWalletError)
             }
             this.modalRef = this.modalService.show(
                 modalBTC,
@@ -676,7 +689,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     this.storage.clear("MoneroAUXBTCTransaction_id");
     this.storage.clear("MoneroAUXBTCTransaction_to_address");
     this.storage.clear("MoneroAUXBTCTransaction_token_amount");
-    this.stepRecieveBTH = 1;
+    this.stepRecieveBTH = 0;
     this.btcmodaltitle = "Pay through BTC (ERC20 Token)";
     this.btcwalletname = "";
     this.btcwalletaddress="";
@@ -690,7 +703,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     this.initialCount = 0;
     this.message = "";this.message1 = "";
     this.showtransidin3 = '';
-    if(this.stepRecieveBTH == 1){
+    if(this.stepRecieveBTH == 0){
       location.reload();
     }
     this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","clearERC()","Modal closed for btc transaction","");                

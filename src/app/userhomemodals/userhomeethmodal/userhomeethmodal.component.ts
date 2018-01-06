@@ -129,6 +129,8 @@ export class UserhomeethmodalComponent implements OnInit {
     //console.log(ethwa,ethwn)
     if((ethwa == "" || ethwa == null || ethwa == undefined || !ethwa) && (ethwn == "" || ethwn == undefined || ethwn == null || !ethwn)){
       this.toETH = 0;//show submitnextskip btn
+      this.ethwalletname = "0";
+      this.ethwalletaddress = "";
     }else{
       this.toETH = 1;//show review and submit btn
       this.ethwalletname = ethwn;
@@ -246,7 +248,11 @@ export class UserhomeethmodalComponent implements OnInit {
           if(type == "eth"){
             this.serv.saveToLocal("MoneroAUXETHTransaction_id",_id);
             this.serv.saveToLocal("MoneroAUXETHTransaction_to_address",to_address);
-            if(erc_address != "" || erc_address != null || erc_wallet != "" || erc_wallet != null){
+            if(erc_address == "" || erc_address == null || erc_wallet == "" || erc_wallet == null){
+              this.toETH = 0;
+              this.ethwalletname = "0";
+              this.ethwalletaddress = "";
+            }else{
               this.serv.saveToLocal("MoneroAUXETHTransactionWN",erc_wallet);
               this.serv.saveToLocal("MoneroAUXETHTransactionWA",erc_address);
               this.toETH = 1;//show review and submit btn
@@ -259,8 +265,6 @@ export class UserhomeethmodalComponent implements OnInit {
               }else{
                 this.selectWalletError = false;
               }
-            }else{
-              this.toETH = 0;
             }
             this.modalRef = this.modalService.show(
               modalETH,
@@ -613,7 +617,7 @@ export class UserhomeethmodalComponent implements OnInit {
       this.storage.clear("MoneroAUXETHTransaction_token_amount");
       // this.stepRecieveETH = 1;
       // this.ethmodaltitle = "Pay through ETH";
-      this.ethwalletname = "";
+      this.ethwalletname = "0";
       this.ethwalletaddress="";
       this.ethrefundaddress="";
       this.toETH=0;//0 for submitnextskip, 1 for reviewnext, 2 for updatenext in 1 screen
@@ -644,9 +648,9 @@ export class UserhomeethmodalComponent implements OnInit {
     this.storage.clear("MoneroAUXETHTransaction_id");
     this.storage.clear("MoneroAUXETHTransaction_to_address");
     this.storage.clear("MoneroAUXETHTransaction_token_amount");
-    this.stepRecieveETH = 1;
+    this.stepRecieveETH = 0;
     this.ethmodaltitle = "Pay through ETH";
-    this.ethwalletname = "";
+    this.ethwalletname = "0";
     this.ethwalletaddress="";
     this.ethrefundaddress="";
     this.toETH=0;//0 for submitnextskip, 1 for reviewnext, 2 for updatenext in 1 screen
@@ -658,7 +662,7 @@ export class UserhomeethmodalComponent implements OnInit {
     this.initialCount = 0;
     this.message = "";this.message1 = "";
     this.showtransidin3 = '';
-    if(this.stepRecieveETH == 1){
+    if(this.stepRecieveETH == 0){
       location.reload();
     }
     this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","clearERC()","Modal closed for btc transaction","");                
