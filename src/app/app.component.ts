@@ -28,7 +28,7 @@ export class AppComponent {
     //main   -->Moneroconnect
     //staging "http://198.199.75.214:8000"
     // main ssl https://moneroconnet-api.auxledger.org/
-    this.storage.store("MoneroAUXUserUrl","https://moneroconnet-api.auxledger.org/");
+    this.storage.store("MoneroAUXUserUrl","https://moneroconnet-api.auxledger.org/");  
   } 
 
   ngOnInit() {
