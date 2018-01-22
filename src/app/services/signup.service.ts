@@ -307,6 +307,21 @@ export class SignupService {
     });
   }
 
+  resendOtp(email){
+    email = this.findUserEmail(email);//get encrypted email
+    let data = JSON.stringify({email:email});
+    // console.log(data);
+    return new Promise((resolve,reject)=>{
+      this.http.post(this.url+"resend_otp/",data)
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+      },err=>{
+        reject(err);
+      });
+    });
+  }
+
   makeTNC(name,email,refid){
     //console.log(email);
     let email2 = localStorage.getItem("MoneroAUXUserEmailLocal");//this.findUserEmail(email);//get encrypted email

@@ -28,7 +28,7 @@ export class PageotpComponent implements OnInit {
 
   mystyle1: any;
 	myparams1: any;
-
+  public ngxloading  = false; 
   constructor(
     public signup:SignupService,
     private route: ActivatedRoute,
@@ -294,6 +294,39 @@ export class PageotpComponent implements OnInit {
         
       });
     }
+  }
+
+  resendOTP(){
+    
+    this.ngxloading = true;
+    let email = this.storage.retrieve("MoneroAUXUserEmail");
+    this.sucmsg = "Wait...";
+    // console.log(email)
+    this.signup.resendOtp(email)
+    .then(
+      d=>{
+        this.ngxloading = false;
+        console.log(d);
+        this.sucmsg = "OTP is sent at your provided E-mail ID. Please check Spam/Others box if you don’t receive it under 2 minutes.";
+        setTimeout(()=>{
+          // this.sucmsg = "";
+        },4000);
+      },
+      e=>{
+        this.ngxloading = false;
+        //console.log(err);
+        this.sucmsg = "";
+        this.printmsg("Abondoned, please try again.");
+      }
+    ).catch(
+      e=>{
+        this.ngxloading = false;
+        //console.log(err);
+        this.sucmsg = "";
+        this.printmsg("Abondoned, please try again.");
+        this.pouchserv.putErrorInPouch("resendOTP()","Catch throws error in component "+"PageotpComponent","'Monerocryp' app the exception caught is "+JSON.stringify(e),1);        
+      }
+    );
   }
 
 }
