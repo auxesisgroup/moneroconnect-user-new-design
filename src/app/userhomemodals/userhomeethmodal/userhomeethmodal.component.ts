@@ -486,6 +486,8 @@ export class UserhomeethmodalComponent implements OnInit {
 
           this.activityServ.putActivityInPouch("UserhomeethmodalComponent","callingApiForETHScreen3()","Screen 2 open","Start here firebase service");            
           
+          this.loggedInFBauth();
+
           setTimeout(()=>{
             this.callfb();
           },5000);

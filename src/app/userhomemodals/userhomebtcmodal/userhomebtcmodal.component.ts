@@ -298,7 +298,7 @@ export class UserhomebtcmodalComponent implements OnInit {
                 modalBTC,
                 Object.assign({}, this.config, { class: 'gray modal-md' })
             );
-            this.loggedInFBauth();
+            // this.loggedInFBauth();
             this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","callforpaywithcurrencyonmodaltoshow()","Modal open for btc transaction","");            
             if(response.refund_address != null){
               this.btcrefundaddress = response.refund_address;
@@ -528,6 +528,8 @@ export class UserhomebtcmodalComponent implements OnInit {
           this.stepRecieveBTH = 2;this.btcmodaltitle = "Pay through BTC";//next firebase
           this.activityServ.putActivityInPouch("UserhomebtcmodalComponent","callingApiForBTCScreen3()","Modal open for btc transaction with screen 2","Starts here firebase activity");            
           
+          this.loggedInFBauth();
+          
           setTimeout(()=>{
             this.callfb();
           },5000);
@@ -552,7 +554,7 @@ export class UserhomebtcmodalComponent implements OnInit {
     this.fbinterval = setInterval(()=>{
       //console.log('interval started');
       this.items = this.gettransaction_details();
-    },2000);
+    },2500);
   }
 
   //call fb **************************************************************************
